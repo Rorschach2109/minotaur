@@ -1,0 +1,4 @@
+minotaur
+========
+
+Graph algorithms implementation.
