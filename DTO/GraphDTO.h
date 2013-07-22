@@ -15,6 +15,7 @@
 #include "NodeDTO.h"
 #include "EdgeDTO.h"
 
+#include <string>
 #include <vector>
 
 namespace Minotaur
@@ -23,14 +24,16 @@ namespace Minotaur
 class CGraphDto
 {
 	private:
+		std::string m_dtoGraphName;
 		std::vector < CNodeDto > m_nodesDto;
 		std::vector < CEdgeDto > m_edgesDto;
 		
 	public:
 		CGraphDto( void ) = delete;
-		CGraphDto( const std::vector < CNodeDto >& nodesDto, const std::vector < CEdgeDto >& edgesDto );
+		CGraphDto( const std::string& graphName, const std::vector < CNodeDto >& nodesDto, const std::vector < CEdgeDto >& edgesDto );
 		~CGraphDto( void );
 		
+		const std::string& GetDtoGraphName( void ) const;
 		const std::vector < CNodeDto >& GetNodesDto ( void ) const;
 		const std::vector < CEdgeDto >& GetEdgesDto ( void ) const;
 };
