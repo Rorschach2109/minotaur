@@ -1,8 +1,11 @@
-#include <stdio.h>
+#include <iostream>
 
-int main(int argc, char **argv)
+#include <UnitTest++.h>
+
+int main( )
 {
-	auto i = 5;
-	printf("BA %d\n", i);
+	UnitTest::RunAllTests();
+	std::cout << "BA \n"; 
+	
 	return 0;
 }
