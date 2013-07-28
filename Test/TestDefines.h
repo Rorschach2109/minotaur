@@ -9,20 +9,85 @@
  * 
  * */
  
- #include <cstdio>
+#include <iostream>
+#include <cstring>
  
- #define CHECK_EQUAL( lValue, rValue )  \
+namespace Minotaur
+{
+	
+#define FILE_NAME ( strrchr(__FILE__, '/' ) ? ( strrchr(__FILE__, '/') + 1 ) : ( __FILE__ ) );
+
+#define TEST_INFO \
 	do { \
+		const char* fileName = FILE_NAME; \
+		std::cout << " \nFile: " << fileName << " \nFunction: " << __FUNCTION__ << " \nLine: " << __LINE__ << "\n\n"; \
+		} while( false )
+			
+#define PASSED_INFO do { \
+	std::cout << "[PASSED]"; \
+	TEST_INFO; \
+	} while( false )
+
+#define FAILED_INFO( expected, actual ) \
+	do { \
+		std::cout << "[FAILED]"; \
+		TEST_INFO; \
+		} while( false )
+
+#define FAILED_VECTORS_INFO( expected, actual ) \
+	do { \
+		std::cout << "[FAILED]"; \
+		TEST_INFO; \
+		} while( false )
+			
+#define CHECK_EQUAL( lValue, rValue )  \
+	do { \
+		std::cout << "CHECK_EQUAL: "; \
 		if ( lValue == rValue ) \
-		{ printf("Test passed. \tFile: %s \t Line: %d\n", __FILE__, __LINE__); } \
+		{ PASSED_INFO; } \
 		else \
-		{ printf("Test not passed. \tFile: %s \t Line: %d\n", __FILE__, __LINE__); } \
+		{ FAILED_INFO(lValue, rValue); } \
+	} while(0)
+
+#define CHECK_VECTORS_EQUAL( lVector, rVector )  \
+	do { \
+		if ( lVector.size() == rVector.size() ) \
+		{ \
+			for ( size_t vectorIndex = 0; vectorIndex < lVector.size(); ++vectorIndex ) \
+			{ \
+				if ( lVector[vectorIndex] == rVector[vectorIndex] ) \
+				{} \
+				else \
+				{ \
+					std::cout << "CHECK_VECTORS_EQUAL: "; \
+					FAILED_VECTORS_INFO(lVector, rVector);  \
+				} \
+			} \
+		} \
 	} while(0)
 		
- #define CHECK_NOT_EQUAL( lValue, rValue )  \
+#define CHECK_NOT_EQUAL( lValue, rValue )  \
 	do { \
-		if ( lValue != rValue ) \
-		{ printf("Test passed. \tFile: %s \t Line: %d\n", __FILE__, __LINE__); } \
+		std::cout << "CHECK_NOT_EQUAL: "; \
+		if ( lValue == rValue ) \
+		{ FAILED_INFO(lValue, rValue); } \
 		else \
-		{ printf("Test not passed. \tFile: %s \t Line: %d\n", __FILE__, __LINE__); } \
+		{ PASSED_INFO; } \
 	} while(0)
+
+#define CHECK_VECTORS_NOT_EQUAL( lVector, rVector )  \
+	do { \
+		if ( lVector.size() == rVector.size() ) \
+		{ \
+			for ( size_t vectorIndex = 0; vectorIndex < lVector.size(); ++vectorIndex ) \
+			{ \
+				if ( lVector[vectorIndex] == rVector[vectorIndex] ) \
+				{ \
+					std::cout << "CHECK_VECTORS_NOT_EQUAL: "; \
+					FAILED_VECTORS_INFO(lVector, rVector);  \
+				} \
+			} \
+		} \
+	} while(0)
+
+} // namespace Minotaur
