@@ -9,28 +9,29 @@
  * 
  * */
  
-#ifndef _MINOATAUR_NODEDTOTEST_H_
-#define _MINOATAUR_NODEDTOTEST_H_
+#ifndef _MINOTAUR_NODEDTOTEST_H_
+#define _MINOTAUR_NODEDTOTEST_H_
  
-#include "DTO/NodeDTO.h"
+#include "AbstractMinotaurTest.h"
+#include "NodeDTO.h"
  
 namespace Minotaur
 {
 
-class CNodeDtoTest
+class CNodeDtoTest : public AbstractMinotaurTest
 {
 	public:
 		CNodeDtoTest( void );
-		~CNodeDtoTest( void );
+		virtual ~CNodeDtoTest( void );
 		
 	private:
 		CNodeDto m_dtoTestNode;
 	
-		void m_GetNodeIdTest( void );
-		void m_GetNodeXTest( void );
-		void m_GetNodeYTest( void );
+		void m_GetNodeIdTest( void ) const;
+		void m_GetNodeXTest( void ) const;
+		void m_GetNodeYTest( void ) const;
 };
 
 } // namespace Minotaur
  
-#endif /* _MINOATAUR_NODEDTOTEST_H_ */
+#endif /* _MINOTAUR_NODEDTOTEST_H_ */

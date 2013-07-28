@@ -15,6 +15,7 @@
 using namespace Minotaur;
  
 CNodeDtoTest::CNodeDtoTest( void ) : 
+	AbstractMinotaurTest(),
 	m_dtoTestNode( CNodeDto(0, 1, 2) )
 {
 	m_GetNodeIdTest();
@@ -27,8 +28,9 @@ CNodeDtoTest::~CNodeDtoTest( void )
 	
 }
 
-void CNodeDtoTest::m_GetNodeIdTest( void )
+void CNodeDtoTest::m_GetNodeIdTest( void ) const
 {
+	++t_testNumber;
 	unsigned int expectedDtoNodeId = 0;
 	unsigned int invalidDtoNodeId = 1;
 	
@@ -38,10 +40,11 @@ void CNodeDtoTest::m_GetNodeIdTest( void )
 	CHECK_NOT_EQUAL(invalidDtoNodeId, actualDtoNodeId);
 }
 
-void CNodeDtoTest::m_GetNodeXTest( void )
+void CNodeDtoTest::m_GetNodeXTest( void ) const
 {
+	++t_testNumber;
 	unsigned int expectedDtoNodeX = 1;
-	unsigned int invalidDtoNodeX = 1;
+	unsigned int invalidDtoNodeX = 3;
 	
 	unsigned int actualDtoNodeX = m_dtoTestNode.GetNodeX();
 	
@@ -50,8 +53,9 @@ void CNodeDtoTest::m_GetNodeXTest( void )
 	CHECK_NOT_EQUAL(invalidDtoNodeX, actualDtoNodeX);
 }
 
-void CNodeDtoTest::m_GetNodeYTest( void )
+void CNodeDtoTest::m_GetNodeYTest( void ) const
 {
+	++t_testNumber;
 	unsigned int expectedDtoNodeY = 2;
 	unsigned int invalidDtoNodeY = 1;
 	
