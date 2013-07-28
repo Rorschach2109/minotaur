@@ -28,7 +28,7 @@ CStreamInputGraphManager::~CStreamInputGraphManager( void )
 {
 
 }
-		
+
 void CStreamInputGraphManager::m_SetGraphsCount( const unsigned int& graphsCount )
 {
 	unsigned int graphsFileCount = 0;
@@ -45,10 +45,11 @@ CGraphDto CStreamInputGraphManager::GetNextGraph( void )
 		t_dtoGraphInputStream >> m_graphName;
 
 		t_dtoGraphInputStream >> m_nodesCount;
+		t_dtoGraphInputStream >> m_edgesCount;
+
 		std::vector < CNodeDto > dtoNodes;
 		m_GetDtoNodes(dtoNodes);
-		
-		t_dtoGraphInputStream >> m_edgesCount;
+
 		std::vector < CEdgeDto > dtoEdges;
 		m_GetDtoEdges(dtoEdges);
 		

@@ -12,6 +12,8 @@
 #ifndef _MINOTAUR_ABSTRACTINPUTGRAPHMANAGER_H_
 #define _MINOTAUR_ABSTRACTINPUTGRAPHMANAGER_H_
 
+#include "DTO/GraphDTO.h"
+
 #include <istream>
 
 namespace Minotaur
@@ -25,9 +27,9 @@ class AbstractInputGraphManager
 	public:
 		AbstractInputGraphManager( void ) = delete;
 		explicit AbstractInputGraphManager( std::istream& graphInputStream );
-		virtual ~AbstractInputGraphManager( void );
+		virtual ~AbstractInputGraphManager( void ) = 0;
 		
-		virtual bool ReadGraphFromInput( void ) = 0;
+		virtual CGraphDto GetNextGraph( void ) = 0;
 };
 	
 } // namespace Minotaur

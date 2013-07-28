@@ -12,7 +12,7 @@
 #ifndef _MINOTAUR_ABSTRACTOUTPUTGRAPHMANAGER_H_
 #define _MINOTAUR_ABSTRACTOUTPUTGRAPHMANAGER_H_
 
-#include "GraphDTO.h"
+#include "DTO/GraphDTO.h"
 
 #include <ostream>
 
@@ -27,9 +27,9 @@ class AbstractOutputGraphManager
 	public:
 		AbstractOutputGraphManager( void ) = delete;
 		explicit AbstractOutputGraphManager( std::ostream& graphOutputStream );
-		virtual ~AbstractOutputGraphManager( void );
+		virtual ~AbstractOutputGraphManager( void ) = 0;
 		
-		virtual void WriteGraphToOutput( const CGraphDto& dtoGraph ) = 0;
+		virtual void WriteGraphToOutput( const CGraphDto& dtoGraph ) const = 0;
 };
 
 } // namespace Minotaur

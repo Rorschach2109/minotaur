@@ -11,8 +11,8 @@
  
 #include "StreamOutputGraphManager.h"
 
-#include "NodeDTO.h"
-#include "EdgeDTO.h"
+#include "DTO/NodeDTO.h"
+#include "DTO/EdgeDTO.h"
 
 #include <string>
 #include <vector>
@@ -24,7 +24,7 @@ CStreamOutputGraphManager::CStreamOutputGraphManager( std::ostream& graphOutputS
 	m_graphsCount(graphsCount),
 	m_graphsCounter(0)
 {
-	t_dtoGraphOutputStream << m_graphsCount << "\n";	
+	t_dtoGraphOutputStream << m_graphsCount << "\n\n";	
 }
 
 CStreamOutputGraphManager::~CStreamOutputGraphManager( void )
@@ -37,8 +37,7 @@ void CStreamOutputGraphManager::WriteGraphToOutput( const CGraphDto& dtoGraph ) 
 	if ( m_graphsCount > m_graphsCounter )
 	{
 		m_WriteDtoGraphName(dtoGraph);
-		m_WriteDtoNodes(dtoGraph);
-		m_WriteDtoEdges(dtoGraph);
+		m_WriteDtoNodesEdges(dtoGraph);
 		++m_graphsCounter;	
 	}
 }
@@ -46,27 +45,41 @@ void CStreamOutputGraphManager::WriteGraphToOutput( const CGraphDto& dtoGraph ) 
 void CStreamOutputGraphManager::m_WriteDtoGraphName( const CGraphDto& dtoGraph ) const
 {
 	std::string dtoGraphName = dtoGraph.GetDtoGraphName();
-	t_dtoGraphOutputStream << dtoGraphName << "\n";
+	t_dtoGraphOutputStream << dtoGraphName << "\n\n";
 }
 
-void CStreamOutputGraphManager::m_WriteDtoNodes( const CGraphDto& dtoGraph ) const
+void CStreamOutputGraphManager::m_WriteDtoNodesEdges( const CGraphDto& dtoGraph ) const
 {
-	auto dtoNodes = dtoGraph.GetNodesDto();
-	for ( auto dtoNode : dtoNodes )
+	m_dtoNodes = dtoGraph.GetNodesDto();
+	m_dtoEdges = dtoGraph.GetEdgesDto();
+	
+	size_t nodesCount = m_dtoNodes.size();
+	size_t edgesCount = m_dtoEdges.size();
+	
+	t_dtoGraphOutputStream << nodesCount << "\t" << edgesCount << "\n\n";
+	
+	m_WriteDtoNodes();
+	m_WriteDtoEdges();
+}
+
+void CStreamOutputGraphManager::m_WriteDtoNodes( void ) const
+{
+	for ( auto dtoNode : m_dtoNodes )
 	{
 		t_dtoGraphOutputStream << dtoNode.GetNodeId() << "\t";
 		t_dtoGraphOutputStream << dtoNode.GetNodeX() << "\t";
 		t_dtoGraphOutputStream << dtoNode.GetNodeY() << "\n";
 	}
+	t_dtoGraphOutputStream << "\n";
 }
 
-void CStreamOutputGraphManager::m_WriteDtoEdges( const CGraphDto& dtoGraph ) const
+void CStreamOutputGraphManager::m_WriteDtoEdges( void ) const
 {
-	auto dtoEdges = dtoGraph.GetEdgesDto();
-	for ( auto dtoEdge : dtoEdges )
+	for ( auto dtoEdge : m_dtoEdges )
 	{
 		t_dtoGraphOutputStream << dtoEdge.GetNodeFromId() << "\t";
 		t_dtoGraphOutputStream << dtoEdge.GetNodeToId() << "\t";
 		t_dtoGraphOutputStream << dtoEdge.GetWeight() << "\n";
 	}
+	t_dtoGraphOutputStream << "\n";
 }

@@ -9,14 +9,13 @@
  * 
  * */
  
-#ifndef _MINOTAUR_STREAMINPUTGRAPHMANAGER_H_
-#define _MINOTAUR_STREAMINPUTGRAPHMANAGER_H_
+#ifndef _MINOTAUR_STREAMINPUTGRAPHMAN_H_
+#define _MINOTAUR_STREAMINPUTGRAPHMAN_H_
 
 #include "AbstractInputGraphManager.h"
 
 #include "NodeDTO.h"
 #include "EdgeDTO.h"
-#include "GraphDTO.h"
 
 #include <istream>
 #include <string>
@@ -44,9 +43,9 @@ class CStreamInputGraphManager : public AbstractInputGraphManager
 		CStreamInputGraphManager( std::istream& graphInputStream, const unsigned int& graphsCount );
 		virtual ~CStreamInputGraphManager( void );
 		
-		CGraphDto GetNextGraph( void );
+		virtual CGraphDto GetNextGraph( void );
 };
 	
 } // namespace Minotaur
 
-#endif /* _MINOTAUR_STREAMINPUTGRAPHMANAGER_H_ */
+#endif /* _MINOTAUR_STREAMINPUTGRAPHMAN_H_ */
