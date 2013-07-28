@@ -27,6 +27,8 @@ class CNodeDto
 		CNodeDto( const unsigned int& nodeId, const unsigned int& nodeX, const unsigned int& nodeY );
 		~CNodeDto( void );
 		
+		bool operator==( const CNodeDto& nodeToCompare ) const;
+		
 		const unsigned int& GetNodeId( void ) const;
 		const unsigned int& GetNodeX( void ) const;
 		const unsigned int& GetNodeY( void ) const;

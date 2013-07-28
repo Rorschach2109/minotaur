@@ -25,7 +25,18 @@ CNodeDto::~CNodeDto( void )
 {
 	
 }
-		
+
+bool CNodeDto::operator==( const CNodeDto& nodeToCompare ) const
+{
+	bool result = false;
+	
+	result = ( nodeToCompare.m_nodeId == this->m_nodeId ) &&
+				( nodeToCompare.m_nodeX == this->m_nodeX ) &&
+				( nodeToCompare.m_nodeY == this->m_nodeY );
+	
+	return result;
+}
+
 const unsigned int& CNodeDto::GetNodeId( void ) const
 {
 	return m_nodeId;

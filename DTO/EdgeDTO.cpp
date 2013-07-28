@@ -25,7 +25,19 @@ CEdgeDto::~CEdgeDto( void )
 {
 	
 }
-		
+
+bool CEdgeDto::operator==( const CEdgeDto& edgeToCompare )
+{
+	bool result = false;
+	
+	result = ( edgeToCompare.m_nodeFromId == this->m_nodeFromId ) &&
+				( edgeToCompare.m_nodeToId == this->m_nodeToId ) &&
+				( edgeToCompare.m_weight == this->m_weight );
+	
+	return result;
+}
+
+
 const unsigned int& CEdgeDto::GetNodeFromId( void ) const
 {
 	return m_nodeFromId;

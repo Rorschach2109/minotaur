@@ -27,6 +27,9 @@ class CEdgeDto
 		CEdgeDto( const unsigned int& nodeFromId, const unsigned int& nodeToId, const double& weight );
 		~CEdgeDto( void );
 		
+		bool operator==( const CEdgeDto& nodeToCompare );
+		
+		
 		const unsigned int& GetNodeFromId( void ) const;
 		const unsigned int& GetNodeToId( void ) const;
 		const double& GetWeight( void ) const;

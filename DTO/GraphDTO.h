@@ -33,11 +33,13 @@ class CGraphDto
 		CGraphDto( const std::string& graphName, const std::vector < CNodeDto >& nodesDto, const std::vector < CEdgeDto >& edgesDto );
 		~CGraphDto( void );
 		
+		bool operator==( CGraphDto& dtoGraphToCompare ) const;
+		
 		const std::string& GetDtoGraphName( void ) const;
 		const std::vector < CNodeDto >& GetNodesDto ( void ) const;
 		const std::vector < CEdgeDto >& GetEdgesDto ( void ) const;
 };
-	
+
 } // namespace Minotaur
 
 #endif /* _MINOTAUR_GRAPHDTO_H_ */
