@@ -4,27 +4,26 @@
  * File: AbstractMinotaurTest.cpp
  * Brief: Implementation of abstract minotaur test class.
  *
- * Date: 27.07.2013
+ * Date: 11.08.2013
  * Author: Andrzej Korycinski
- * 
+ *
  * */
- 
+
 #include "AbstractMinotaurTest.h"
- 
+
 using namespace Minotaur;
-	
-AbstractMinotaurTest::AbstractMinotaurTest( void ) :
-	t_dtoGraphFactory( CGraphDtoFactory() ),
+
+AbstractMinotaurTest::AbstractMinotaurTest( void ) : 
 	t_testNumber(0)
 {
-		
+	
 }
 
 AbstractMinotaurTest::~AbstractMinotaurTest( void )
 {
 	
-}	
-
+}
+	
 const unsigned int& AbstractMinotaurTest::GetTestNumber( void ) const
 {
 	return t_testNumber;
