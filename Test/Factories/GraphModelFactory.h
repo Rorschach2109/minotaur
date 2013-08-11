@@ -30,20 +30,22 @@ class CGraphModelFactory
 
 private:
 	void m_CreateSquareModelGraph( void );
+	void m_CreateSquareModelUtils( void );
 	void m_CreateSquareModelNodesMap( void );
 	void m_CreateSquareModelAdjacencyList( void );
-	
+
 	void m_CreateInfinityModelGraph( void );
+	void m_CreateInfinityModelUtils( void );
 	void m_CreateInfinityModelNodesMap( void );
 	void m_CreateInfinityModelAdjacencyList( void );
-	void m_CreateInfinityModelUtils( void );
 	
 	void m_CreateTurtleModelGraph( void );
+	void m_CreateTurtleModelUtils( void );
 	void m_CreateTurtleModelNodesMap( void );
 	void m_CreateTurtleModelAdjacencyList( void );
-	void m_CreateTurtleModelUtils( void );
 
 	void m_CreateDoubleTriangleModelGraph( void );
+	void m_CreateDoubleTriangleModelUtils( void );
 	void m_CreateDoubleTriangleModelNodesMap( void );
 	void m_CreateDoubleTriangleModelAdjacencyList( void );
 
@@ -53,7 +55,9 @@ public:
 	
 	AdjacencyMap squareAdjacencyMap;
 	NodesMap squareNodesMap;
-	
+	std::vector < CNodeModel > squareModelNodes;
+	std::vector < CEdgeModel > squareModelEdges;
+
 	AdjacencyMap infinityAdjacencyMap;
 	NodesMap infinityNodesMap;
 	std::vector < CNodeModel > infinityNode0Neighbors;
@@ -67,6 +71,8 @@ public:
 	
 	AdjacencyMap doubleTriangleAdjacencyMap;
 	NodesMap doubleTriangleNodesMap;
+	std::vector < CNodeModel > doubleTriangleModelNodes;
+	std::vector < CEdgeModel > doubleTriangleModelEdges;
 };
 	
 } // namespace Minotaur

@@ -28,18 +28,26 @@ CGraphModelFactory::~CGraphModelFactory( void )
 
 void CGraphModelFactory::m_CreateSquareModelGraph( void )
 {
+	m_CreateSquareModelUtils();
 	m_CreateSquareModelNodesMap();
 	m_CreateSquareModelAdjacencyList();
 }
 
+void CGraphModelFactory::m_CreateSquareModelUtils( void )
+{
+	squareModelNodes.push_back( CNodeModel( 0, 0, 0 ) );
+	squareModelNodes.push_back( CNodeModel( 1, 0, 2 ) );
+	squareModelNodes.push_back( CNodeModel( 2, 2, 0 ) );
+	squareModelNodes.push_back( CNodeModel( 3, 2, 2 ) );
+	
+	squareModelEdges.push_back( CEdgeModel( 0, 1, 3.7 ) );
+	squareModelEdges.push_back( CEdgeModel( 0, 2, 2.9 ) );
+	squareModelEdges.push_back( CEdgeModel( 1, 3, 2.1 ) );
+	squareModelEdges.push_back( CEdgeModel( 2, 3, 3.2 ) );
+}
+
 void CGraphModelFactory::m_CreateSquareModelNodesMap( void )
 {
-	std::vector < CNodeModel > squareModelNodes( {
-					CNodeModel( 0, 0, 0 ),
-					CNodeModel( 1, 0, 2 ),
-					CNodeModel( 2, 2, 0 ),
-					CNodeModel( 3, 2, 2 ) 
-					} );
 	for ( auto node : squareModelNodes )
 	{
 		squareNodesMap[ node.GetNodeId() ] = node;
@@ -49,14 +57,14 @@ void CGraphModelFactory::m_CreateSquareModelNodesMap( void )
 void CGraphModelFactory::m_CreateSquareModelAdjacencyList( void )
 {
 	std::vector < std::pair < CEdgeModel, unsigned int > > node0Neighbors( {
-					std::make_pair( CEdgeModel( 0, 1, 3.7 ), 1 ),
-					std::make_pair( CEdgeModel( 0, 2, 2.9 ), 2 )
+					std::make_pair( squareModelEdges[0], 1 ),
+					std::make_pair( squareModelEdges[1], 2 )
 					} );
 	std::vector < std::pair < CEdgeModel, unsigned int > > node1Neighbors( {
-					std::make_pair( CEdgeModel( 1, 3, 2.1 ), 3 )
+					std::make_pair( squareModelEdges[2], 3 )
 					} );
 	std::vector < std::pair < CEdgeModel, unsigned int > > node2Neighbors( {
-					std::make_pair( CEdgeModel( 2, 3, 3.2 ), 3 )
+					std::make_pair( squareModelEdges[3], 3 )
 					} );
 	squareAdjacencyMap[0] = node0Neighbors;
 	squareAdjacencyMap[1] = node1Neighbors;
@@ -182,20 +190,33 @@ void CGraphModelFactory::m_CreateTurtleModelAdjacencyList( void )
 
 void CGraphModelFactory::m_CreateDoubleTriangleModelGraph( void )
 {
+	m_CreateDoubleTriangleModelUtils();
 	m_CreateDoubleTriangleModelNodesMap();
 	m_CreateDoubleTriangleModelAdjacencyList();
 }
 
+void CGraphModelFactory::m_CreateDoubleTriangleModelUtils( void )
+{
+	doubleTriangleModelNodes.push_back( CNodeModel( 0, 0, 0 ) );
+	doubleTriangleModelNodes.push_back( CNodeModel( 1, 2, 0 ) );
+	doubleTriangleModelNodes.push_back( CNodeModel( 2, 4, 0 ) );
+	doubleTriangleModelNodes.push_back( CNodeModel( 3, 1, 2 ) );
+	doubleTriangleModelNodes.push_back( CNodeModel( 4, 3, 2 ) );
+	doubleTriangleModelNodes.push_back( CNodeModel( 5, 2, 4 ) );
+	
+	doubleTriangleModelEdges.push_back( CEdgeModel( 0, 1, 1.7 ) );
+	doubleTriangleModelEdges.push_back( CEdgeModel( 0, 3, 2.1 ) );
+	doubleTriangleModelEdges.push_back( CEdgeModel( 1, 2, 3.5 ) );
+	doubleTriangleModelEdges.push_back( CEdgeModel( 1, 3, 2.3 ) );
+	doubleTriangleModelEdges.push_back( CEdgeModel( 1, 4, 1.9 ) );
+	doubleTriangleModelEdges.push_back( CEdgeModel( 2, 4, 2.7 ) );
+	doubleTriangleModelEdges.push_back( CEdgeModel( 3, 4, 2.3 ) );
+	doubleTriangleModelEdges.push_back( CEdgeModel( 3, 5, 2.2 ) );
+	doubleTriangleModelEdges.push_back( CEdgeModel( 4, 5, 1.9 ) );
+}
+
 void CGraphModelFactory::m_CreateDoubleTriangleModelNodesMap( void )
 {
-	std::vector < CNodeModel > doubleTriangleModelNodes( {
-							CNodeModel( 0, 0, 0 ),
-							CNodeModel( 1, 2, 0 ),
-							CNodeModel( 2, 4, 0 ),
-							CNodeModel( 3, 1, 2 ),
-							CNodeModel( 4, 3, 2 ),
-							CNodeModel( 5, 2, 4 )
-							} );
 	for ( auto node : doubleTriangleModelNodes )
 	{
 		doubleTriangleNodesMap[ node.GetNodeId() ] = node;
@@ -205,23 +226,23 @@ void CGraphModelFactory::m_CreateDoubleTriangleModelNodesMap( void )
 void CGraphModelFactory::m_CreateDoubleTriangleModelAdjacencyList( void )
 {
 	std::vector < std::pair < CEdgeModel, unsigned int > > node0Neighbors( {
-					std::make_pair( CEdgeModel( 0, 1, 1.7 ), 1 ),
-					std::make_pair( CEdgeModel( 0, 3, 2.1 ), 3 )
+					std::make_pair( doubleTriangleModelEdges[0], 1 ),
+					std::make_pair( doubleTriangleModelEdges[1], 3 )
 					} );
 	std::vector < std::pair < CEdgeModel, unsigned int > > node1Neighbors( {
-					std::make_pair( CEdgeModel( 1, 2, 3.5 ), 2 ),
-					std::make_pair( CEdgeModel( 1, 3, 2.3 ), 3 ),
-					std::make_pair( CEdgeModel( 1, 4, 1.9 ), 4 )
+					std::make_pair( doubleTriangleModelEdges[2], 2 ),
+					std::make_pair( doubleTriangleModelEdges[3], 3 ),
+					std::make_pair( doubleTriangleModelEdges[4], 4 )
 					} );
 	std::vector < std::pair < CEdgeModel, unsigned int > > node2Neighbors( {
-					std::make_pair( CEdgeModel( 2, 4, 2.7 ), 4 )
+					std::make_pair( doubleTriangleModelEdges[5], 4 )
 					} );
 	std::vector < std::pair < CEdgeModel, unsigned int > > node3Neighbors( {
-					std::make_pair( CEdgeModel( 3, 4, 2.3 ), 4 ),
-					std::make_pair( CEdgeModel( 3, 5, 2.2 ), 5 )
+					std::make_pair( doubleTriangleModelEdges[6], 4 ),
+					std::make_pair( doubleTriangleModelEdges[7], 5 )
 					} );
 	std::vector < std::pair < CEdgeModel, unsigned int > > node4Neighbors( {
-					std::make_pair( CEdgeModel( 4, 5, 1.9 ), 5 )
+					std::make_pair( doubleTriangleModelEdges[8], 5 )
 					} );
 	doubleTriangleAdjacencyMap[0] = node0Neighbors;
 	doubleTriangleAdjacencyMap[1] = node1Neighbors;

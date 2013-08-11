@@ -13,17 +13,19 @@
 #define _MINOTAUR_ADJACENCYLISTFACTORYTEST_H_
 
 #include "AbstractModelMinotaurTest.h"
+#include "AbstractMinotaurDtoTest.h"
 #include "AdjacencyListFactory.h"
 
 namespace Minotaur
 {
 	
-class CAdjacencyListFactoryTest : public AbstractModelMinotaurTest
+class CAdjacencyListFactoryTest : public AbstractModelMinotaurTest, public AbstractMinotaurDtoTest
 {
 	private:
 		CAdjacencyListFactory m_adjacencyListFactory;
 	
 		void m_CreateFromVectorsTest( void );
+		void m_CreateFromDtoTest( void );
 		
 	public:
 		CAdjacencyListFactoryTest( void );
