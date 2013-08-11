@@ -32,7 +32,7 @@ class CEdgeDto
 		
 		const unsigned int& GetNodeFromId( void ) const;
 		const unsigned int& GetNodeToId( void ) const;
-		const double& GetWeight( void ) const;
+		const double& GetEdgeWeight( void ) const;
 };
 	
 } // namespace Minotaur

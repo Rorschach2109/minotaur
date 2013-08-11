@@ -79,7 +79,7 @@ void CStreamOutputGraphManager::m_WriteDtoEdges( void ) const
 	{
 		t_dtoGraphOutputStream << dtoEdge.GetNodeFromId() << "\t";
 		t_dtoGraphOutputStream << dtoEdge.GetNodeToId() << "\t";
-		t_dtoGraphOutputStream << dtoEdge.GetWeight() << "\n";
+		t_dtoGraphOutputStream << dtoEdge.GetEdgeWeight() << "\n";
 	}
 	t_dtoGraphOutputStream << "\n";
 }

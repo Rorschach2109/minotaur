@@ -58,7 +58,7 @@ void CEdgeDtoTest::m_GetWeightTest( void ) const
 	double expectedDtoEdgeWeight = 2.0;
 	double invalidDtoEdgeWeight = 2.1;
 	
-	double actualDtoEdgeWeight = m_dtoTestEdge.GetWeight();
+	double actualDtoEdgeWeight = m_dtoTestEdge.GetEdgeWeight();
 	
 	CHECK_EQUAL(expectedDtoEdgeWeight, actualDtoEdgeWeight);
 	CHECK_NOT_EQUAL(invalidDtoEdgeWeight, actualDtoEdgeWeight);

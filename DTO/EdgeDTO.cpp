@@ -48,7 +48,7 @@ const unsigned int& CEdgeDto::GetNodeToId( void ) const
 	return m_nodeToId;
 }
 
-const double& CEdgeDto::GetWeight( void ) const
+const double& CEdgeDto::GetEdgeWeight( void ) const
 {
 	return m_weight;
 }
