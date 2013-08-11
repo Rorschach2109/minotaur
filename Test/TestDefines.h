@@ -94,16 +94,26 @@ namespace Minotaur
 		std::cout << "CHECK_VECTORS_NOT_EQUAL: "; \
 		if ( lVector.size() == rVector.size() ) \
 		{ \
+			bool equal = true; \
 			for ( size_t vectorIndex = 0; vectorIndex < lVector.size(); ++vectorIndex ) \
 			{ \
-				if ( lVector[vectorIndex] == rVector[vectorIndex] ) \
+				equal = equal && ( lVector[vectorIndex] == rVector[vectorIndex] ); \
+				if ( !equal ) \
 				{ \
-					FAILED_VECTORS_INFO(lVector, rVector);  \
+					PASSED_VECTORS_INFO(lVector, rVector); \
 					break; \
 				} \
 			} \
+			if ( equal) \
+			{ \
+				FAILED_VECTORS_INFO(lVector, rVector); \
+				break; \
+			} \
 		} \
-		PASSED_VECTORS_INFO(lVector, rVector);  \
+		else \
+		{ \
+			PASSED_VECTORS_INFO(lVector, rVector);  \
+		} \
 	} while(0)
 
 } // namespace Minotaur
