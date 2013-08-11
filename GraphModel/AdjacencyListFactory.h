@@ -12,6 +12,7 @@
 #ifndef _MINOTAUR_ADJACENCYLISTFACTORY_H_
 #define _MINOTAUR_ADJACENCYLISTFACTORY_H_
 
+#include "AbstractGraphModelFactory.h"
 #include "NodeModel.h"
 #include "EdgeModel.h"
 #include "IGraphModel.h"
@@ -23,7 +24,7 @@
 namespace Minotaur
 {
 	
-class CAdjacencyListFactory
+class CAdjacencyListFactory : public AbstractGraphModelFactory
 {
 	private:
 		void m_CreateGraphModelNodesMap( std::map < unsigned int, CNodeModel >& graphModelNodesMap, const std::vector < CNodeModel >& graphModelNodes );
@@ -31,9 +32,9 @@ class CAdjacencyListFactory
 												const std::vector < CEdgeModel >& graphModelEdges );
 	public:
 		CAdjacencyListFactory( void );
-		~CAdjacencyListFactory( void );
+		virtual ~CAdjacencyListFactory( void );
 
-		std::shared_ptr < IGraphModel > CreateFromVectors( const std::vector < CNodeModel >& graphModelNodes, const std::vector < CEdgeModel >& graphModelEdges );
+		virtual std::shared_ptr < IGraphModel > CreateFromVectors( const std::vector < CNodeModel >& graphModelNodes, const std::vector < CEdgeModel >& graphModelEdges );
 };
 	
 } // namespace Minotaur

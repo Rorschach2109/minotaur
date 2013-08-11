@@ -14,7 +14,8 @@
 
 using namespace Minotaur;
 
-CAdjacencyListFactory::CAdjacencyListFactory( void )
+CAdjacencyListFactory::CAdjacencyListFactory( void ) : 
+	AbstractGraphModelFactory()
 {
 	
 }
