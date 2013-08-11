@@ -23,20 +23,27 @@ namespace Minotaur
 		std::cout << " \nFile: " << fileName << " \nFunction: " << __FUNCTION__ << " \nLine: " << __LINE__ << "\n\n"; \
 		} while( false )
 			
-#define PASSED_INFO do { \
-	std::cout << "[PASSED]"; \
-	TEST_INFO; \
+#define PASSED_INFO \
+	do { \
+		std::cout << "\33[32;40m" << "[PASSED]" << "\33[0m"; \
+		TEST_INFO; \
 	} while( false )
 
 #define FAILED_INFO( expected, actual ) \
 	do { \
-		std::cout << "[FAILED]"; \
+		std::cout << "\33[31;40m" << "[FAILED]"<< "\33[0m"; \
 		TEST_INFO; \
 		} while( false )
 
 #define FAILED_VECTORS_INFO( expected, actual ) \
 	do { \
-		std::cout << "[FAILED]"; \
+		std::cout << "\33[31;40m" << "[FAILED]"<< "\33[0m"; \
+		TEST_INFO; \
+		} while( false )
+
+#define PASSED_VECTORS_INFO( expected, actual ) \
+	do { \
+		std::cout << "\33[32;40m" << "[PASSED]" << "\33[0m"; \
 		TEST_INFO; \
 		} while( false )
 			
@@ -51,6 +58,7 @@ namespace Minotaur
 
 #define CHECK_VECTORS_EQUAL( lVector, rVector )  \
 	do { \
+		std::cout << "CHECK_VECTORS_EQUAL: "; \
 		if ( lVector.size() == rVector.size() ) \
 		{ \
 			for ( size_t vectorIndex = 0; vectorIndex < lVector.size(); ++vectorIndex ) \
@@ -59,11 +67,17 @@ namespace Minotaur
 				{} \
 				else \
 				{ \
-					std::cout << "CHECK_VECTORS_EQUAL: "; \
 					FAILED_VECTORS_INFO(lVector, rVector);  \
+					break; \
 				} \
 			} \
 		} \
+		else \
+		{ \
+			FAILED_VECTORS_INFO(lVector, rVector);  \
+			break; \
+		} \
+		PASSED_VECTORS_INFO(lVector, rVector);  \
 	} while(0)
 		
 #define CHECK_NOT_EQUAL( lValue, rValue )  \
@@ -77,17 +91,19 @@ namespace Minotaur
 
 #define CHECK_VECTORS_NOT_EQUAL( lVector, rVector )  \
 	do { \
+		std::cout << "CHECK_VECTORS_NOT_EQUAL: "; \
 		if ( lVector.size() == rVector.size() ) \
 		{ \
 			for ( size_t vectorIndex = 0; vectorIndex < lVector.size(); ++vectorIndex ) \
 			{ \
 				if ( lVector[vectorIndex] == rVector[vectorIndex] ) \
 				{ \
-					std::cout << "CHECK_VECTORS_NOT_EQUAL: "; \
 					FAILED_VECTORS_INFO(lVector, rVector);  \
+					break; \
 				} \
 			} \
 		} \
+		PASSED_VECTORS_INFO(lVector, rVector);  \
 	} while(0)
 
 } // namespace Minotaur
