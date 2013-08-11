@@ -29,7 +29,7 @@ class CGraphDto
 		std::vector < CEdgeDto > m_edgesDto;
 		
 	public:
-		CGraphDto( void ) = delete;
+		CGraphDto( void ) = default;
 		CGraphDto( const std::string& graphName, const std::vector < CNodeDto >& nodesDto, const std::vector < CEdgeDto >& edgesDto );
 		~CGraphDto( void );
 		

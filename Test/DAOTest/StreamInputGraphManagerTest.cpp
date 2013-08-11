@@ -22,7 +22,7 @@
 using namespace Minotaur;
 
 CStreamInputGraphManagerTest::CStreamInputGraphManagerTest( void ) : 
-	AbstractMinotaurTest()
+	AbstractMinotaurDtoTest()
 {
 	m_GetSingleNextGraphTest();
 	m_GetMultipleNextGraphTest();

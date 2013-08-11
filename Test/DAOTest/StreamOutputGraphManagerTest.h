@@ -12,12 +12,12 @@
 #ifndef _MINOTAUR_STREAMOUTPUTGRAPHMANAGER_H_
 #define _MINOTAUR_STREAMOUTPUTGRAPHMANAGER_H_
 
-#include "AbstractMinotaurTest.h"
+#include "AbstractMinotaurDtoTest.h"
 
 namespace Minotaur
 {
 
-class CStreamOutputGraphManagerTest : public AbstractMinotaurTest
+class CStreamOutputGraphManagerTest : public AbstractMinotaurDtoTest
 {
 	private:
 		void m_WriteSingleGraphToOutput( void );

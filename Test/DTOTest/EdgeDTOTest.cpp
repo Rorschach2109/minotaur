@@ -15,7 +15,7 @@
 using namespace Minotaur;
 
 CEdgeDtoTest::CEdgeDtoTest( void ) : 
-	AbstractMinotaurTest(),
+	AbstractMinotaurDtoTest(),
 	m_dtoTestEdge( CEdgeDto(0, 1, 2.0) )
 {
 	m_GetNodeFromIdTest();

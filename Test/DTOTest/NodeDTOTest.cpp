@@ -15,7 +15,7 @@
 using namespace Minotaur;
  
 CNodeDtoTest::CNodeDtoTest( void ) : 
-	AbstractMinotaurTest(),
+	AbstractMinotaurDtoTest(),
 	m_dtoTestNode( CNodeDto(0, 1, 2) )
 {
 	m_GetNodeIdTest();

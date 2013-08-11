@@ -12,13 +12,13 @@
 #ifndef _MINOATAUR_GRAPHDTOTEST_H_
 #define _MINOATAUR_GRAPHDTOTEST_H_
 
-#include "AbstractMinotaurTest.h"
+#include "AbstractMinotaurDtoTest.h"
 #include "GraphDTO.h"
  
 namespace Minotaur
 {
 
-class CGraphDtoTest : public AbstractMinotaurTest
+class CGraphDtoTest : public AbstractMinotaurDtoTest
 {
 	public:
 		CGraphDtoTest( void );

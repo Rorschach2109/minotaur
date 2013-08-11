@@ -15,7 +15,7 @@
 using namespace Minotaur;
  
 CGraphDtoTest::CGraphDtoTest( void ) : 
-	AbstractMinotaurTest(),
+	AbstractMinotaurDtoTest(),
 	m_dtoGraphTest( t_dtoGraphFactory.infinityDtoGraph )
 {
 	m_GetDtoGraphNameTest();

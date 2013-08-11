@@ -57,6 +57,7 @@ CGraphDto CStreamInputGraphManager::GetNextGraph( void )
 		
 		return dtoGraph;
 	}
+	return ( CGraphDto() );
 }
 
 bool CStreamInputGraphManager::m_HasNextGraph( void ) const

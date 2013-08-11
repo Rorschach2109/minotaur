@@ -23,7 +23,7 @@
 using namespace Minotaur;
  
 CStreamOutputGraphManagerTest::CStreamOutputGraphManagerTest( void ) : 
-	AbstractMinotaurTest()
+	AbstractMinotaurDtoTest()
 {
 	m_WriteSingleGraphToOutput();
 	m_WriteMultipleGraphToOutput();

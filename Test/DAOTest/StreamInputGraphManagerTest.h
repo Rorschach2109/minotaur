@@ -12,12 +12,12 @@
 #ifndef _MINOTAUR_STREAMINPUTGRAPHMANAGER_H_
 #define _MINOTAUR_STREAMINPUTGRAPHMANAGER_H_
 
-#include "AbstractMinotaurTest.h"
+#include "AbstractMinotaurDtoTest.h"
 
 namespace Minotaur
 {
 
-class CStreamInputGraphManagerTest : public AbstractMinotaurTest
+class CStreamInputGraphManagerTest : public AbstractMinotaurDtoTest
 {
 	private:
 		void m_GetSingleNextGraphTest( void );

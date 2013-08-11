@@ -12,13 +12,13 @@
 #ifndef _MINOTAUR_NODEDTOTEST_H_
 #define _MINOTAUR_NODEDTOTEST_H_
  
-#include "AbstractMinotaurTest.h"
+#include "AbstractMinotaurDtoTest.h"
 #include "NodeDTO.h"
  
 namespace Minotaur
 {
 
-class CNodeDtoTest : public AbstractMinotaurTest
+class CNodeDtoTest : public AbstractMinotaurDtoTest
 {
 	public:
 		CNodeDtoTest( void );

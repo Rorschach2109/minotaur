@@ -12,13 +12,13 @@
 #ifndef _MINOATAUR_EDGEDTOTEST_H_
 #define _MINOATAUR_EDGEDTOTEST_H_
 
-#include "AbstractMinotaurTest.h"
+#include "AbstractMinotaurDtoTest.h"
 #include "EdgeDTO.h"
  
 namespace Minotaur
 {
 
-class CEdgeDtoTest : public AbstractMinotaurTest
+class CEdgeDtoTest : public AbstractMinotaurDtoTest
 {
 	public:
 		CEdgeDtoTest( void );
