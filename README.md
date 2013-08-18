@@ -1,4 +1,4 @@
-minotaur
+Minotaur
 ========
 
 Graph algorithms implementation.
