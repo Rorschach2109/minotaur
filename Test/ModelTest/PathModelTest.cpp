@@ -28,6 +28,8 @@ CPathModelTest::~CPathModelTest( void )
 
 void CPathModelTest::m_VerifySubGraphTopology( void )
 {
+	++t_testNumber;
+
 	bool expectedValue = true;
 	
 	bool actualValue = m_pathModelTest.VerifySubGraphTopology();

@@ -28,6 +28,8 @@ CTreeModelTest::~CTreeModelTest( void )
 
 void CTreeModelTest::m_VerifySubGraphTopologyTest( void )
 {
+	++t_testNumber;
+
 	bool expectedValue = true;
 	
 	bool actualValue = m_treeModelTest.VerifySubGraphTopology( );

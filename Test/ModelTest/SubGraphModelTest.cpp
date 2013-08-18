@@ -46,6 +46,7 @@ void CSubGraphModelTest::m_VerifySubGraphTopologyTest( void )
 void CSubGraphModelTest::m_GetSubGraphEdgesTest( void )
 {
 	++t_testNumber;
+	
 	std::vector < std::pair < unsigned int, unsigned int > > expectedSubGraphEdges = t_graphModelFactory.subGraphModelFactory.doubleTriangleModelEdgeDefinition;
 	std::vector < std::pair < unsigned int, unsigned int > > invalidSubGraphEdges = t_graphModelFactory.subGraphModelFactory.infinityModelEdgeDefinition;
 	std::vector < std::pair < unsigned int, unsigned int > > actualSubGraphEdges = m_subGraphTest.GetSubGraphEdges();

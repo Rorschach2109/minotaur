@@ -48,6 +48,8 @@ void CSubGraphToGraphAdapterTest::m_RunTest( void )
 
 void CSubGraphToGraphAdapterTest::m_ContainsNodeTest( void )
 {
+	++t_testNumber;
+
 	unsigned int validNodeId = 0;
 	unsigned int invalidNodeId = 10;
 	
@@ -63,6 +65,8 @@ void CSubGraphToGraphAdapterTest::m_ContainsNodeTest( void )
 
 void CSubGraphToGraphAdapterTest::m_GetGraphModelNodeTest( void )
 {
+	++t_testNumber;
+
 	CNodeModel expectedNode = t_graphModelFactory.infinityModelNodes[0];
 	unsigned int validNodeId = t_graphModelFactory.infinityModelNodes[0].GetNodeId();
 	unsigned int invalidNodeId = t_graphModelFactory.infinityModelNodes[1].GetNodeId();
@@ -77,6 +81,8 @@ void CSubGraphToGraphAdapterTest::m_GetGraphModelNodeTest( void )
 
 void CSubGraphToGraphAdapterTest::m_GetGraphModelNodesTest( void )
 {
+	++t_testNumber;
+
 	std::vector < CNodeModel > expectedSubGraphNodes = t_graphModelFactory.infinityModelNodes;
 	
 	std::vector < CNodeModel > actualSubGraphNodes = m_adapterTest.GetGraphModelNodes();
@@ -87,6 +93,8 @@ void CSubGraphToGraphAdapterTest::m_GetGraphModelNodesTest( void )
 
 void CSubGraphToGraphAdapterTest::m_GetNodesNumberTest( void )
 {
+	++t_testNumber;
+
 	unsigned int expectedNodesNumber = 7;
 	
 	unsigned int actualNodesNumber = m_adapterTest.GetNodesNumber();
@@ -96,6 +104,8 @@ void CSubGraphToGraphAdapterTest::m_GetNodesNumberTest( void )
 
 void CSubGraphToGraphAdapterTest::m_GetNeighborsTest( void )
 {
+	++t_testNumber;
+
 	CNodeModel nodeModelTest = CNodeModel( 1, 2, 4 );
 	
 	std::vector < CNodeModel > expectedNodes; 
@@ -118,6 +128,8 @@ void CSubGraphToGraphAdapterTest::m_GetNeighborsTest( void )
 
 void CSubGraphToGraphAdapterTest::m_ContainsEdgeTest( void )
 {
+	++t_testNumber;
+
 	unsigned int validNodeFromId = 1;
 	unsigned int validNodeToId = 3;
 	
@@ -136,6 +148,8 @@ void CSubGraphToGraphAdapterTest::m_ContainsEdgeTest( void )
 
 void CSubGraphToGraphAdapterTest::m_GetGraphModelEdgeTest( void )
 {
+	++t_testNumber;
+
 	CEdgeModel expectedEdge = t_graphModelFactory.infinityModelEdges[0];
 	
 	unsigned int validNodeFormId = t_graphModelFactory.infinityModelEdges[0].GetNodeFromId();
@@ -153,6 +167,8 @@ void CSubGraphToGraphAdapterTest::m_GetGraphModelEdgeTest( void )
 
 void CSubGraphToGraphAdapterTest::m_GetGraphModelEdgesTest( void )
 {
+	++t_testNumber;
+
 	std::vector < CEdgeModel > expectedSubGraphEdges = t_graphModelFactory.subGraphModelFactory.infinitySubGraphModelEdges;
 	
 	std::vector < CEdgeModel > invalidSubGraphEdges = t_graphModelFactory.infinityModelEdges;
@@ -166,6 +182,8 @@ void CSubGraphToGraphAdapterTest::m_GetGraphModelEdgesTest( void )
 
 void CSubGraphToGraphAdapterTest::m_GetEdgesNumberTest( void )
 {
+	++t_testNumber;
+
 	unsigned int expectedEdgesNumber = 6;
 	
 	unsigned int actualEdgesNumber = m_adapterTest.GetEdgesNumber();
