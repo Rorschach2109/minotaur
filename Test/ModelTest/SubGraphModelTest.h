@@ -4,7 +4,7 @@
  * File: SubGraphTest.h
  * Brief: Declaration of subgraph test class.
  *
- * Date: .08.2013
+ * Date: 18.08.2013
  * Author: Andrzej Korycinski
  * 
  * */
