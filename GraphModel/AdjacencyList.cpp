@@ -14,6 +14,7 @@
 using namespace Minotaur;
 
 CAdjacencyList::CAdjacencyList( const AdjacencyMap& adjacencyMap, const NodesMap& nodesMap ) : 
+	IGraphModel(),
 	m_adjacencyMap( adjacencyMap ),
 	m_nodesMap( nodesMap )
 {
@@ -25,7 +26,7 @@ CAdjacencyList::~CAdjacencyList( void )
 	m_adjacencyMap.clear();
 	m_nodesMap.clear();
 }
-#include <iostream>
+
 bool CAdjacencyList::operator==( CAdjacencyList& adjacencyListToCompare )
 {
 	bool adjacencyListsEqual = ( adjacencyListToCompare.m_adjacencyMap.size() == m_adjacencyMap.size() );

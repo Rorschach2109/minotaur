@@ -11,6 +11,12 @@
 #include "EdgeModelTest.h"
 #include "AdjacencyListTest.h"
 #include "AdjacencyListFactoryTest.h"
+#include "SubGraphModelTest.h"
+
+#include "SubGraphToGraphAdapterTest.h"
+
+#include "TreeModelTest.h"
+#include "PathModelTest.h"
 
 int main( void )
 {
@@ -23,9 +29,14 @@ int main( void )
 	
 	Minotaur::CNodeModelTest nodeModelTest = Minotaur::CNodeModelTest();
 	Minotaur::CEdgeModelTest edgeModelTest = Minotaur::CEdgeModelTest();
-	
 	Minotaur::CAdjacencyListTest adjacencyListTest = Minotaur::CAdjacencyListTest();
 	Minotaur::CAdjacencyListFactoryTest adjacencyListFactoryTest = Minotaur::CAdjacencyListFactoryTest();
+	Minotaur::CSubGraphModelTest subGraphTest = Minotaur::CSubGraphModelTest();
+	
+	Minotaur::CSubGraphToGraphAdapterTest adapterTest = Minotaur::CSubGraphToGraphAdapterTest();
+	
+	Minotaur::CTreeModelTest treeModelTest = Minotaur::CTreeModelTest();
+	Minotaur::CPathModelTest pathModelTest = Minotaur::CPathModelTest();
 	
 	return 0;
 }
