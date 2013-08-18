@@ -16,7 +16,7 @@
 #include "IGraphModel.h"
 #include "NodeModel.h"
 
-#include <utility>
+#include <memory>
 
 namespace Minotaur
 {
@@ -24,13 +24,13 @@ namespace Minotaur
 class ITreeFinder
 {
 	public:
-		ITreeFinder( void );
+		ITreeFinder( void ) = default;
 		virtual ~ITreeFinder( void )
 		{
 			
 		}
 		
-		virtual shared_ptr < CTreeModel > FindMST( const IGraphModel& graphModel, const CNodeModel& nodeRoot ) = 0;
+		virtual std::shared_ptr < CTreeModel > FindMST( const IGraphModel& graphModel, const CNodeModel& nodeRoot ) = 0;
 };
 	
 } // namespace Minotaur
