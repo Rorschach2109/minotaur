@@ -16,7 +16,7 @@
 #include "IGraphModel.h"
 #include "NodeModel.h"
 
-#include <utility>
+#include <memory>
 
 namespace Minotaur
 {
@@ -30,7 +30,7 @@ class IPathFinder
 			
 		}
 		
-		virtual shared_ptr < CPathModel > FindShortestPath( const IGraphModel& graphModel, const CNodeModel& nodeFrom, const CNodeModel& nodeTo ) = 0;
+		virtual std::shared_ptr < CPathModel > FindShortestPath( const IGraphModel& graphModel, const CNodeModel& nodeFrom, const CNodeModel& nodeTo ) = 0;
 };
 	
 } // namespace Minotaur
