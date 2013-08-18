@@ -18,14 +18,14 @@
 namespace Minotaur
 {
 
-class AbstractModelMinotaurTest : public AbstractMinotaurTest
+class AbstractMinotaurModelTest : public AbstractMinotaurTest
 {
 	protected:
 		CGraphModelFactory t_graphModelFactory;
 
 	public:
-		AbstractModelMinotaurTest( void );
-		virtual ~AbstractModelMinotaurTest( void ) = 0;
+		AbstractMinotaurModelTest( void );
+		virtual ~AbstractMinotaurModelTest( void ) = 0;
 };
 	
 } // namespace Minotaur

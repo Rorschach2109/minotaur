@@ -28,7 +28,7 @@
 using namespace Minotaur;
 
 CAdjacencyListFactoryTest::CAdjacencyListFactoryTest( void ) :
-	AbstractModelMinotaurTest(),
+	AbstractMinotaurModelTest(),
 	AbstractMinotaurDtoTest(),
 	m_adjacencyListFactory( CAdjacencyListFactory() )
 {

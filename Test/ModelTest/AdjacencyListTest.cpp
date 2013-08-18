@@ -15,7 +15,7 @@
 using namespace Minotaur;
 
 CAdjacencyListTest::CAdjacencyListTest( void ) : 
-	AbstractModelMinotaurTest(),
+	AbstractMinotaurModelTest(),
 	m_adjacencyList( CAdjacencyList(t_graphModelFactory.infinityAdjacencyMap, t_graphModelFactory.infinityNodesMap) )
 {
 	m_RunTest();

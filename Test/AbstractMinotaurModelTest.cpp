@@ -9,18 +9,18 @@
  * 
  * */
 
-#include "AbstractModelMinotaurTest.h"
+#include "AbstractMinotaurModelTest.h"
 
 using namespace Minotaur;
 
-AbstractModelMinotaurTest::AbstractModelMinotaurTest( void ) : 
+AbstractMinotaurModelTest::AbstractMinotaurModelTest( void ) : 
 	AbstractMinotaurTest(),
 	t_graphModelFactory( CGraphModelFactory() )
 {
 	
 }
 
-AbstractModelMinotaurTest::~AbstractModelMinotaurTest( void )
+AbstractMinotaurModelTest::~AbstractMinotaurModelTest( void )
 {
 	
 }

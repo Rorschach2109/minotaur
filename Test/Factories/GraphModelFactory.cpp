@@ -10,10 +10,12 @@
  * */
  
 #include "GraphModelFactory.h"
+#include "AdjacencyListFactory.h"
 
 using namespace Minotaur;
 
-CGraphModelFactory::CGraphModelFactory( void )
+CGraphModelFactory::CGraphModelFactory( void ) : 
+	subGraphModelFactory( CSubGraphModelFactory() )
 {
 	m_CreateSquareModelGraph();
 	m_CreateInfinityModelGraph();
@@ -80,6 +82,8 @@ void CGraphModelFactory::m_CreateInfinityModelGraph( void )
 
 void CGraphModelFactory::m_CreateInfinityModelUtils( void )
 {
+	CAdjacencyListFactory adjFactory = CAdjacencyListFactory();
+	
 	infinityModelNodes.clear();
 	infinityModelNodes.push_back( CNodeModel( 0, 0, 2 ) );
 	infinityModelNodes.push_back( CNodeModel( 1, 2, 4 ) );
@@ -102,6 +106,8 @@ void CGraphModelFactory::m_CreateInfinityModelUtils( void )
 	infinityNode0Neighbors.clear();
 	infinityNode0Neighbors.push_back( CNodeModel( 1, 2, 4 ) );
 	infinityNode0Neighbors.push_back( CNodeModel( 2, 2, 0 ) );
+	
+	infinityGraphModel = adjFactory.CreateFromVectors(infinityModelNodes, infinityModelEdges);
 }
 
 void CGraphModelFactory::m_CreateInfinityModelNodesMap( void )

@@ -15,7 +15,7 @@
 using namespace Minotaur;
 
 CNodeModelTest::CNodeModelTest( void ) :
-	AbstractModelMinotaurTest(),
+	AbstractMinotaurModelTest(),
 	m_nodeModelTest( CNodeModel(0, 1, 2) )
 {
 	m_GetNodeModelIdTest();

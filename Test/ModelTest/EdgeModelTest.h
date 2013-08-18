@@ -9,7 +9,7 @@
  *
  * */
 
-#include "AbstractModelMinotaurTest.h"
+#include "AbstractMinotaurModelTest.h"
 #include "EdgeModel.h"
 
 #ifndef _MINOTAUR_EDGEMODELTEST_H_
@@ -18,7 +18,7 @@
 namespace Minotaur
 {
 
-class CEdgeModelTest : public AbstractModelMinotaurTest
+class CEdgeModelTest : public AbstractMinotaurModelTest
 {
 	private:
 		CEdgeModel m_edgeModelTest;

@@ -12,13 +12,13 @@
 #ifndef _MINOTAUR_NODEMODELTEST_H_
 #define _MINOTAUR_NODEMODELTEST_H_
 
-#include "AbstractModelMinotaurTest.h"
+#include "AbstractMinotaurModelTest.h"
 #include "NodeModel.h"
 
 namespace Minotaur
 {
 
-class CNodeModelTest : public AbstractModelMinotaurTest
+class CNodeModelTest : public AbstractMinotaurModelTest
 {
 	private:
 		CNodeModel m_nodeModelTest;

@@ -12,13 +12,13 @@
 #ifndef _MINOTAUR_ADJACENCYLISTTEST_H_
 #define _MINOTAUR_ADJACENCYLISTTEST_H_
 
-#include "AbstractModelMinotaurTest.h"
+#include "AbstractMinotaurModelTest.h"
 #include "GraphModel/AdjacencyList.h"
  
 namespace Minotaur
 {
 
-class CAdjacencyListTest : public AbstractModelMinotaurTest
+class CAdjacencyListTest : public AbstractMinotaurModelTest
 {
 private:
 	CAdjacencyList m_adjacencyList;

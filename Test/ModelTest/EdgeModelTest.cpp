@@ -15,7 +15,7 @@
 using namespace Minotaur;
 
 CEdgeModelTest::CEdgeModelTest( void ) :
-	AbstractModelMinotaurTest(),
+	AbstractMinotaurModelTest(),
 	m_edgeModelTest( CEdgeModel(0, 1, 10.4) )
 {
 	m_GetNodeFromIdTest();
