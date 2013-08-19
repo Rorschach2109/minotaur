@@ -92,12 +92,12 @@ CSubGraphModelFactory::CSubGraphModelFactory( void ) :
 	
 	largeModelMSTKruskalEdges( { 
 								std::make_pair( 0, 2 ),
-								std::make_pair( 2, 3 ),
 								std::make_pair( 1, 3 ),
-								std::make_pair( 3, 4 ),
-								std::make_pair( 3, 6 ),
+								std::make_pair( 2, 3 ),
 								std::make_pair( 5, 6 ),
-								std::make_pair( 5, 7 )
+								std::make_pair( 3, 6 ),
+								std::make_pair( 5, 7 ),
+								std::make_pair( 3, 4 )
 								} ),
 	largeModelMSTKruskal( new CTreeModel( *( largeGraphModel ), largeModelMSTKruskalEdges ) )
 {

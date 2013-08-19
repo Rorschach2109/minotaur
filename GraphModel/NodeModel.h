@@ -32,6 +32,14 @@ class CNodeModel
         const unsigned int& GetNodeId( void ) const;
         const unsigned int& GetNodeX( void ) const;
         const unsigned int& GetNodeY( void ) const;
+
+		struct SNodeModelLess
+        {
+                bool operator()(const CNodeModel& lNodeModel, const CNodeModel& rNodeModel) const
+                {
+                        return ( ( lNodeModel.m_nodeId ) < ( rNodeModel.m_nodeId) );
+                }
+        };
 };
 
 } // namespace Minotaur
