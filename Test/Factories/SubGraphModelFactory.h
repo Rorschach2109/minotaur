@@ -35,8 +35,8 @@ class CSubGraphModelFactory : public CGraphModelFactory
 		~CSubGraphModelFactory( void );
 
 		edgeDefinition squareModelEdgeDefinition;
-		edgeDefinition suqareModelMSTKruskalEdges;
-		std::shared_ptr < CTreeModel > suqareModelMSTKruskal;
+		edgeDefinition squareModelMSTKruskalEdges;
+		std::shared_ptr < CTreeModel > squareModelMSTKruskal;
 		
 		edgeDefinition infinityModelEdgeDefinition;
 		subGraphEdges infinitySubGraphModelEdges;

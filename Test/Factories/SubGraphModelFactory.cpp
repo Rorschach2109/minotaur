@@ -21,12 +21,12 @@ CSubGraphModelFactory::CSubGraphModelFactory( void ) :
 								std::make_pair( 0, 2 ),
 								std::make_pair( 1, 3 )
 								} ),
-	suqareModelMSTKruskalEdges( { 
+	squareModelMSTKruskalEdges( { 
 								std::make_pair( 1, 3 ),
 								std::make_pair( 0, 2 ),
 								std::make_pair( 2, 3 )
 								} ),
-	suqareModelMSTKruskal( new CTreeModel( *( squareGraphModel ), suqareModelMSTKruskalEdges ) ),
+	squareModelMSTKruskal( new CTreeModel( *( squareGraphModel ), squareModelMSTKruskalEdges ) ),
 	
 
 	infinityModelEdgeDefinition( {
@@ -58,8 +58,8 @@ CSubGraphModelFactory::CSubGraphModelFactory( void ) :
 								std::make_pair( 0, 1 ),
 								std::make_pair( 4, 6 ),
 								std::make_pair( 1, 3 ),
-								std::make_pair( 0, 2 ),
-								std::make_pair( 5, 6 )
+								std::make_pair( 5, 6 ),
+								std::make_pair( 0, 2 )
 								} ),
 	infinityModelMSTKruskal( new CTreeModel( *( infinityGraphModel ), infinityModelMSTKruskalEdges ) ),
 	
@@ -69,7 +69,7 @@ CSubGraphModelFactory::CSubGraphModelFactory( void ) :
 								std::make_pair( 2, 3 )
 								} ),
 	turtleModelMSTKruskalEdges( { 
-								std::make_pair( 1, 3 ),
+								std::make_pair( 2, 3 ),
 								std::make_pair( 0, 1 ),
 								std::make_pair( 1, 2 )
 								} ),
@@ -81,12 +81,11 @@ CSubGraphModelFactory::CSubGraphModelFactory( void ) :
 								std::make_pair( 1, 2 )
 								} ),
 	doubleTriangleModelMSTKruskalEdges( { 
-								std::make_pair( 3, 5 ),
 								std::make_pair( 0, 1 ),
-								std::make_pair( 4, 6 ),
-								std::make_pair( 1, 3 ),
-								std::make_pair( 0, 2 ),
-								std::make_pair( 5, 6 )
+								std::make_pair( 1, 4 ),
+								std::make_pair( 4, 5 ),
+								std::make_pair( 0, 3 ),
+								std::make_pair( 2, 4 )
 								} ),
 	doubleTriangleModelMSTKruskal( new CTreeModel( *( doubleTriangleGraphModel ), doubleTriangleModelMSTKruskalEdges ) ),
 	
