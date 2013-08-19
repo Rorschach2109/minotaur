@@ -10,17 +10,17 @@
  * */
  
 #include "GraphModelFactory.h"
-#include "AdjacencyListFactory.h"
 
 using namespace Minotaur;
 
 CGraphModelFactory::CGraphModelFactory( void ) : 
-	subGraphModelFactory( CSubGraphModelFactory() )
+	m_adjFactory( CAdjacencyListFactory() )
 {
 	m_CreateSquareModelGraph();
 	m_CreateInfinityModelGraph();
 	m_CreateTurtleModelGraph();
 	m_CreateDoubleTriangleModelGraph();
+	m_CreateLargeModelGraph();
 }
 
 CGraphModelFactory::~CGraphModelFactory( void )
@@ -46,6 +46,8 @@ void CGraphModelFactory::m_CreateSquareModelUtils( void )
 	squareModelEdges.push_back( CEdgeModel( 0, 2, 2.9 ) );
 	squareModelEdges.push_back( CEdgeModel( 1, 3, 2.1 ) );
 	squareModelEdges.push_back( CEdgeModel( 2, 3, 3.2 ) );
+
+	squareGraphModel = m_adjFactory.CreateFromVectors(squareModelNodes, squareModelEdges);
 }
 
 void CGraphModelFactory::m_CreateSquareModelNodesMap( void )
@@ -82,8 +84,6 @@ void CGraphModelFactory::m_CreateInfinityModelGraph( void )
 
 void CGraphModelFactory::m_CreateInfinityModelUtils( void )
 {
-	CAdjacencyListFactory adjFactory = CAdjacencyListFactory();
-	
 	infinityModelNodes.clear();
 	infinityModelNodes.push_back( CNodeModel( 0, 0, 2 ) );
 	infinityModelNodes.push_back( CNodeModel( 1, 2, 4 ) );
@@ -107,7 +107,7 @@ void CGraphModelFactory::m_CreateInfinityModelUtils( void )
 	infinityNode0Neighbors.push_back( CNodeModel( 1, 2, 4 ) );
 	infinityNode0Neighbors.push_back( CNodeModel( 2, 2, 0 ) );
 	
-	infinityGraphModel = adjFactory.CreateFromVectors(infinityModelNodes, infinityModelEdges);
+	infinityGraphModel = m_adjFactory.CreateFromVectors(infinityModelNodes, infinityModelEdges);
 }
 
 void CGraphModelFactory::m_CreateInfinityModelNodesMap( void )
@@ -166,6 +166,8 @@ void CGraphModelFactory::m_CreateTurtleModelUtils( void )
 	turtleModelEdges.push_back( CEdgeModel( 1, 2, 2.5 ) );
 	turtleModelEdges.push_back( CEdgeModel( 1, 3, 4.2 ) );
 	turtleModelEdges.push_back( CEdgeModel( 2, 3, 1.2 ) );
+
+	turtleGraphModel = m_adjFactory.CreateFromVectors(turtleModelNodes, turtleModelEdges);
 }
 
 void CGraphModelFactory::m_CreateTurtleModelNodesMap( void )
@@ -219,6 +221,8 @@ void CGraphModelFactory::m_CreateDoubleTriangleModelUtils( void )
 	doubleTriangleModelEdges.push_back( CEdgeModel( 3, 4, 2.3 ) );
 	doubleTriangleModelEdges.push_back( CEdgeModel( 3, 5, 2.2 ) );
 	doubleTriangleModelEdges.push_back( CEdgeModel( 4, 5, 1.9 ) );
+	
+	doubleTriangleGraphModel = m_adjFactory.CreateFromVectors(doubleTriangleModelNodes, doubleTriangleModelEdges);
 }
 
 void CGraphModelFactory::m_CreateDoubleTriangleModelNodesMap( void )
@@ -255,4 +259,92 @@ void CGraphModelFactory::m_CreateDoubleTriangleModelAdjacencyList( void )
 	doubleTriangleAdjacencyMap[2] = node2Neighbors;
 	doubleTriangleAdjacencyMap[3] = node3Neighbors;
 	doubleTriangleAdjacencyMap[4] = node4Neighbors;
+}
+
+void CGraphModelFactory::m_CreateLargeModelGraph( void )
+{
+	m_CreateLargeModelUtils();
+	m_CreateLargeModelNodesMap();
+	m_CreateLargeModelAdjacencyList();
+}
+
+void CGraphModelFactory::m_CreateLargeModelUtils( void )
+{
+	CAdjacencyListFactory adjFactory = CAdjacencyListFactory();
+	
+	largeModelNodes.clear();
+	largeModelNodes.push_back( CNodeModel( 0, 0, 0 ) );
+	largeModelNodes.push_back( CNodeModel( 1, 0, 0 ) );
+	largeModelNodes.push_back( CNodeModel( 2, 0, 0 ) );
+	largeModelNodes.push_back( CNodeModel( 3, 0, 0 ) );
+	largeModelNodes.push_back( CNodeModel( 4, 0, 0 ) );
+	largeModelNodes.push_back( CNodeModel( 5, 0, 0 ) );
+	largeModelNodes.push_back( CNodeModel( 6, 0, 0 ) );
+	largeModelNodes.push_back( CNodeModel( 7, 0, 0 ) );
+	
+	largeModelEdges.clear();
+	largeModelEdges.push_back( CEdgeModel( 0, 1, 3.0 ) );
+	largeModelEdges.push_back( CEdgeModel( 0, 2, 2.0 ) );
+	largeModelEdges.push_back( CEdgeModel( 0, 3, 5.0 ) );
+	largeModelEdges.push_back( CEdgeModel( 1, 3, 2.0 ) );
+	largeModelEdges.push_back( CEdgeModel( 1, 5, 13.0 ) );
+	largeModelEdges.push_back( CEdgeModel( 2, 3, 2.0 ) );
+	largeModelEdges.push_back( CEdgeModel( 2, 4, 5.0 ) );
+	largeModelEdges.push_back( CEdgeModel( 3, 4, 4.0 ) );
+	largeModelEdges.push_back( CEdgeModel( 3, 5, 6.0 ) );
+	largeModelEdges.push_back( CEdgeModel( 3, 6, 3.0 ) );
+	largeModelEdges.push_back( CEdgeModel( 4, 6, 6.0 ) );
+	largeModelEdges.push_back( CEdgeModel( 5, 6, 2.0 ) );
+	largeModelEdges.push_back( CEdgeModel( 5, 7, 3.0 ) );
+	largeModelEdges.push_back( CEdgeModel( 6, 7, 6.0 ) );	
+
+	largeGraphModel = adjFactory.CreateFromVectors(largeModelNodes, largeModelEdges);
+}
+
+void CGraphModelFactory::m_CreateLargeModelNodesMap( void )
+{
+	for ( auto node : largeModelNodes )
+	{
+		largeNodesMap[ node.GetNodeId() ] = node;
+	}
+}
+
+void CGraphModelFactory::m_CreateLargeModelAdjacencyList( void )
+{
+	std::vector < std::pair < CEdgeModel, unsigned int > > node0Neighbors( {
+					std::make_pair( doubleTriangleModelEdges[0], 1 ),
+					std::make_pair( doubleTriangleModelEdges[1], 2 ),
+					std::make_pair( doubleTriangleModelEdges[2], 3 )
+					} );
+	std::vector < std::pair < CEdgeModel, unsigned int > > node1Neighbors( {
+					std::make_pair( doubleTriangleModelEdges[3], 3 ),
+					std::make_pair( doubleTriangleModelEdges[4], 5 )
+					} );
+	std::vector < std::pair < CEdgeModel, unsigned int > > node2Neighbors( {
+					std::make_pair( doubleTriangleModelEdges[5], 3 ),
+					std::make_pair( doubleTriangleModelEdges[6], 4 )
+					} );
+	std::vector < std::pair < CEdgeModel, unsigned int > > node3Neighbors( {
+					std::make_pair( doubleTriangleModelEdges[7], 4 ),
+					std::make_pair( doubleTriangleModelEdges[8], 5 ),
+					std::make_pair( doubleTriangleModelEdges[9], 6 )
+					} );
+	std::vector < std::pair < CEdgeModel, unsigned int > > node4Neighbors( {
+					std::make_pair( doubleTriangleModelEdges[10], 6 )
+					} );
+	std::vector < std::pair < CEdgeModel, unsigned int > > node5Neighbors( {
+					std::make_pair( doubleTriangleModelEdges[11], 6 ),
+					std::make_pair( doubleTriangleModelEdges[12], 7 )
+					} );
+	std::vector < std::pair < CEdgeModel, unsigned int > > node6Neighbors( {
+					std::make_pair( doubleTriangleModelEdges[13], 7 )
+					} );
+
+	doubleTriangleAdjacencyMap[0] = node0Neighbors;
+	doubleTriangleAdjacencyMap[1] = node1Neighbors;
+	doubleTriangleAdjacencyMap[2] = node2Neighbors;
+	doubleTriangleAdjacencyMap[3] = node3Neighbors;
+	doubleTriangleAdjacencyMap[4] = node4Neighbors;
+	doubleTriangleAdjacencyMap[5] = node5Neighbors;
+	doubleTriangleAdjacencyMap[6] = node6Neighbors;
 }

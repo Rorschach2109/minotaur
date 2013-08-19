@@ -12,7 +12,6 @@
 #ifndef _MINOTAUR_GRAPHMODELFACTORY_H_
 #define _MINOTAUR_GRAPHMODELFACTORY_H_
 
-#include "SubGraphModelFactory.h"
 #include "AdjacencyListFactory.h"
 #include "NodeModel.h"
 #include "IGraphModel.h"
@@ -32,6 +31,8 @@ typedef std::map < unsigned int, CNodeModel > NodesMap;
 class CGraphModelFactory
 {
 	private:
+		CAdjacencyListFactory m_adjFactory;
+	
 		void m_CreateSquareModelGraph( void );
 		void m_CreateSquareModelUtils( void );
 		void m_CreateSquareModelNodesMap( void );
@@ -52,11 +53,14 @@ class CGraphModelFactory
 		void m_CreateDoubleTriangleModelNodesMap( void );
 		void m_CreateDoubleTriangleModelAdjacencyList( void );
 
+		void m_CreateLargeModelGraph( void );
+		void m_CreateLargeModelUtils( void );
+		void m_CreateLargeModelNodesMap( void );
+		void m_CreateLargeModelAdjacencyList( void );
+
 	public:
 		CGraphModelFactory( void );
-		~CGraphModelFactory( void );
-		
-		CSubGraphModelFactory subGraphModelFactory;
+		virtual ~CGraphModelFactory( void );
 		
 		AdjacencyMap squareAdjacencyMap;
 		NodesMap squareNodesMap;
@@ -82,6 +86,12 @@ class CGraphModelFactory
 		std::vector < CNodeModel > doubleTriangleModelNodes;
 		std::vector < CEdgeModel > doubleTriangleModelEdges;
 		std::shared_ptr < IGraphModel > doubleTriangleGraphModel;
+
+		AdjacencyMap largeAdjacencyMap;
+		NodesMap largeNodesMap;
+		std::vector < CNodeModel > largeModelNodes;
+		std::vector < CEdgeModel > largeModelEdges;
+		std::shared_ptr < IGraphModel > largeGraphModel;
 };
 	
 } // namespace Minotaur

@@ -14,11 +14,21 @@
 using namespace Minotaur;
 
 CSubGraphModelFactory::CSubGraphModelFactory( void ) : 
+	CGraphModelFactory(),
+	
 	squareModelEdgeDefinition( {
 								std::make_pair( 0, 1 ),
 								std::make_pair( 0, 2 ),
 								std::make_pair( 1, 3 )
 								} ),
+	suqareModelMSTKruskalEdges( { 
+								std::make_pair( 1, 3 ),
+								std::make_pair( 0, 2 ),
+								std::make_pair( 2, 3 )
+								} ),
+	suqareModelMSTKruskal( new CTreeModel( *( squareGraphModel ), suqareModelMSTKruskalEdges ) ),
+	
+
 	infinityModelEdgeDefinition( {
 								std::make_pair( 0, 1 ),
 								std::make_pair( 1, 3 ),
@@ -43,16 +53,53 @@ CSubGraphModelFactory::CSubGraphModelFactory( void ) :
 								std::make_pair( 1, 3 ),
 								std::make_pair( 3, 5 )
 								} ),
+	infinityModelMSTKruskalEdges( { 
+								std::make_pair( 3, 5 ),
+								std::make_pair( 0, 1 ),
+								std::make_pair( 4, 6 ),
+								std::make_pair( 1, 3 ),
+								std::make_pair( 0, 2 ),
+								std::make_pair( 5, 6 )
+								} ),
+	infinityModelMSTKruskal( new CTreeModel( *( infinityGraphModel ), infinityModelMSTKruskalEdges ) ),
+	
 	turtleModelEdgeDefinition( {
 								std::make_pair( 0, 1 ),
 								std::make_pair( 1, 3 ),
 								std::make_pair( 2, 3 )
 								} ),
+	turtleModelMSTKruskalEdges( { 
+								std::make_pair( 1, 3 ),
+								std::make_pair( 0, 1 ),
+								std::make_pair( 1, 2 )
+								} ),
+	turtleModelMSTKruskal( new CTreeModel( *( turtleGraphModel ), turtleModelMSTKruskalEdges ) ),
+	
 	doubleTriangleModelEdgeDefinition( {
 								std::make_pair( 0, 1 ),
 								std::make_pair( 0, 3 ),
 								std::make_pair( 1, 2 )
-								} )					
+								} ),
+	doubleTriangleModelMSTKruskalEdges( { 
+								std::make_pair( 3, 5 ),
+								std::make_pair( 0, 1 ),
+								std::make_pair( 4, 6 ),
+								std::make_pair( 1, 3 ),
+								std::make_pair( 0, 2 ),
+								std::make_pair( 5, 6 )
+								} ),
+	doubleTriangleModelMSTKruskal( new CTreeModel( *( doubleTriangleGraphModel ), doubleTriangleModelMSTKruskalEdges ) ),
+	
+	largeModelMSTKruskalEdges( { 
+								std::make_pair( 0, 2 ),
+								std::make_pair( 2, 3 ),
+								std::make_pair( 1, 3 ),
+								std::make_pair( 3, 4 ),
+								std::make_pair( 3, 6 ),
+								std::make_pair( 5, 6 ),
+								std::make_pair( 5, 7 )
+								} ),
+	largeModelMSTKruskal( new CTreeModel( *( largeGraphModel ), largeModelMSTKruskalEdges ) )
 {
 	
 }
