@@ -12,17 +12,24 @@
 #ifndef _MINOTAUR_KRUSKALALGORITHMTEST_H_
 #define _MINOTAUR_KRUSKALALGORITHMTEST_H_
 
+#include "AbstractMinotaurModelTest.h"
 #include "KruskalAlgorithm.h"
+#include "SubGraphComparer.h"
+#include "TreeModel.h"
+
+#include <memory>
 
 namespace Minotaur
 {
 	
-class CKruskalAlgorithmTest
+class CKruskalAlgorithmTest : public AbstractMinotaurModelTest
 {
 	private:
 		CKruskalAlgorithm m_kruskalAlgorithmTest;
-	
+		CSubGraphComparer m_subGraphComparer;
+		
 		void m_FindMSTTest( void );
+		bool m_CheckPtr( const std::shared_ptr < CTreeModel > actualTree );
 	
 	public:
 		CKruskalAlgorithmTest( void );
