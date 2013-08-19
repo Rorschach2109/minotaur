@@ -21,7 +21,7 @@ using namespace Minotaur;
 
 CSubGraphModelTest::CSubGraphModelTest( void ) :
 	AbstractMinotaurModelTest(),
-	m_subGraphTest( CSubGraphModel( *t_graphModelFactory.infinityGraphModel, t_graphModelFactory.subGraphModelFactory.doubleTriangleModelEdgeDefinition) )
+	m_subGraphTest( CSubGraphModel( *t_graphModelFactory.infinityGraphModel, t_subGraphModelFactory.doubleTriangleModelEdgeDefinition) )
 {
 	m_VerifySubGraphTopologyTest();
 	m_GetSubGraphEdgesTest();
@@ -47,8 +47,8 @@ void CSubGraphModelTest::m_GetSubGraphEdgesTest( void )
 {
 	++t_testNumber;
 	
-	std::vector < std::pair < unsigned int, unsigned int > > expectedSubGraphEdges = t_graphModelFactory.subGraphModelFactory.doubleTriangleModelEdgeDefinition;
-	std::vector < std::pair < unsigned int, unsigned int > > invalidSubGraphEdges = t_graphModelFactory.subGraphModelFactory.infinityModelEdgeDefinition;
+	std::vector < std::pair < unsigned int, unsigned int > > expectedSubGraphEdges = t_subGraphModelFactory.doubleTriangleModelEdgeDefinition;
+	std::vector < std::pair < unsigned int, unsigned int > > invalidSubGraphEdges = t_subGraphModelFactory.infinityModelEdgeDefinition;
 	std::vector < std::pair < unsigned int, unsigned int > > actualSubGraphEdges = m_subGraphTest.GetSubGraphEdges();
 	
 	CHECK_VECTORS_EQUAL(expectedSubGraphEdges, actualSubGraphEdges);

@@ -16,7 +16,7 @@ using namespace Minotaur;
 
 CTreeModelTest::CTreeModelTest( void ) : 
 	AbstractMinotaurModelTest(),
-	m_treeModelTest( CTreeModel( *t_graphModelFactory.infinityGraphModel, t_graphModelFactory.subGraphModelFactory.infinityModelEdgeDefinition ) )
+	m_treeModelTest( CTreeModel( *t_graphModelFactory.infinityGraphModel, t_subGraphModelFactory.infinityModelEdgeDefinition ) )
 {
 	m_VerifySubGraphTopologyTest();
 }

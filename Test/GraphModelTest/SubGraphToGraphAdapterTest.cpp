@@ -22,7 +22,7 @@ using namespace Minotaur;
  
 CSubGraphToGraphAdapterTest::CSubGraphToGraphAdapterTest( void ) : 
 	AbstractMinotaurModelTest(),
-	m_subGraphTest( *t_graphModelFactory.infinityGraphModel, t_graphModelFactory.subGraphModelFactory.infinityModelEdgeDefinition ),
+	m_subGraphTest( *t_graphModelFactory.infinityGraphModel, t_subGraphModelFactory.infinityModelEdgeDefinition ),
 	m_adapterTest( CSubGraphToGraphAdapter(m_subGraphTest) )
 {
 	m_RunTest();
@@ -169,7 +169,7 @@ void CSubGraphToGraphAdapterTest::m_GetGraphModelEdgesTest( void )
 {
 	++t_testNumber;
 
-	std::vector < CEdgeModel > expectedSubGraphEdges = t_graphModelFactory.subGraphModelFactory.infinitySubGraphModelEdges;
+	std::vector < CEdgeModel > expectedSubGraphEdges = t_subGraphModelFactory.infinitySubGraphModelEdges;
 	
 	std::vector < CEdgeModel > invalidSubGraphEdges = t_graphModelFactory.infinityModelEdges;
 	

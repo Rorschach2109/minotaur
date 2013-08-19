@@ -16,7 +16,7 @@ using namespace Minotaur;
 
 CPathModelTest::CPathModelTest( void ) : 
 	AbstractMinotaurModelTest(),
-	m_pathModelTest( CPathModel( *t_graphModelFactory.infinityGraphModel, t_graphModelFactory.subGraphModelFactory.infinityPath0To5 ) ) 
+	m_pathModelTest( CPathModel( *t_graphModelFactory.infinityGraphModel, t_subGraphModelFactory.infinityPath0To5 ) ) 
 {
 	m_VerifySubGraphTopology();
 }

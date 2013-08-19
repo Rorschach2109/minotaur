@@ -15,7 +15,8 @@ using namespace Minotaur;
 
 AbstractMinotaurModelTest::AbstractMinotaurModelTest( void ) : 
 	AbstractMinotaurTest(),
-	t_graphModelFactory( CGraphModelFactory() )
+	t_graphModelFactory( CGraphModelFactory() ),
+	t_subGraphModelFactory( CSubGraphModelFactory() )
 {
 	
 }

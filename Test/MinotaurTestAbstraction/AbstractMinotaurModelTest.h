@@ -13,6 +13,7 @@
 #define _MINOTAUR_ABSTRACTMODELMINOTAURTEST_H_
 
 #include "GraphModelFactory.h"
+#include "SubGraphModelFactory.h"
 #include "AbstractMinotaurTest.h"
 
 namespace Minotaur
@@ -22,6 +23,7 @@ class AbstractMinotaurModelTest : public AbstractMinotaurTest
 {
 	protected:
 		CGraphModelFactory t_graphModelFactory;
+		CSubGraphModelFactory t_subGraphModelFactory;
 
 	public:
 		AbstractMinotaurModelTest( void );
