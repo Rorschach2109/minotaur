@@ -53,10 +53,15 @@ class CGraphModelFactory
 		void m_CreateDoubleTriangleModelNodesMap( void );
 		void m_CreateDoubleTriangleModelAdjacencyList( void );
 
-		void m_CreateLargeModelGraph( void );
-		void m_CreateLargeModelUtils( void );
-		void m_CreateLargeModelNodesMap( void );
-		void m_CreateLargeModelAdjacencyList( void );
+		void m_CreateSpiderNetModelGraph( void );
+		void m_CreateSpiderNetModelUtils( void );
+		void m_CreateSpiderNetModelNodesMap( void );
+		void m_CreateSpiderNetModelAdjacencyList( void );
+
+		void m_CreateGrapeModelGraph( void );
+		void m_CreateGrapeModelUtils( void );
+		void m_CreateGrapeModelNodesMap( void );
+		void m_CreateGrapeModelAdjacencyList( void );
 
 	public:
 		CGraphModelFactory( void );
@@ -87,11 +92,18 @@ class CGraphModelFactory
 		std::vector < CEdgeModel > doubleTriangleModelEdges;
 		std::shared_ptr < IGraphModel > doubleTriangleGraphModel;
 
-		AdjacencyMap largeAdjacencyMap;
-		NodesMap largeNodesMap;
-		std::vector < CNodeModel > largeModelNodes;
-		std::vector < CEdgeModel > largeModelEdges;
-		std::shared_ptr < IGraphModel > largeGraphModel;
+		AdjacencyMap spiderNetAdjacencyMap;
+		NodesMap spiderNetNodesMap;
+		std::vector < CNodeModel > spiderNetModelNodes;
+		std::vector < CEdgeModel > spiderNetModelEdges;
+		std::shared_ptr < IGraphModel > spiderNetGraphModel;
+
+		// grape graph created by Marta Konieczna
+		AdjacencyMap grapeAdjacencyMap;
+		NodesMap grapeNodesMap;
+		std::vector < CNodeModel > grapeModelNodes;
+		std::vector < CEdgeModel > grapeModelEdges;
+		std::shared_ptr < IGraphModel > grapeGraphModel;
 };
 	
 } // namespace Minotaur

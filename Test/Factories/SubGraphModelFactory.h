@@ -53,8 +53,12 @@ class CSubGraphModelFactory : public CGraphModelFactory
 		edgeDefinition doubleTriangleModelMSTKruskalEdges;
 		std::shared_ptr < CTreeModel > doubleTriangleModelMSTKruskal;
 		
-		edgeDefinition largeModelMSTKruskalEdges;
-		std::shared_ptr < CTreeModel > largeModelMSTKruskal;
+		edgeDefinition spiderNetModelMSTKruskalEdges;
+		std::shared_ptr < CTreeModel > spiderNetModelMSTKruskal;
+		
+		// grape graph created by Marta Konieczna
+		edgeDefinition grapeModelMSTKruskalEdges;
+		std::shared_ptr < CTreeModel > grapeModelMSTKruskal;
 };
 	
 } // namespace Minotaur

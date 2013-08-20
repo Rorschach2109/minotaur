@@ -89,7 +89,7 @@ CSubGraphModelFactory::CSubGraphModelFactory( void ) :
 								} ),
 	doubleTriangleModelMSTKruskal( new CTreeModel( *( doubleTriangleGraphModel ), doubleTriangleModelMSTKruskalEdges ) ),
 	
-	largeModelMSTKruskalEdges( { 
+	spiderNetModelMSTKruskalEdges( { 
 								std::make_pair( 0, 2 ),
 								std::make_pair( 1, 3 ),
 								std::make_pair( 2, 3 ),
@@ -98,7 +98,29 @@ CSubGraphModelFactory::CSubGraphModelFactory( void ) :
 								std::make_pair( 5, 7 ),
 								std::make_pair( 3, 4 )
 								} ),
-	largeModelMSTKruskal( new CTreeModel( *( largeGraphModel ), largeModelMSTKruskalEdges ) )
+	spiderNetModelMSTKruskal( new CTreeModel( *( spiderNetGraphModel ), spiderNetModelMSTKruskalEdges ) ),
+	
+	grapeModelMSTKruskalEdges( {
+								std::make_pair( 0, 1 ),
+								std::make_pair( 3, 6 ),
+								std::make_pair( 13, 14 ),
+								std::make_pair( 2, 3 ),
+								std::make_pair( 8, 9 ),
+								std::make_pair( 6, 11 ),
+								std::make_pair( 12, 13 ),
+								std::make_pair( 15, 16 ),
+								std::make_pair( 3, 7 ),
+								std::make_pair( 9, 10 ),
+								std::make_pair( 0, 2 ),
+								std::make_pair( 4, 5 ),
+								std::make_pair( 7, 8 ),
+								std::make_pair( 5, 12 ),
+								std::make_pair( 10, 14 ),
+								std::make_pair( 17, 16 ),
+								std::make_pair( 14, 17 )
+		
+								} ),
+	grapeModelMSTKruskal( new CTreeModel( *( grapeGraphModel ), grapeModelMSTKruskalEdges ) )
 {
 	
 }

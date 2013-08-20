@@ -24,7 +24,8 @@ CKruskalAlgorithmTest::CKruskalAlgorithmTest( void ) :
 	m_FindInfinityMSTTest();
 	m_FindTurtleMSTTest();
 	m_FindDoubleTriangleMSTTest();
-	m_FindLargeMSTTest();
+	m_FindSpiderNetMSTTest();
+	m_FindGrapeMSTTest();
 }
 
 CKruskalAlgorithmTest::~CKruskalAlgorithmTest( void )
@@ -141,15 +142,15 @@ void CKruskalAlgorithmTest::m_FindDoubleTriangleMSTTest( void )
 	actualTree.reset();
 }
 
-void CKruskalAlgorithmTest::m_FindLargeMSTTest( void )
+void CKruskalAlgorithmTest::m_FindSpiderNetMSTTest( void )
 {
 	++t_testNumber;
 
 	CNodeModel rootNode = CNodeModel( 0, 0, 0 );
-	std::shared_ptr < CTreeModel > expectedValidTree = t_subGraphModelFactory.largeModelMSTKruskal;
+	std::shared_ptr < CTreeModel > expectedValidTree = t_subGraphModelFactory.spiderNetModelMSTKruskal;
 	std::shared_ptr < CTreeModel > invalidTree = t_subGraphModelFactory.doubleTriangleModelMSTKruskal;
 	
-	std::shared_ptr < CTreeModel > actualTree = m_kruskalAlgorithmTest.FindMST( *( t_graphModelFactory.largeGraphModel ), rootNode);
+	std::shared_ptr < CTreeModel > actualTree = m_kruskalAlgorithmTest.FindMST( *( t_graphModelFactory.spiderNetGraphModel ), rootNode);
 	if ( !m_CheckPtr(actualTree) )
 	{
 		bool expectedValue = true;
@@ -166,4 +167,27 @@ void CKruskalAlgorithmTest::m_FindLargeMSTTest( void )
 	actualTree.reset();
 }
 
+void CKruskalAlgorithmTest::m_FindGrapeMSTTest( void )
+{
+	++t_testNumber;
 
+	CNodeModel rootNode = CNodeModel( 0, 0, 0 );
+	std::shared_ptr < CTreeModel > expectedValidTree = t_subGraphModelFactory.grapeModelMSTKruskal;
+	std::shared_ptr < CTreeModel > invalidTree = t_subGraphModelFactory.doubleTriangleModelMSTKruskal;
+	
+	std::shared_ptr < CTreeModel > actualTree = m_kruskalAlgorithmTest.FindMST( *( t_graphModelFactory.grapeGraphModel ), rootNode);
+	if ( !m_CheckPtr(actualTree) )
+	{
+		bool expectedValue = true;
+		
+		bool actualValidValue = m_subGraphComparer.AreEqual(*expectedValidTree, *actualTree);
+		bool actualInvalidValue = m_subGraphComparer.AreEqual(*invalidTree, *actualTree);
+		
+		CHECK_EQUAL( expectedValue, actualValidValue );
+		CHECK_NOT_EQUAL( expectedValue, actualInvalidValue );
+	}
+
+	expectedValidTree.reset();
+	invalidTree.reset();
+	actualTree.reset();
+}

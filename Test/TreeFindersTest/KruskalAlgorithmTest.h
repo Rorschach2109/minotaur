@@ -32,7 +32,9 @@ class CKruskalAlgorithmTest : public AbstractMinotaurModelTest
 		void m_FindInfinityMSTTest( void );
 		void m_FindTurtleMSTTest( void );
 		void m_FindDoubleTriangleMSTTest( void );
-		void m_FindLargeMSTTest( void );
+		void m_FindSpiderNetMSTTest( void );
+		void m_FindGrapeMSTTest( void );
+		
 		bool m_CheckPtr( const std::shared_ptr < CTreeModel > actualTree );
 	
 	public:

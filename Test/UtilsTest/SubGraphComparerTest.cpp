@@ -34,7 +34,7 @@ void CSubGraphComparerTest::m_AreEqualTest( void )
 {
 	++t_testNumber;
 	
-	std::shared_ptr < CTreeModel > validTreeModel = t_subGraphModelFactory.largeModelMSTKruskal;
+	std::shared_ptr < CTreeModel > validTreeModel = t_subGraphModelFactory.spiderNetModelMSTKruskal;
 	std::shared_ptr < CTreeModel > invalidTreeModel = t_subGraphModelFactory.doubleTriangleModelMSTKruskal;
 	
 	bool expectedValue = true;
