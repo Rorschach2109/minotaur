@@ -33,7 +33,10 @@ CAdjacencyListFactoryTest::CAdjacencyListFactoryTest( void ) :
 	m_adjacencyListFactory( CAdjacencyListFactory() )
 {
 	m_CreateFromVectorsTest();
-	m_CreateFromDtoTest();
+	m_CreateSquareFromDtoTest();
+	m_CreateInfinityFromDtoTest();
+	m_CreateTurtleFromDtoTest();
+	m_CreateDoubleTriangleFromDtoTest();
 }
 
 CAdjacencyListFactoryTest::~CAdjacencyListFactoryTest( void )
@@ -63,7 +66,82 @@ void CAdjacencyListFactoryTest::m_CreateFromVectorsTest( void )
 	actualAdjacencyList.reset();
 }
 
-void CAdjacencyListFactoryTest::m_CreateFromDtoTest( void )
+void CAdjacencyListFactoryTest::m_CreateSquareFromDtoTest( void )
+{
+	std::vector < CNodeDto > graphDtoNodes = t_dtoGraphFactory.squareDtoNodes;
+	std::vector < CEdgeDto > graphDtoEdges = t_dtoGraphFactory.squareDtoEdges;
+	
+	std::shared_ptr < IGraphModel > actualAdjacencyList = m_adjacencyListFactory.CreateFromDto(graphDtoNodes, graphDtoEdges);
+
+	std::vector < CNodeModel > expectedGraphModelNodes = t_graphModelFactory.squareModelNodes;
+	std::vector < CEdgeModel> expectedGraphModelEdges = t_graphModelFactory.squareModelEdges;
+
+	std::vector < CNodeModel > invalidGraphModelNodes = t_graphModelFactory.infinityModelNodes;
+	std::vector < CEdgeModel> invalidGraphModelEdges = t_graphModelFactory.infinityModelEdges;
+
+	std::vector < CNodeModel > actualGraphModelNodes = actualAdjacencyList->GetGraphModelNodes();
+	std::vector < CEdgeModel > actualGraphModelEdges = actualAdjacencyList->GetGraphModelEdges();
+	
+	CHECK_VECTORS_EQUAL(expectedGraphModelNodes, actualGraphModelNodes);
+	CHECK_VECTORS_EQUAL(expectedGraphModelEdges, actualGraphModelEdges);
+
+	CHECK_VECTORS_NOT_EQUAL(invalidGraphModelNodes, actualGraphModelNodes);
+	CHECK_VECTORS_NOT_EQUAL(invalidGraphModelEdges, actualGraphModelEdges);
+
+	actualAdjacencyList.reset();
+}
+
+void CAdjacencyListFactoryTest::m_CreateInfinityFromDtoTest( void )
+{
+	std::vector < CNodeDto > graphDtoNodes = t_dtoGraphFactory.infinityDtoNodes;
+	std::vector < CEdgeDto > graphDtoEdges = t_dtoGraphFactory.infinityDtoEdges;
+	
+	std::shared_ptr < IGraphModel > actualAdjacencyList = m_adjacencyListFactory.CreateFromDto(graphDtoNodes, graphDtoEdges);
+
+	std::vector < CNodeModel > expectedGraphModelNodes = t_graphModelFactory.infinityModelNodes;
+	std::vector < CEdgeModel> expectedGraphModelEdges = t_graphModelFactory.infinityModelEdges;
+
+	std::vector < CNodeModel > invalidGraphModelNodes = t_graphModelFactory.squareModelNodes;
+	std::vector < CEdgeModel> invalidGraphModelEdges = t_graphModelFactory.squareModelEdges;
+
+	std::vector < CNodeModel > actualGraphModelNodes = actualAdjacencyList->GetGraphModelNodes();
+	std::vector < CEdgeModel > actualGraphModelEdges = actualAdjacencyList->GetGraphModelEdges();
+	
+	CHECK_VECTORS_EQUAL(expectedGraphModelNodes, actualGraphModelNodes);
+	CHECK_VECTORS_EQUAL(expectedGraphModelEdges, actualGraphModelEdges);
+
+	CHECK_VECTORS_NOT_EQUAL(invalidGraphModelNodes, actualGraphModelNodes);
+	CHECK_VECTORS_NOT_EQUAL(invalidGraphModelEdges, actualGraphModelEdges);
+
+	actualAdjacencyList.reset();
+}
+
+void CAdjacencyListFactoryTest::m_CreateTurtleFromDtoTest( void )
+{
+	std::vector < CNodeDto > graphDtoNodes = t_dtoGraphFactory.turtleDtoNodes;
+	std::vector < CEdgeDto > graphDtoEdges = t_dtoGraphFactory.turtleDtoEdges;
+	
+	std::shared_ptr < IGraphModel > actualAdjacencyList = m_adjacencyListFactory.CreateFromDto(graphDtoNodes, graphDtoEdges);
+
+	std::vector < CNodeModel > expectedGraphModelNodes = t_graphModelFactory.turtleModelNodes;
+	std::vector < CEdgeModel> expectedGraphModelEdges = t_graphModelFactory.turtleModelEdges;
+
+	std::vector < CNodeModel > invalidGraphModelNodes = t_graphModelFactory.infinityModelNodes;
+	std::vector < CEdgeModel> invalidGraphModelEdges = t_graphModelFactory.infinityModelEdges;
+
+	std::vector < CNodeModel > actualGraphModelNodes = actualAdjacencyList->GetGraphModelNodes();
+	std::vector < CEdgeModel > actualGraphModelEdges = actualAdjacencyList->GetGraphModelEdges();
+	
+	CHECK_VECTORS_EQUAL(expectedGraphModelNodes, actualGraphModelNodes);
+	CHECK_VECTORS_EQUAL(expectedGraphModelEdges, actualGraphModelEdges);
+
+	CHECK_VECTORS_NOT_EQUAL(invalidGraphModelNodes, actualGraphModelNodes);
+	CHECK_VECTORS_NOT_EQUAL(invalidGraphModelEdges, actualGraphModelEdges);
+
+	actualAdjacencyList.reset();
+}
+
+void CAdjacencyListFactoryTest::m_CreateDoubleTriangleFromDtoTest( void )
 {
 	std::vector < CNodeDto > graphDtoNodes = t_dtoGraphFactory.doubleTriangleDtoNodes;
 	std::vector < CEdgeDto > graphDtoEdges = t_dtoGraphFactory.doubleTriangleDtoEdges;

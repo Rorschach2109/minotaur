@@ -25,7 +25,10 @@ class CAdjacencyListFactoryTest : public AbstractMinotaurModelTest, public Abstr
 		CAdjacencyListFactory m_adjacencyListFactory;
 	
 		void m_CreateFromVectorsTest( void );
-		void m_CreateFromDtoTest( void );
+		void m_CreateSquareFromDtoTest( void );
+		void m_CreateInfinityFromDtoTest( void );
+		void m_CreateTurtleFromDtoTest( void );
+		void m_CreateDoubleTriangleFromDtoTest( void );
 		
 	public:
 		CAdjacencyListFactoryTest( void );

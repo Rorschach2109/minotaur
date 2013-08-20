@@ -93,6 +93,10 @@ std::vector < CNodeModel > CSubGraphToGraphAdapter::GetNeighbors ( const CNodeMo
 		{
 			subGraphNodesIdSet.insert( edgeDef.second );
 		}
+		if ( currentNodeId == edgeDef.second )
+		{
+			subGraphNodesIdSet.insert( edgeDef.first );
+		}
 	}
 
 	std::vector <  CNodeModel > neighborNodes;
@@ -121,7 +125,10 @@ CEdgeModel CSubGraphToGraphAdapter::GetGraphModelEdge( const unsigned int& nodeF
 {
 	for ( auto edgeDef : m_subGraphModel.GetSubGraphEdges() )
 	{
-		if ( ( nodeFromId == edgeDef.first ) && (  nodeToId == edgeDef.second ) )
+		if ( 
+				( ( nodeFromId == edgeDef.first ) && (  nodeToId == edgeDef.second ) ) || 
+				( ( nodeToId == edgeDef.first ) && (  nodeFromId == edgeDef.second ) )
+			)
 		{
 			CEdgeModel edgeToReturn = m_parentGraphModel.GetGraphModelEdge(nodeFromId, nodeToId);
 			return edgeToReturn;

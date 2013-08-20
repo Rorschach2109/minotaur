@@ -109,20 +109,21 @@ void CSubGraphToGraphAdapterTest::m_GetNeighborsTest( void )
 	CNodeModel nodeModelTest = CNodeModel( 1, 2, 4 );
 	
 	std::vector < CNodeModel > expectedNodes; 
+	expectedNodes.push_back( CNodeModel( 0, 0, 2 ) );
 	expectedNodes.push_back( CNodeModel( 3, 4, 2 ) );
 	
 	std::vector < CNodeModel > invalidNodes;
 	invalidNodes.push_back( CNodeModel( 3, 4, 4 ) );
-	
-	std::vector < CNodeModel > invalidNodesBiDir;
-	invalidNodesBiDir.push_back( CNodeModel( 3, 2, 0 ) );
-	invalidNodesBiDir.push_back( CNodeModel( 0, 0, 2 ) );
+	invalidNodes.push_back( CNodeModel( 0, 0, 2 ) );
+
+	std::vector < CNodeModel > invalidNodesNumber; 
+	invalidNodesNumber.push_back( CNodeModel( 0, 0, 2 ) );
 	
 	std::vector < CNodeModel > actualNodes = m_adapterTest.GetNeighbors( nodeModelTest );
 
 	CHECK_VECTORS_EQUAL( expectedNodes, actualNodes );
-	CHECK_VECTORS_NOT_EQUAL( invalidNodesBiDir, actualNodes );
 	CHECK_VECTORS_NOT_EQUAL( invalidNodes, actualNodes );
+	CHECK_VECTORS_NOT_EQUAL( invalidNodesNumber, actualNodes );
 }
 
 

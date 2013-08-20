@@ -51,8 +51,13 @@ void CAdjacencyListFactory::m_CreateGraphModelAdjacencyMap( std::map < unsigned 
 																const std::vector < CEdgeModel >& graphModelEdges )
 {
 	graphModelAdjacencyMap.clear();
+	
 	for ( auto graphModelEdge : graphModelEdges )
-	{		
-		graphModelAdjacencyMap[ graphModelEdge.GetNodeFromId() ].push_back( std::make_pair( graphModelEdge, graphModelEdge.GetNodeToId() ) );
+	{	
+		unsigned int nodeFromId = graphModelEdge.GetNodeFromId();
+		unsigned int nodeToId = graphModelEdge.GetNodeToId();
+		
+		graphModelAdjacencyMap[nodeFromId].push_back( std::make_pair( graphModelEdge, nodeToId ) );
+		graphModelAdjacencyMap[nodeToId].push_back( std::make_pair( graphModelEdge, nodeFromId ) );
 	}
 }

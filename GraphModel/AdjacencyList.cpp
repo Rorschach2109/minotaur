@@ -11,6 +11,8 @@
 
 #include "AdjacencyList.h"
 
+#include <set>
+
 using namespace Minotaur;
 
 CAdjacencyList::CAdjacencyList( const AdjacencyMap& adjacencyMap, const NodesMap& nodesMap ) : 
@@ -170,28 +172,31 @@ CEdgeModel CAdjacencyList::GetGraphModelEdge( const unsigned int& nodeFromId, co
 
 const std::vector < CEdgeModel > CAdjacencyList::GetGraphModelEdges( void ) const
 {
-	std::vector< CEdgeModel > graphModelEdges;
+	std::set < CEdgeModel, CEdgeModel::SEdgeModelLess > graphModelEdgesSet;
+	
 	for ( auto adjacencyMapIterator : m_adjacencyMap )
 	{
-		for ( unsigned int edgesVectorIndex = 0; edgesVectorIndex < adjacencyMapIterator.second.size(); ++edgesVectorIndex )
+		for ( auto adjacencyMapVectorIterator : adjacencyMapIterator.second )
 		{
-			graphModelEdges.push_back( adjacencyMapIterator.second.at(edgesVectorIndex).first );
+			graphModelEdgesSet.insert( adjacencyMapVectorIterator.first );
 		}
 	}
+	std::vector< CEdgeModel > graphModelEdges( graphModelEdgesSet.begin(), graphModelEdgesSet.end() );
+	
 	return graphModelEdges;
 }
 
 unsigned int CAdjacencyList::GetEdgesNumber( void ) const
 {
-	unsigned int edgesCounter = 0;
+	std::set < CEdgeModel, CEdgeModel::SEdgeModelLess > graphModelEdgesSet;
 	
 	for ( auto adjacencyMapIterator : m_adjacencyMap )
 	{
-		for ( unsigned int edgesVectorIndex = 0; edgesVectorIndex < adjacencyMapIterator.second.size(); ++edgesVectorIndex )
+		for ( auto adjacencyMapVectorIterator : adjacencyMapIterator.second )
 		{
-			++edgesCounter;
+			graphModelEdgesSet.insert( adjacencyMapVectorIterator.first );
 		}
 	}
-	return edgesCounter;
+	return ( graphModelEdgesSet.size() );
 }
 

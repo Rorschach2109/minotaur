@@ -133,7 +133,7 @@ void CAdjacencyListTest::m_ContainsEdgeTest( void )
 	CHECK_EQUAL(validExpectedValue, validActualValue);
 	
 	bool invalidActualNode = m_adjacencyList.ContainsEdge(validNodeToId, validNodeFromId);
-	CHECK_EQUAL(invalidExpectedValue, invalidActualNode);
+	CHECK_EQUAL(validExpectedValue, invalidActualNode);
 
 	invalidActualNode = m_adjacencyList.ContainsEdge(validNodeToId, invalidNodeId);
 	CHECK_EQUAL(invalidExpectedValue, invalidActualNode);
@@ -157,7 +157,7 @@ void CAdjacencyListTest::m_GetGraphModelEdgesTest( void )
 	std::vector < CEdgeModel > expectedModelEdges = t_graphModelFactory.infinityModelEdges;
 	
 	std::vector < CEdgeModel > actualModelEdges = m_adjacencyList.GetGraphModelEdges();
-
+		
 	CHECK_VECTORS_EQUAL(expectedModelEdges, actualModelEdges);
 }
 
