@@ -1,14 +1,17 @@
 /*
  * This file is part of minotaur.
  *
- * File: TestDefines.h
- * Brief: Declaration of useful test defines.
+ * File: MinotaurTestDefines.h
+ * Brief: Declaration of useful minotaur test defines.
  *
  * Date: 24.07.2013
  * Author: Andrzej Korycinski
  * 
  * */
  
+#ifndef _MINOTAUR_MINOTAURTESTDEFINES_H_
+#define _MINOTAUR_MINOTAURTESTDEFINES_H_
+
 #include <iostream>
 #include <cstring>
  
@@ -29,14 +32,16 @@ namespace Minotaur
 		TEST_INFO; \
 	} while( false )
 
-#define FAILED_INFO( expected, actual ) \
+#define FAILED_INFO( expected, actual, failedTestCounter ) \
 	do { \
+		++failedTestCounter; \
 		std::cout << "\33[31;40m" << "[FAILED]"<< "\33[0m"; \
 		TEST_INFO; \
 		} while( false )
 
-#define FAILED_VECTORS_INFO( expected, actual ) \
+#define FAILED_VECTORS_INFO( expected, actual, failedTestCounter ) \
 	do { \
+		++failedTestCounter; \
 		std::cout << "\33[31;40m" << "[FAILED]"<< "\33[0m"; \
 		TEST_INFO; \
 		} while( false )
@@ -47,16 +52,16 @@ namespace Minotaur
 		TEST_INFO; \
 		} while( false )
 			
-#define CHECK_EQUAL( lValue, rValue )  \
+#define CHECK_EQUAL( lValue, rValue, failedTestCounter )  \
 	do { \
 		std::cout << "CHECK_EQUAL: "; \
 		if ( lValue == rValue ) \
 		{ PASSED_INFO; } \
 		else \
-		{ FAILED_INFO(lValue, rValue); } \
+		{ FAILED_INFO(lValue, rValue, failedTestCounter); } \
 	} while(0)
 
-#define CHECK_VECTORS_EQUAL( lVector, rVector )  \
+#define CHECK_VECTORS_EQUAL( lVector, rVector, failedTestCounter )  \
 	do { \
 		std::cout << "CHECK_VECTORS_EQUAL: "; \
 		if ( lVector.size() == rVector.size() ) \
@@ -67,29 +72,29 @@ namespace Minotaur
 				{} \
 				else \
 				{ \
-					FAILED_VECTORS_INFO(lVector, rVector);  \
+					FAILED_VECTORS_INFO(lVector, rVector, failedTestCounter);  \
 					break; \
 				} \
 			} \
 		} \
 		else \
 		{ \
-			FAILED_VECTORS_INFO(lVector, rVector);  \
+			FAILED_VECTORS_INFO(lVector, rVector, failedTestCounter);  \
 			break; \
 		} \
 		PASSED_VECTORS_INFO(lVector, rVector);  \
 	} while(0)
 		
-#define CHECK_NOT_EQUAL( lValue, rValue )  \
+#define CHECK_NOT_EQUAL( lValue, rValue, failedTestCounter )  \
 	do { \
 		std::cout << "CHECK_NOT_EQUAL: "; \
 		if ( lValue == rValue ) \
-		{ FAILED_INFO(lValue, rValue); } \
+		{ FAILED_INFO(lValue, rValue, failedTestCounter); } \
 		else \
 		{ PASSED_INFO; } \
 	} while(0)
 
-#define CHECK_VECTORS_NOT_EQUAL( lVector, rVector )  \
+#define CHECK_VECTORS_NOT_EQUAL( lVector, rVector, failedTestCounter )  \
 	do { \
 		std::cout << "CHECK_VECTORS_NOT_EQUAL: "; \
 		if ( lVector.size() == rVector.size() ) \
@@ -106,7 +111,7 @@ namespace Minotaur
 			} \
 			if ( equal) \
 			{ \
-				FAILED_VECTORS_INFO(lVector, rVector); \
+				FAILED_VECTORS_INFO(lVector, rVector, failedTestCounter); \
 				break; \
 			} \
 		} \
@@ -117,3 +122,5 @@ namespace Minotaur
 	} while(0)
 
 } // namespace Minotaur
+
+#endif /* _MINOTAUR_MINOTAURTESTDEFINES_H_ */

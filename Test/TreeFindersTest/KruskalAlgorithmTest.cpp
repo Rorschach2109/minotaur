@@ -12,7 +12,7 @@
 #include "KruskalAlgorithmTest.h"
 #include "NodeModel.h"
 
-#include "TestDefines.h"
+#include "MinotaurTestDefines.h"
 
 using namespace Minotaur;
 
@@ -35,17 +35,17 @@ CKruskalAlgorithmTest::~CKruskalAlgorithmTest( void )
 
 bool CKruskalAlgorithmTest::m_CheckPtr( const std::shared_ptr < CTreeModel > actualTree )
 {
+	++t_testNumber;
+	
 	bool nullPtr = ( nullptr == actualTree );
 	
-	CHECK_NOT_EQUAL( nullptr, actualTree );
+	CHECK_NOT_EQUAL( nullptr, actualTree, t_failedTestNumber );
 		
 	return nullPtr;
 }
 
 void CKruskalAlgorithmTest::m_FindSquareMSTTest( void )
 {
-	++t_testNumber;
-
 	CNodeModel rootNode = CNodeModel( 0, 0, 0 );
 	std::shared_ptr < CTreeModel > expectedValidTree = t_subGraphModelFactory.squareModelMSTKruskal;
 	std::shared_ptr < CTreeModel > invalidTree = t_subGraphModelFactory.turtleModelMSTKruskal;
@@ -53,13 +53,15 @@ void CKruskalAlgorithmTest::m_FindSquareMSTTest( void )
 	std::shared_ptr < CTreeModel > actualTree = m_kruskalAlgorithmTest.FindMST( *( t_graphModelFactory.squareGraphModel ), rootNode);
 	if ( !m_CheckPtr(actualTree) )
 	{
+		t_testNumber += 2;
+
 		bool expectedValue = true;
 		
 		bool actualValidValue = m_subGraphComparer.AreEqual(*expectedValidTree, *actualTree);
 		bool actualInvalidValue = m_subGraphComparer.AreEqual(*invalidTree, *actualTree);
 		
-		CHECK_EQUAL( expectedValue, actualValidValue );
-		CHECK_NOT_EQUAL( expectedValue, actualInvalidValue );
+		CHECK_EQUAL( expectedValue, actualValidValue, t_failedTestNumber );
+		CHECK_NOT_EQUAL( expectedValue, actualInvalidValue, t_failedTestNumber );
 	}
 	
 	expectedValidTree.reset();
@@ -69,8 +71,6 @@ void CKruskalAlgorithmTest::m_FindSquareMSTTest( void )
 
 void CKruskalAlgorithmTest::m_FindInfinityMSTTest( void )
 {
-	++t_testNumber;
-
 	CNodeModel rootNode = CNodeModel( 0, 0, 2 );
 	std::shared_ptr < CTreeModel > expectedValidTree = t_subGraphModelFactory.infinityModelMSTKruskal;
 	std::shared_ptr < CTreeModel > invalidTree = t_subGraphModelFactory.turtleModelMSTKruskal;
@@ -78,13 +78,15 @@ void CKruskalAlgorithmTest::m_FindInfinityMSTTest( void )
 	std::shared_ptr < CTreeModel > actualTree = m_kruskalAlgorithmTest.FindMST( *( t_graphModelFactory.infinityGraphModel ), rootNode);
 	if ( !m_CheckPtr(actualTree) )
 	{
+		t_testNumber += 2;
+
 		bool expectedValue = true;
 		
 		bool actualValidValue = m_subGraphComparer.AreEqual(*expectedValidTree, *actualTree);
 		bool actualInvalidValue = m_subGraphComparer.AreEqual(*invalidTree, *actualTree);
 		
-		CHECK_EQUAL( expectedValue, actualValidValue );
-		CHECK_NOT_EQUAL( expectedValue, actualInvalidValue );
+		CHECK_EQUAL( expectedValue, actualValidValue, t_failedTestNumber );
+		CHECK_NOT_EQUAL( expectedValue, actualInvalidValue, t_failedTestNumber );
 	}
 	
 	expectedValidTree.reset();
@@ -94,8 +96,6 @@ void CKruskalAlgorithmTest::m_FindInfinityMSTTest( void )
 
 void CKruskalAlgorithmTest::m_FindTurtleMSTTest( void )
 {
-	++t_testNumber;
-
 	CNodeModel rootNode = CNodeModel( 0, 0, 0 );
 	std::shared_ptr < CTreeModel > expectedValidTree = t_subGraphModelFactory.turtleModelMSTKruskal;
 	std::shared_ptr < CTreeModel > invalidTree = t_subGraphModelFactory.squareModelMSTKruskal;
@@ -103,13 +103,15 @@ void CKruskalAlgorithmTest::m_FindTurtleMSTTest( void )
 	std::shared_ptr < CTreeModel > actualTree = m_kruskalAlgorithmTest.FindMST( *( t_graphModelFactory.turtleGraphModel ), rootNode);
 	if ( !m_CheckPtr(actualTree) )
 	{
+		t_testNumber += 2;
+		
 		bool expectedValue = true;
 		
 		bool actualValidValue = m_subGraphComparer.AreEqual(*expectedValidTree, *actualTree);
 		bool actualInvalidValue = m_subGraphComparer.AreEqual(*invalidTree, *actualTree);
 		
-		CHECK_EQUAL( expectedValue, actualValidValue );
-		CHECK_NOT_EQUAL( expectedValue, actualInvalidValue );
+		CHECK_EQUAL( expectedValue, actualValidValue, t_failedTestNumber );
+		CHECK_NOT_EQUAL( expectedValue, actualInvalidValue, t_failedTestNumber );
 	}
 	
 	expectedValidTree.reset();
@@ -119,8 +121,6 @@ void CKruskalAlgorithmTest::m_FindTurtleMSTTest( void )
 
 void CKruskalAlgorithmTest::m_FindDoubleTriangleMSTTest( void )
 {
-	++t_testNumber;
-
 	CNodeModel rootNode = CNodeModel( 0, 0, 0 );
 	std::shared_ptr < CTreeModel > expectedValidTree = t_subGraphModelFactory.doubleTriangleModelMSTKruskal;
 	std::shared_ptr < CTreeModel > invalidTree = t_subGraphModelFactory.turtleModelMSTKruskal;
@@ -128,13 +128,15 @@ void CKruskalAlgorithmTest::m_FindDoubleTriangleMSTTest( void )
 	std::shared_ptr < CTreeModel > actualTree = m_kruskalAlgorithmTest.FindMST( *( t_graphModelFactory.doubleTriangleGraphModel ), rootNode);
 	if ( !m_CheckPtr(actualTree) )
 	{
+		t_testNumber += 2;
+
 		bool expectedValue = true;
 		
 		bool actualValidValue = m_subGraphComparer.AreEqual(*expectedValidTree, *actualTree);
 		bool actualInvalidValue = m_subGraphComparer.AreEqual(*invalidTree, *actualTree);
 		
-		CHECK_EQUAL( expectedValue, actualValidValue );
-		CHECK_NOT_EQUAL( expectedValue, actualInvalidValue );
+		CHECK_EQUAL( expectedValue, actualValidValue, t_failedTestNumber );
+		CHECK_NOT_EQUAL( expectedValue, actualInvalidValue, t_failedTestNumber );
 	}
 	
 	expectedValidTree.reset();
@@ -144,8 +146,6 @@ void CKruskalAlgorithmTest::m_FindDoubleTriangleMSTTest( void )
 
 void CKruskalAlgorithmTest::m_FindSpiderNetMSTTest( void )
 {
-	++t_testNumber;
-
 	CNodeModel rootNode = CNodeModel( 0, 0, 0 );
 	std::shared_ptr < CTreeModel > expectedValidTree = t_subGraphModelFactory.spiderNetModelMSTKruskal;
 	std::shared_ptr < CTreeModel > invalidTree = t_subGraphModelFactory.doubleTriangleModelMSTKruskal;
@@ -153,13 +153,15 @@ void CKruskalAlgorithmTest::m_FindSpiderNetMSTTest( void )
 	std::shared_ptr < CTreeModel > actualTree = m_kruskalAlgorithmTest.FindMST( *( t_graphModelFactory.spiderNetGraphModel ), rootNode);
 	if ( !m_CheckPtr(actualTree) )
 	{
+		t_testNumber += 2;
+
 		bool expectedValue = true;
 		
 		bool actualValidValue = m_subGraphComparer.AreEqual(*expectedValidTree, *actualTree);
 		bool actualInvalidValue = m_subGraphComparer.AreEqual(*invalidTree, *actualTree);
 		
-		CHECK_EQUAL( expectedValue, actualValidValue );
-		CHECK_NOT_EQUAL( expectedValue, actualInvalidValue );
+		CHECK_EQUAL( expectedValue, actualValidValue, t_failedTestNumber );
+		CHECK_NOT_EQUAL( expectedValue, actualInvalidValue, t_failedTestNumber );
 	}
 	
 	expectedValidTree.reset();
@@ -169,8 +171,6 @@ void CKruskalAlgorithmTest::m_FindSpiderNetMSTTest( void )
 
 void CKruskalAlgorithmTest::m_FindGrapeMSTTest( void )
 {
-	++t_testNumber;
-
 	CNodeModel rootNode = CNodeModel( 0, 0, 0 );
 	std::shared_ptr < CTreeModel > expectedValidTree = t_subGraphModelFactory.grapeModelMSTKruskal;
 	std::shared_ptr < CTreeModel > invalidTree = t_subGraphModelFactory.doubleTriangleModelMSTKruskal;
@@ -178,13 +178,15 @@ void CKruskalAlgorithmTest::m_FindGrapeMSTTest( void )
 	std::shared_ptr < CTreeModel > actualTree = m_kruskalAlgorithmTest.FindMST( *( t_graphModelFactory.grapeGraphModel ), rootNode);
 	if ( !m_CheckPtr(actualTree) )
 	{
+		t_testNumber += 2;
+
 		bool expectedValue = true;
 		
 		bool actualValidValue = m_subGraphComparer.AreEqual(*expectedValidTree, *actualTree);
 		bool actualInvalidValue = m_subGraphComparer.AreEqual(*invalidTree, *actualTree);
 		
-		CHECK_EQUAL( expectedValue, actualValidValue );
-		CHECK_NOT_EQUAL( expectedValue, actualInvalidValue );
+		CHECK_EQUAL( expectedValue, actualValidValue, t_failedTestNumber );
+		CHECK_NOT_EQUAL( expectedValue, actualInvalidValue, t_failedTestNumber );
 	}
 
 	expectedValidTree.reset();

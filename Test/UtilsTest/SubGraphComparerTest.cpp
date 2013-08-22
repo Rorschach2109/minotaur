@@ -12,7 +12,7 @@
 #include "SubGraphComparerTest.h"
 #include "TreeModel.h"
 
-#include "TestDefines.h"
+#include "MinotaurTestDefines.h"
 
 #include <memory>
 
@@ -32,7 +32,7 @@ CSubGraphComparerTest::~CSubGraphComparerTest( void )
 		
 void CSubGraphComparerTest::m_AreEqualTest( void )
 {
-	++t_testNumber;
+	t_testNumber += 2;
 	
 	std::shared_ptr < CTreeModel > validTreeModel = t_subGraphModelFactory.spiderNetModelMSTKruskal;
 	std::shared_ptr < CTreeModel > invalidTreeModel = t_subGraphModelFactory.doubleTriangleModelMSTKruskal;
@@ -42,8 +42,8 @@ void CSubGraphComparerTest::m_AreEqualTest( void )
 	bool validActualValue = m_subGraphComparer.AreEqual( *validTreeModel, *validTreeModel );
 	bool invalidActualValue = m_subGraphComparer.AreEqual( *validTreeModel, *invalidTreeModel );
 	
-	CHECK_EQUAL( expectedValue, validActualValue );
-	CHECK_NOT_EQUAL( expectedValue, invalidActualValue );
+	CHECK_EQUAL( expectedValue, validActualValue, t_failedTestNumber );
+	CHECK_NOT_EQUAL( expectedValue, invalidActualValue, t_failedTestNumber );
 
 	validTreeModel.reset();
 	invalidTreeModel.reset();

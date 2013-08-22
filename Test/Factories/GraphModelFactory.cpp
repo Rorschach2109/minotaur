@@ -22,6 +22,7 @@ CGraphModelFactory::CGraphModelFactory( void ) :
 	m_CreateDoubleTriangleModelGraph();
 	m_CreateSpiderNetModelGraph();
 	m_CreateGrapeModelGraph();
+	m_CreateTruncatedGraph();
 }
 
 CGraphModelFactory::~CGraphModelFactory( void )
@@ -586,4 +587,24 @@ void CGraphModelFactory::m_CreateGrapeModelAdjacencyList( void )
 	grapeAdjacencyMap[15] = node15Neighbors;
 	grapeAdjacencyMap[16] = node16Neighbors;
 	grapeAdjacencyMap[17] = node17Neighbors;
+}
+
+void CGraphModelFactory::m_CreateTruncatedGraph( void )
+{
+	m_CreateTruncatedModelUtils();
+}
+
+void CGraphModelFactory::m_CreateTruncatedModelUtils( void )
+{
+	truncatedModelNodes.clear();
+	truncatedModelNodes.push_back( CNodeModel( 0, 0, 2 ) );
+	truncatedModelNodes.push_back( CNodeModel( 1, 2, 4 ) );
+	truncatedModelNodes.push_back( CNodeModel( 2, 2, 0 ) );
+	truncatedModelNodes.push_back( CNodeModel( 3, 4, 4 ) );
+	truncatedModelNodes.push_back( CNodeModel( 4, 6, 6 ) );
+	
+	truncatedModelEdges.clear();
+	truncatedModelEdges.push_back( CEdgeModel( 0, 1, 1.0 ) );
+	truncatedModelEdges.push_back( CEdgeModel( 0, 2, 1.0 ) );
+	truncatedModelEdges.push_back( CEdgeModel( 3, 4, 1.0 ) );
 }

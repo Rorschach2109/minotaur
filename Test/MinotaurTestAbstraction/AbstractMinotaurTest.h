@@ -19,12 +19,14 @@ class AbstractMinotaurTest
 {
 	protected:
 		mutable unsigned int t_testNumber;
+		mutable unsigned int t_failedTestNumber;
 	
 	public:
 		AbstractMinotaurTest( void );
 		virtual ~AbstractMinotaurTest( void ) = 0;
 	
 		virtual const unsigned int& GetTestNumber( void ) const;
+		virtual const unsigned int& GetFailedTestNumber( void ) const;
 };
 	
 } // namespace Minotaur

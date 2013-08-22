@@ -10,7 +10,7 @@
  * */
 
 #include "AdjacencyListTest.h"
-#include "TestDefines.h"
+#include "MinotaurTestDefines.h"
 
 using namespace Minotaur;
 
@@ -41,6 +41,8 @@ void CAdjacencyListTest::m_RunTest( void )
 
 void CAdjacencyListTest::m_CompareTest( void )
 {
+	t_testNumber += 2;
+
 	CAdjacencyList validAdjacencyList = CAdjacencyList(t_graphModelFactory.infinityAdjacencyMap, t_graphModelFactory.infinityNodesMap);
 	CAdjacencyList invalidAdjacencyList = CAdjacencyList(t_graphModelFactory.turtleAdjacencyMap, t_graphModelFactory.turtleNodesMap);
 	
@@ -50,13 +52,13 @@ void CAdjacencyListTest::m_CompareTest( void )
 	bool actualValidResult = ( m_adjacencyList == validAdjacencyList );
 	bool actualInvalidResult = ( m_adjacencyList == invalidAdjacencyList );
 	
-	CHECK_EQUAL(expectedValidResult, actualValidResult);
-	CHECK_EQUAL(expectedInvalidResult, actualInvalidResult);
+	CHECK_EQUAL( expectedValidResult, actualValidResult, t_failedTestNumber );
+	CHECK_EQUAL( expectedInvalidResult, actualInvalidResult, t_failedTestNumber );
 }
 	
 void CAdjacencyListTest::m_ContainsNodeTest( void )
 {
-	++t_testNumber;
+	t_testNumber += 2;
 
 	unsigned int validNodeId = 0;
 	unsigned int invalidNodeId = 10;
@@ -67,8 +69,8 @@ void CAdjacencyListTest::m_ContainsNodeTest( void )
 	bool validActualValue = m_adjacencyList.ContainsNode(validNodeId);
 	bool invalidActualNode = m_adjacencyList.ContainsNode(invalidNodeId);
 	
-	CHECK_EQUAL(validExpectedValue, validActualValue);
-	CHECK_EQUAL(invalidExpectedValue, invalidActualNode);
+	CHECK_EQUAL( validExpectedValue, validActualValue, t_failedTestNumber );
+	CHECK_EQUAL( invalidExpectedValue, invalidActualNode, t_failedTestNumber );
 }
 
 void CAdjacencyListTest::m_GetGraphModelNodeTest( void )
@@ -79,7 +81,7 @@ void CAdjacencyListTest::m_GetGraphModelNodeTest( void )
 	
 	CNodeModel actualModelNode = m_adjacencyList.GetGraphModelNode(3);
 	
-	CHECK_EQUAL(expectedModelNode, actualModelNode);
+	CHECK_EQUAL( expectedModelNode, actualModelNode, t_failedTestNumber );
 }
 
 void CAdjacencyListTest::m_GetGraphModelNodesTest( void )
@@ -90,20 +92,20 @@ void CAdjacencyListTest::m_GetGraphModelNodesTest( void )
 	
 	std::vector < CNodeModel > actualModelNodes = m_adjacencyList.GetGraphModelNodes();
 
-	CHECK_VECTORS_EQUAL(expectedModelNodes, actualModelNodes);
+	CHECK_VECTORS_EQUAL( expectedModelNodes, actualModelNodes, t_failedTestNumber );
 }
 
 void CAdjacencyListTest::m_GetNodesNumberTest( void )
 {
-	++t_testNumber;
+	t_testNumber += 2;
 	
 	unsigned int expectedNodesNumber = 7;
 	unsigned int invalidNodesNumber = 0;
 	
 	unsigned int actualNodesNumber = m_adjacencyList.GetNodesNumber();
 	
-	CHECK_EQUAL(expectedNodesNumber, actualNodesNumber);
-	CHECK_NOT_EQUAL(invalidNodesNumber, actualNodesNumber);
+	CHECK_EQUAL( expectedNodesNumber, actualNodesNumber, t_failedTestNumber );
+	CHECK_NOT_EQUAL( invalidNodesNumber, actualNodesNumber, t_failedTestNumber );
 }
 
 void CAdjacencyListTest::m_GetNeighborsTest( void )
@@ -114,12 +116,12 @@ void CAdjacencyListTest::m_GetNeighborsTest( void )
 	
 	std::vector < CNodeModel > actualNode0Neighbors = m_adjacencyList.GetNeighbors( t_graphModelFactory.infinityNodesMap[0] );
 
-	CHECK_VECTORS_EQUAL(expectedNode0Neighbors, actualNode0Neighbors);
+	CHECK_VECTORS_EQUAL( expectedNode0Neighbors, actualNode0Neighbors, t_failedTestNumber );
 }
 
 void CAdjacencyListTest::m_ContainsEdgeTest( void )
 {
-	++t_testNumber;
+	t_testNumber += 2;
 	
 	unsigned int validNodeFromId = 0;
 	unsigned int validNodeToId = 1;
@@ -130,13 +132,13 @@ void CAdjacencyListTest::m_ContainsEdgeTest( void )
 
 	bool validActualValue = m_adjacencyList.ContainsEdge(validNodeFromId, validNodeToId);
 		
-	CHECK_EQUAL(validExpectedValue, validActualValue);
+	CHECK_EQUAL( validExpectedValue, validActualValue, t_failedTestNumber );
 	
 	bool invalidActualNode = m_adjacencyList.ContainsEdge(validNodeToId, validNodeFromId);
-	CHECK_EQUAL(validExpectedValue, invalidActualNode);
+	CHECK_EQUAL( validExpectedValue, invalidActualNode, t_failedTestNumber );
 
 	invalidActualNode = m_adjacencyList.ContainsEdge(validNodeToId, invalidNodeId);
-	CHECK_EQUAL(invalidExpectedValue, invalidActualNode);
+	CHECK_EQUAL( invalidExpectedValue, invalidActualNode, t_failedTestNumber );
 }
 
 void CAdjacencyListTest::m_GetGraphModelEdgeTest( void )
@@ -147,7 +149,7 @@ void CAdjacencyListTest::m_GetGraphModelEdgeTest( void )
 	
 	CEdgeModel actualModelEdge = m_adjacencyList.GetGraphModelEdge(4, 6);
 	
-	CHECK_EQUAL(expectedModelEdge, actualModelEdge);
+	CHECK_EQUAL( expectedModelEdge, actualModelEdge, t_failedTestNumber );
 }
 
 void CAdjacencyListTest::m_GetGraphModelEdgesTest( void )
@@ -158,18 +160,18 @@ void CAdjacencyListTest::m_GetGraphModelEdgesTest( void )
 	
 	std::vector < CEdgeModel > actualModelEdges = m_adjacencyList.GetGraphModelEdges();
 		
-	CHECK_VECTORS_EQUAL(expectedModelEdges, actualModelEdges);
+	CHECK_VECTORS_EQUAL( expectedModelEdges, actualModelEdges, t_failedTestNumber );
 }
 
 void CAdjacencyListTest::m_GetEdgesNumberTest( void )
 {
-	++t_testNumber;
+	t_testNumber += 2;
 	
 	unsigned int expectedEdgesNumber = 8;
 	unsigned int invalidEdgesNumber = 0;
 	
 	unsigned int actualEdgesNumber = m_adjacencyList.GetEdgesNumber();
 	
-	CHECK_EQUAL(expectedEdgesNumber, actualEdgesNumber);
-	CHECK_NOT_EQUAL(invalidEdgesNumber, actualEdgesNumber);
+	CHECK_EQUAL( expectedEdgesNumber, actualEdgesNumber, t_failedTestNumber );
+	CHECK_NOT_EQUAL( invalidEdgesNumber, actualEdgesNumber, t_failedTestNumber );
 }

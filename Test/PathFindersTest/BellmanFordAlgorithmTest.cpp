@@ -11,7 +11,7 @@
  
 #include "BellmanFordAlgorithmTest.h"
 
-#include "TestDefines.h"
+#include "MinotaurTestDefines.h"
 
 using namespace Minotaur;
 

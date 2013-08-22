@@ -12,12 +12,13 @@
 #ifndef _MINOTAUR_BELLMANFORDALGORITHMTEST_H_
 #define _MINOTAUR_BELLMANFORDALGORITHMTEST_H_
 
+#include "AbstractMinotaurModelTest.h"
 #include "BellmanFordAlgorithm.h"
 
 namespace Minotaur
 {
 	
-class CBellmanFordAlgorithmTest
+class CBellmanFordAlgorithmTest : public AbstractMinotaurModelTest
 {
 	private:
 		CBellmanFordAlgorithm m_bellmanFordAlgorithmTest;

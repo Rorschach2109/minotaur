@@ -12,7 +12,7 @@
 #include "StreamOutputGraphManagerTest.h"
 
 #include "StreamOutputGraphManager.h"
-#include "TestDefines.h"
+#include "MinotaurTestDefines.h"
  
 #include "GraphDTO.h"
 #include "GraphDTOFactory.h" 
@@ -25,7 +25,7 @@ using namespace Minotaur;
 CStreamOutputGraphManagerTest::CStreamOutputGraphManagerTest( void ) : 
 	AbstractMinotaurDtoTest()
 {
-	m_WriteSingleGraphToOutput();
+	//m_WriteSingleGraphToOutput();
 	m_WriteMultipleGraphToOutput();
 }
  
@@ -36,9 +36,10 @@ CStreamOutputGraphManagerTest::~CStreamOutputGraphManagerTest( void )
 
 void CStreamOutputGraphManagerTest::m_WriteSingleGraphToOutput( void )
 {
-	++t_testNumber;
-	CGraphDto dtoGraphToTest = t_dtoGraphFactory.doubleTriangleDtoGraph;
+	t_testNumber += 2;
+	
 	unsigned int graphsCount = 1;
+	CGraphDto dtoGraphToTest = t_dtoGraphFactory.doubleTriangleDtoGraph;
 	std::stringstream expectedDtoGraphStream;
 	CStreamOutputGraphManager validStreamOutputGraphManager = CStreamOutputGraphManager(expectedDtoGraphStream, graphsCount);
 	
@@ -48,11 +49,25 @@ void CStreamOutputGraphManagerTest::m_WriteSingleGraphToOutput( void )
 	validStreamOutputGraphManager.WriteGraphToOutput(dtoGraphToTest);
 	std::string actualDtoGraphString = expectedDtoGraphStream.str();
 
-	CHECK_EQUAL(expectedDtoGraphString, actualDtoGraphString);
-	CHECK_NOT_EQUAL(invalidDtoGraphString, actualDtoGraphString);
+	CHECK_EQUAL( expectedDtoGraphString, actualDtoGraphString, t_failedTestNumber );
+	CHECK_NOT_EQUAL( invalidDtoGraphString, actualDtoGraphString, t_failedTestNumber );
 }
 
 void CStreamOutputGraphManagerTest::m_WriteMultipleGraphToOutput( void )
 {
+	t_testNumber += 2;
 	
+	unsigned int graphsCount = 2;
+	CGraphDto dtoGraphToTest = t_dtoGraphFactory.doubleTriangleDtoGraph;
+	std::stringstream expectedDtoGraphStream;
+	CStreamOutputGraphManager validStreamOutputGraphManager = CStreamOutputGraphManager(expectedDtoGraphStream, graphsCount);
+	
+	std::string expectedDtoGraphString = "2\n\n" + t_dtoGraphFactory.doubleTriangleDtoGraphString + t_dtoGraphFactory.doubleTriangleDtoGraphString;
+	std::string invalidDtoGraphString = "1\n\n" + t_dtoGraphFactory.doubleTriangleDtoGraphString;
+
+	validStreamOutputGraphManager.WriteGraphToOutput(dtoGraphToTest);
+	std::string actualDtoGraphString = expectedDtoGraphStream.str();
+
+	CHECK_EQUAL( expectedDtoGraphString, actualDtoGraphString, t_failedTestNumber );
+	CHECK_NOT_EQUAL( invalidDtoGraphString, actualDtoGraphString, t_failedTestNumber );
 }

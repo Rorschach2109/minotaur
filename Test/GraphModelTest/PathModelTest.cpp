@@ -10,7 +10,7 @@
  * */
 
 #include "PathModelTest.h"
-#include "TestDefines.h"
+#include "MinotaurTestDefines.h"
 
 using namespace Minotaur;
 
@@ -34,5 +34,5 @@ void CPathModelTest::m_VerifySubGraphTopology( void )
 	
 	bool actualValue = m_pathModelTest.VerifySubGraphTopology();
 	
-	CHECK_EQUAL( expectedValue, actualValue );
+	CHECK_EQUAL( expectedValue, actualValue, t_failedTestNumber );
 }

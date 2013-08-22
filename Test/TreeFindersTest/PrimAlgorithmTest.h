@@ -12,12 +12,13 @@
 #ifndef _MINOTAUR_PRIMALGORITHMTEST_H_
 #define _MINOTAUR_PRIMALGORITHMTEST_H_
 
+#include "AbstractMinotaurModelTest.h"
 #include "PrimAlgorithm.h"
 
 namespace Minotaur
 {
 	
-class CPrimAlgorithmTest
+class CPrimAlgorithmTest : public AbstractMinotaurModelTest
 {
 	private:
 		CPrimAlgorithm m_primAlgorithmTest;

@@ -19,7 +19,7 @@
 namespace Minotaur
 {
 
-class AbstractMinotaurModelTest : public AbstractMinotaurTest
+class AbstractMinotaurModelTest : public virtual AbstractMinotaurTest
 {
 	protected:
 		CGraphModelFactory t_graphModelFactory;

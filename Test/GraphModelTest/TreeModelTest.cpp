@@ -10,7 +10,7 @@
  * */
 
 #include "TreeModelTest.h"
-#include "TestDefines.h"
+#include "MinotaurTestDefines.h"
 
 using namespace Minotaur;
 
@@ -34,5 +34,5 @@ void CTreeModelTest::m_VerifySubGraphTopologyTest( void )
 	
 	bool actualValue = m_treeModelTest.VerifySubGraphTopology( );
 	
-	CHECK_EQUAL( expectedValue, actualValue );
+	CHECK_EQUAL( expectedValue, actualValue, t_failedTestNumber );
 }

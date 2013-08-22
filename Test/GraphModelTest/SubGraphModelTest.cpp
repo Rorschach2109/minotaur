@@ -12,7 +12,7 @@
 #include "SubGraphModelTest.h"
 #include "AdjacencyList.h"
 
-#include "TestDefines.h"
+#include "MinotaurTestDefines.h"
 
 #include <vector>
 #include <utility>
@@ -40,17 +40,17 @@ void CSubGraphModelTest::m_VerifySubGraphTopologyTest( void )
 	
 	bool actualValue = m_subGraphTest.VerifySubGraphTopology();
 	
-	CHECK_EQUAL(expectedValue, actualValue);
+	CHECK_EQUAL( expectedValue, actualValue, t_failedTestNumber );
 }
 
 void CSubGraphModelTest::m_GetSubGraphEdgesTest( void )
 {
-	++t_testNumber;
+	t_testNumber += 2;
 	
 	std::vector < std::pair < unsigned int, unsigned int > > expectedSubGraphEdges = t_subGraphModelFactory.doubleTriangleModelEdgeDefinition;
 	std::vector < std::pair < unsigned int, unsigned int > > invalidSubGraphEdges = t_subGraphModelFactory.infinityModelEdgeDefinition;
 	std::vector < std::pair < unsigned int, unsigned int > > actualSubGraphEdges = m_subGraphTest.GetSubGraphEdges();
 	
-	CHECK_VECTORS_EQUAL(expectedSubGraphEdges, actualSubGraphEdges);
-	CHECK_VECTORS_NOT_EQUAL(invalidSubGraphEdges, actualSubGraphEdges);
+	CHECK_VECTORS_EQUAL( expectedSubGraphEdges, actualSubGraphEdges, t_failedTestNumber );
+	CHECK_VECTORS_NOT_EQUAL( invalidSubGraphEdges, actualSubGraphEdges, t_failedTestNumber );
 }

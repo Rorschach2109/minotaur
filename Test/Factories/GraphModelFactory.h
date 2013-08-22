@@ -63,6 +63,9 @@ class CGraphModelFactory
 		void m_CreateGrapeModelNodesMap( void );
 		void m_CreateGrapeModelAdjacencyList( void );
 
+		void m_CreateTruncatedGraph( void );
+		void m_CreateTruncatedModelUtils( void );
+
 	public:
 		CGraphModelFactory( void );
 		virtual ~CGraphModelFactory( void );
@@ -104,6 +107,9 @@ class CGraphModelFactory
 		std::vector < CNodeModel > grapeModelNodes;
 		std::vector < CEdgeModel > grapeModelEdges;
 		std::shared_ptr < IGraphModel > grapeGraphModel;
+
+		std::vector < CNodeModel > truncatedModelNodes;
+		std::vector < CEdgeModel > truncatedModelEdges;
 };
 	
 } // namespace Minotaur

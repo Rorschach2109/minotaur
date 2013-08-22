@@ -29,12 +29,12 @@ std::shared_ptr < IGraphModel > CAdjacencyListFactory::CreateFromVectors( const 
 {
 	std::map < unsigned int, CNodeModel > graphModelNodesMap;
 	std::map < unsigned int, std::vector < std::pair < CEdgeModel, unsigned int > > > graphModelAdjacencyMap;
-	
+		
 	m_CreateGraphModelNodesMap(graphModelNodesMap, graphModelNodes);
 	m_CreateGraphModelAdjacencyMap(graphModelAdjacencyMap, graphModelEdges);
-	
+		
 	std::shared_ptr < CAdjacencyList > adjacencyList( new CAdjacencyList( graphModelAdjacencyMap, graphModelNodesMap ) );
-	
+		
 	return adjacencyList;
 }
 

@@ -12,7 +12,7 @@
 #include "GraphComparerTest.h"
 #include "TreeModel.h"
 
-#include "TestDefines.h"
+#include "MinotaurTestDefines.h"
 
 #include <memory>
 
@@ -32,7 +32,7 @@ CGraphComparerTest::~CGraphComparerTest( void )
 		
 void CGraphComparerTest::m_AreEqualTest( void )
 {
-	++t_testNumber;
+	t_testNumber += 2;
 	
 	std::shared_ptr < IGraphModel > validGraphModel = t_graphModelFactory.infinityGraphModel;
 	std::shared_ptr < IGraphModel > invalidGraphModel = t_graphModelFactory.turtleGraphModel;
@@ -42,8 +42,8 @@ void CGraphComparerTest::m_AreEqualTest( void )
 	bool validActualValue = m_graphComparer.AreEqual( *validGraphModel, *validGraphModel );
 	bool invalidActualValue = m_graphComparer.AreEqual( *validGraphModel, *invalidGraphModel );
 	
-	CHECK_EQUAL( expectedValue, validActualValue );
-	CHECK_NOT_EQUAL( expectedValue, invalidActualValue );
+	CHECK_EQUAL( expectedValue, validActualValue, t_failedTestNumber );
+	CHECK_NOT_EQUAL( expectedValue, invalidActualValue, t_failedTestNumber );
 
 	validGraphModel.reset();
 	invalidGraphModel.reset();

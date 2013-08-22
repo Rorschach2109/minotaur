@@ -12,12 +12,13 @@
 #ifndef _MINOTAUR_DIJKSTRAALGORITHMTEST_H_
 #define _MINOTAUR_DIJKSTRAALGORITHMTEST_H_
 
+#include "AbstractMinotaurModelTest.h"
 #include "DijkstraAlgorithm.h"
 
 namespace Minotaur
 {
 	
-class CDijkstraAlgorithmTest
+class CDijkstraAlgorithmTest : public AbstractMinotaurModelTest
 {
 	private:
 		CDijkstraAlgorithm m_dijkstraAlgorithmTest;

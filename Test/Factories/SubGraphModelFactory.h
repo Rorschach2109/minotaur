@@ -36,29 +36,53 @@ class CSubGraphModelFactory : public CGraphModelFactory
 
 		edgeDefinition squareModelEdgeDefinition;
 		edgeDefinition squareModelMSTKruskalEdges;
+		edgeDefinition squareModelMSTPrimEdges;
+		edgeDefinition squareModelMSTBoruvkaEdges;
 		std::shared_ptr < CTreeModel > squareModelMSTKruskal;
+		std::shared_ptr < CTreeModel > squareModelMSTPrim;
+		std::shared_ptr < CTreeModel > squareModelMSTBoruvka;
 		
 		edgeDefinition infinityModelEdgeDefinition;
 		subGraphEdges infinitySubGraphModelEdges;
 		subGraphNodes infinityNode1Neighbors;
 		edgeDefinition infinityPath0To5;
 		edgeDefinition infinityModelMSTKruskalEdges;
+		edgeDefinition infinityModelMSTPrimEdges;
+		edgeDefinition infinityModelMSTBoruvkaEdges;
 		std::shared_ptr < CTreeModel > infinityModelMSTKruskal;
+		std::shared_ptr < CTreeModel > infinityModelMSTPrim;
+		std::shared_ptr < CTreeModel > infinityModelMSTBoruvka;
 		
 		edgeDefinition turtleModelEdgeDefinition;
 		edgeDefinition turtleModelMSTKruskalEdges;
+		edgeDefinition turtleModelMSTPrimEdges;
+		edgeDefinition turtleModelMSTBoruvkaEdges;
 		std::shared_ptr < CTreeModel > turtleModelMSTKruskal;
+		std::shared_ptr < CTreeModel > turtleModelMSTPrim;
+		std::shared_ptr < CTreeModel > turtleModelMSTBoruvka;
 		
 		edgeDefinition doubleTriangleModelEdgeDefinition;
 		edgeDefinition doubleTriangleModelMSTKruskalEdges;
+		edgeDefinition doubleTriangleModelMSTPrimEdges;
+		edgeDefinition doubleTriangleModelMSTBoruvkaEdges;
 		std::shared_ptr < CTreeModel > doubleTriangleModelMSTKruskal;
+		std::shared_ptr < CTreeModel > doubleTriangleModelMSTPrim;
+		std::shared_ptr < CTreeModel > doubleTriangleModelMSTBoruvka;
 		
 		edgeDefinition spiderNetModelMSTKruskalEdges;
+		edgeDefinition spiderNetModelMSTPrimEdges;
+		edgeDefinition spiderNetModelMSTBoruvkaEdges;
 		std::shared_ptr < CTreeModel > spiderNetModelMSTKruskal;
+		std::shared_ptr < CTreeModel > spiderNetModelMSTPrim;
+		std::shared_ptr < CTreeModel > spiderNetModelMSTBoruvka;
 		
 		// grape graph created by Marta Konieczna
 		edgeDefinition grapeModelMSTKruskalEdges;
+		edgeDefinition grapeModelMSTPrimEdges;
+		edgeDefinition grapeModelMSTBoruvkaEdges;
 		std::shared_ptr < CTreeModel > grapeModelMSTKruskal;
+		std::shared_ptr < CTreeModel > grapeModelMSTPrim;
+		std::shared_ptr < CTreeModel > grapeModelMSTBoruvka;
 };
 	
 } // namespace Minotaur

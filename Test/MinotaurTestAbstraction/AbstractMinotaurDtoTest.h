@@ -18,7 +18,7 @@
 namespace Minotaur
 {
 	
-class AbstractMinotaurDtoTest : public AbstractMinotaurTest
+class AbstractMinotaurDtoTest : public virtual AbstractMinotaurTest
 {
 	protected:
 		CGraphDtoFactory t_dtoGraphFactory;

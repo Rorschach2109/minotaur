@@ -12,12 +12,13 @@
 #ifndef _MINOTAUR_BORUVKAALGORITHMTEST_H_
 #define _MINOTAUR_BORUVKAALGORITHMTEST_H_
 
+#include "AbstractMinotaurModelTest.h"
 #include "BoruvkaAlgorithm.h"
 
 namespace Minotaur
 {
 	
-class CBoruvkaAlgorithmTest
+class CBoruvkaAlgorithmTest : public AbstractMinotaurModelTest
 {
 	private:
 		CBoruvkaAlgorithm m_boruvkaAlgorithmTest;

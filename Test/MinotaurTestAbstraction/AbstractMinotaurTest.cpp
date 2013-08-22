@@ -14,7 +14,8 @@
 using namespace Minotaur;
 
 AbstractMinotaurTest::AbstractMinotaurTest( void ) : 
-	t_testNumber(0)
+	t_testNumber(0),
+	t_failedTestNumber(0)
 {
 	
 }
@@ -27,4 +28,9 @@ AbstractMinotaurTest::~AbstractMinotaurTest( void )
 const unsigned int& AbstractMinotaurTest::GetTestNumber( void ) const
 {
 	return t_testNumber;
+}
+
+const unsigned int& AbstractMinotaurTest::GetFailedTestNumber( void ) const
+{
+	return t_failedTestNumber;
 }
