@@ -34,7 +34,7 @@ CStreamOutputGraphManager::~CStreamOutputGraphManager( void )
 
 void CStreamOutputGraphManager::WriteGraphToOutput( const CGraphDto& dtoGraph ) const
 {
-	if ( m_graphsCount > m_graphsCounter )
+	while ( m_graphsCount > m_graphsCounter )
 	{
 		m_WriteDtoGraphName(dtoGraph);
 		m_WriteDtoNodesEdges(dtoGraph);

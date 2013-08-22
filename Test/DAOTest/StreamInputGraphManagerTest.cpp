@@ -12,7 +12,7 @@
 #include "StreamInputGraphManagerTest.h"
 
 #include "StreamInputGraphManager.h"
-#include "TestDefines.h"
+#include "MinotaurTestDefines.h"
 
 #include "GraphDTO.h"
 
@@ -35,6 +35,8 @@ CStreamInputGraphManagerTest::~CStreamInputGraphManagerTest( void )
 
 void CStreamInputGraphManagerTest::m_GetSingleNextGraphTest( void )
 {
+	t_testNumber += 2;
+
 	std::string singleGraphString = "1\n\n" + t_dtoGraphFactory.turtleDtoGraphString;
 	std::istringstream singleGraphStream(singleGraphString);
 	CGraphDto invalidDtoGraph = t_dtoGraphFactory.doubleTriangleDtoGraph;
@@ -44,15 +46,17 @@ void CStreamInputGraphManagerTest::m_GetSingleNextGraphTest( void )
 	CGraphDto actualDtoGraph = inputGraphManager.GetNextGraph();
 	CGraphDto expectedDtoGraph = t_dtoGraphFactory.turtleDtoGraph;
 		
-	CHECK_EQUAL(expectedDtoGraph, actualDtoGraph);
-	CHECK_NOT_EQUAL(invalidDtoGraph, actualDtoGraph);
+	CHECK_EQUAL(expectedDtoGraph, actualDtoGraph, t_failedTestNumber);
+	CHECK_NOT_EQUAL(invalidDtoGraph, actualDtoGraph, t_failedTestNumber);
 }
 
 void CStreamInputGraphManagerTest::m_GetMultipleNextGraphTest( void )
 {
+	t_testNumber += 4;
+
+	unsigned int graphsCount = 2;
 	std::string multipleGraphString = "2\n\n" + t_dtoGraphFactory.turtleDtoGraphString + t_dtoGraphFactory.squareDtoGraphString;
 	std::istringstream multipleGraphStream(multipleGraphString);
-	unsigned int graphsCount = 2;
 	CStreamInputGraphManager inputGraphManager = CStreamInputGraphManager(multipleGraphStream, graphsCount);
 
 	CGraphDto actualFirstDtoGraph = inputGraphManager.GetNextGraph();
@@ -60,8 +64,9 @@ void CStreamInputGraphManagerTest::m_GetMultipleNextGraphTest( void )
 	CGraphDto actualSecondDtoGraph = inputGraphManager.GetNextGraph();
 	CGraphDto expectedSecondDtoGraph = t_dtoGraphFactory.squareDtoGraph;
 	
-	CHECK_EQUAL(expectedFirstDtoGraph, actualFirstDtoGraph);
-	CHECK_NOT_EQUAL(expectedSecondDtoGraph, actualFirstDtoGraph);
-	CHECK_EQUAL(expectedSecondDtoGraph, actualSecondDtoGraph);
-	CHECK_NOT_EQUAL(expectedFirstDtoGraph, actualSecondDtoGraph);
+	CHECK_EQUAL( expectedFirstDtoGraph, actualFirstDtoGraph, t_failedTestNumber );
+	CHECK_NOT_EQUAL( expectedSecondDtoGraph, actualFirstDtoGraph, t_failedTestNumber );
+	
+	CHECK_EQUAL( expectedSecondDtoGraph, actualSecondDtoGraph, t_failedTestNumber );
+	CHECK_NOT_EQUAL( expectedFirstDtoGraph, actualSecondDtoGraph, t_failedTestNumber );
 }
