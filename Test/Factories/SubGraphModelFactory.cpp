@@ -29,7 +29,7 @@ CSubGraphModelFactory::CSubGraphModelFactory( void ) :
 	squareModelMSTPrimEdges( { 
 								std::make_pair( 0, 2 ),
 								std::make_pair( 2, 3 ),
-								std::make_pair( 3, 1 )
+								std::make_pair( 1, 3 )
 								} ),
 	squareModelMSTBoruvkaEdges( { 
 								std::make_pair( 0, 2 ),
@@ -78,7 +78,7 @@ CSubGraphModelFactory::CSubGraphModelFactory( void ) :
 								std::make_pair( 1, 3 ),
 								std::make_pair( 3, 5 ),
 								std::make_pair( 5, 6 ),
-								std::make_pair( 6, 4 ),
+								std::make_pair( 4, 6 ),
 								std::make_pair( 0, 2 )
 								} ),
 	infinityModelMSTBoruvkaEdges( { 
@@ -134,7 +134,7 @@ CSubGraphModelFactory::CSubGraphModelFactory( void ) :
 								std::make_pair( 1, 4 ),
 								std::make_pair( 4, 5 ),
 								std::make_pair( 0, 3 ),
-								std::make_pair( 4, 2 )
+								std::make_pair( 2, 4 )
 								} ),
 	doubleTriangleModelMSTBoruvkaEdges( { 
 								std::make_pair( 0, 1 ),
@@ -159,9 +159,9 @@ CSubGraphModelFactory::CSubGraphModelFactory( void ) :
 	spiderNetModelMSTPrimEdges( { 
 								std::make_pair( 0, 2 ),
 								std::make_pair( 2, 3 ),
-								std::make_pair( 3, 1 ),
+								std::make_pair( 1, 3 ),
 								std::make_pair( 3, 6 ),
-								std::make_pair( 6, 5 ),
+								std::make_pair( 5, 6 ),
 								std::make_pair( 5, 7 ),
 								std::make_pair( 3, 4 )
 								} ),
@@ -208,13 +208,13 @@ CSubGraphModelFactory::CSubGraphModelFactory( void ) :
 								std::make_pair( 8, 9 ),
 								std::make_pair( 9, 10 ),
 								std::make_pair( 10, 14 ),
-								std::make_pair( 14, 13 ),
-								std::make_pair( 13, 12 ),
-								std::make_pair( 12, 5 ),
-								std::make_pair( 5, 4 ),
+								std::make_pair( 13, 14 ),
+								std::make_pair( 12, 13 ),
+								std::make_pair( 5, 12 ),
+								std::make_pair( 4, 5 ),
 								std::make_pair( 14, 17 ),
 								std::make_pair( 17, 16 ),
-								std::make_pair( 16, 15 )
+								std::make_pair( 15, 16 )
 								} ),
 	grapeModelMSTBoruvkaEdges( {
 								std::make_pair( 0, 1 ),
