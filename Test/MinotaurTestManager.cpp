@@ -157,10 +157,10 @@ void CMinotaurTestManager::m_RunAllTreeFindersTests( void )
 	m_failedTestNumber += m_minotaurTest->GetFailedTestNumber();
 	m_minotaurTest.reset();
 	
-	//m_minotaurTest = std::shared_ptr< AbstractMinotaurModelTest >( new CPrimAlgorithmTest() );
-	//m_allTestNumber += m_minotaurTest->GetTestNumber();
-	//m_failedTestNumber += m_minotaurTest->GetFailedTestNumber();
-	//m_minotaurTest.reset();
+	m_minotaurTest = std::shared_ptr< AbstractMinotaurModelTest >( new CPrimAlgorithmTest() );
+	m_allTestNumber += m_minotaurTest->GetTestNumber();
+	m_failedTestNumber += m_minotaurTest->GetFailedTestNumber();
+	m_minotaurTest.reset();
 }
 	
 void CMinotaurTestManager::m_RunAllUtilsTests( void )
