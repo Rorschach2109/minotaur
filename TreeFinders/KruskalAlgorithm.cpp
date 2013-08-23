@@ -10,6 +10,7 @@
  * */
 
 #include "KruskalAlgorithm.h"
+#include "TreeModel.h"
 
 #include <limits>
 #include <utility>
@@ -19,8 +20,6 @@ using namespace Minotaur;
 CKruskalAlgorithm::CEdgeSet::CEdgeSet( const IGraphModel& graphModel ) : 
 	m_graphModel( graphModel )
 {
-	m_graphModelNodesNumber = graphModel.GetNodesNumber();
-	
 	m_mstTreeEdges.clear();
 	m_graphModelRemaningEdges = graphModel.GetGraphModelEdges();
 

@@ -12,7 +12,6 @@
 #ifndef _MINOTAUR_ITREEFINDER_H_
 #define _MINOTAUR_ITREEFINDER_H_
 
-#include "TreeModel.h"
 #include "IGraphModel.h"
 #include "NodeModel.h"
 
@@ -20,6 +19,8 @@
 
 namespace Minotaur
 {
+
+class CTreeModel;
 
 class ITreeFinder
 {

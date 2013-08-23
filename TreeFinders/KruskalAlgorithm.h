@@ -23,6 +23,8 @@
 namespace Minotaur
 {
 	
+class CTreeModel;
+
 class CKruskalAlgorithm : public ITreeFinder
 {
 	public:
@@ -35,7 +37,6 @@ class CKruskalAlgorithm : public ITreeFinder
 		{
 			private:
 				const IGraphModel& m_graphModel;
-				unsigned int m_graphModelNodesNumber;
 				
 				std::vector < CEdgeModel > m_mstTreeEdges;
 				std::vector < CEdgeModel > m_graphModelRemaningEdges;

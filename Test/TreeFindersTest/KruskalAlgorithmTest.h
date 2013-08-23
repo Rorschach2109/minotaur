@@ -15,12 +15,13 @@
 #include "AbstractMinotaurModelTest.h"
 #include "KruskalAlgorithm.h"
 #include "SubGraphComparer.h"
-#include "TreeModel.h"
 
 #include <memory>
 
 namespace Minotaur
 {
+
+class CTreeModel;
 	
 class CKruskalAlgorithmTest : public AbstractMinotaurModelTest
 {
