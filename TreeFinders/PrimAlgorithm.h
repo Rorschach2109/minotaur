@@ -14,8 +14,16 @@
 
 #include "ITreeFinder.h"
 
+#include "IGraphModel.h"
+#include "NodeModel.h"
+#include "EdgeModel.h"
+
+#include <vector>
+
 namespace Minotaur
 {
+
+class CTreeModel;
 	
 class CPrimAlgorithm : public ITreeFinder
 {
@@ -24,6 +32,38 @@ class CPrimAlgorithm : public ITreeFinder
 		virtual ~CPrimAlgorithm( void );
 		
 		virtual std::shared_ptr < CTreeModel > FindMST( const IGraphModel& graphModel, const CNodeModel& nodeRoot );
+
+	class CCut
+	{
+		private:
+			const IGraphModel& m_graphModel;
+			
+			std::vector < CEdgeModel > m_cutEdges;
+			std::vector < CNodeModel > m_mstNodes;
+			std::vector < CEdgeModel > m_mstEdges;
+			
+			CEdgeModel m_FindCheapestEdge( void );
+			void m_EraseEdge( CEdgeModel& edgeToErase );
+			CNodeModel m_AddNodeToMST( const CEdgeModel& cheapestMSTEdge );
+
+			void m_AddValidEdgesToMST( const CNodeModel& node );
+			void m_RemoveInvalidEdges( void );
+
+			bool m_VectorContainsNode( const unsigned int& nodeIdToCheck, const std::vector < CNodeModel >& nodesVector );
+			bool m_VectorContainsEdge( CEdgeModel& edgeToCheck, const std::vector < CEdgeModel >& edgesVector );
+			
+		public:
+			CCut( void ) = delete;
+			CCut( const IGraphModel& graphModel, const CNodeModel& nodeRoot );
+			~CCut( void );
+			
+			void ExpandMST( void );
+
+			bool GraphModelContained( void );
+			bool CanExpandMST( void );
+
+			std::shared_ptr < CTreeModel > BuildMST( void );
+	};
 };
 	
 } // namespace Minotaur
