@@ -14,16 +14,30 @@
 
 #include "AbstractMinotaurModelTest.h"
 #include "BoruvkaAlgorithm.h"
+#include "SubGraphComparer.h"
+
+#include <memory>
+
 
 namespace Minotaur
 {
+
+class CTreeModel;
 	
 class CBoruvkaAlgorithmTest : public AbstractMinotaurModelTest
 {
 	private:
 		CBoruvkaAlgorithm m_boruvkaAlgorithmTest;
-	
-		void m_FindMSTTest( void );
+		CSubGraphComparer m_subGraphComparer;
+		
+		void m_FindSquareMSTTest( void );
+		void m_FindInfinityMSTTest( void );
+		void m_FindTurtleMSTTest( void );
+		void m_FindDoubleTriangleMSTTest( void );
+		void m_FindSpiderNetMSTTest( void );
+		void m_FindGrapeMSTTest( void );
+		
+		bool m_CheckPtr( const std::shared_ptr < CTreeModel > actualTree );
 	
 	public:
 		CBoruvkaAlgorithmTest( void );
