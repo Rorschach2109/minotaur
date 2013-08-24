@@ -147,10 +147,10 @@ void CMinotaurTestManager::m_RunAllPathFindersTests( void )
 
 void CMinotaurTestManager::m_RunAllTreeFindersTests( void )
 {
-	//m_minotaurTest = std::shared_ptr< AbstractMinotaurModelTest >( new CBoruvkaAlgorithmTest() );
-	//m_allTestNumber += m_minotaurTest->GetTestNumber();
-	//m_failedTestNumber += m_minotaurTest->GetFailedTestNumber();
-	//m_minotaurTest.reset();
+	m_minotaurTest = std::shared_ptr< AbstractMinotaurModelTest >( new CBoruvkaAlgorithmTest() );
+	m_allTestNumber += m_minotaurTest->GetTestNumber();
+	m_failedTestNumber += m_minotaurTest->GetFailedTestNumber();
+	m_minotaurTest.reset();
 	
 	m_minotaurTest = std::shared_ptr< AbstractMinotaurModelTest >( new CKruskalAlgorithmTest() );
 	m_allTestNumber += m_minotaurTest->GetTestNumber();
