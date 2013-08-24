@@ -14,6 +14,9 @@
 
 #include "AbstractMinotaurModelTest.h"
 #include "BellmanFordAlgorithm.h"
+#include "SubGraphComparer.h"
+
+#include <memory>
 
 namespace Minotaur
 {
@@ -22,9 +25,20 @@ class CBellmanFordAlgorithmTest : public AbstractMinotaurModelTest
 {
 	private:
 		CBellmanFordAlgorithm m_bellmanFordAlgorithmTest;
-	
-		void m_FindShortestPathTest( void );
-	
+		CSubGraphComparer m_subGraphComparer;
+		
+		void m_FindSquareShortestPathTest( void );
+		void m_FindInfinityShortestPathTest( void );
+		void m_FindTurtleShortestPathTest( void );
+		void m_FindDoubleTriangleShortest0To5PathTest( void );
+		void m_FindDoubleTriangleShortest2To5PathTest( void );
+		void m_FindSpiderNetShortest0To7PathTest( void );
+		void m_FindSpiderNetShortest5To0PathTest( void );
+		void m_FindGrapeShortest0To16PathTest( void );
+		void m_FindGrapeShortest9To13PathTest( void );
+		
+		bool m_CheckPtr( const std::shared_ptr < CPathModel > actualTree );
+
 	public:
 		CBellmanFordAlgorithmTest( void );
 		virtual ~CBellmanFordAlgorithmTest( void );
