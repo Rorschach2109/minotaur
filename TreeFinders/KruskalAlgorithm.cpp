@@ -4,7 +4,7 @@
  * File: KruskalAlgorithm.cpp
  * Brief: Implementation of kruskal algorithm class.
  *
- * Date: .07.2013
+ * Date: 21.08.2013
  * Author: Andrzej Korycinski
  *
  * */
@@ -20,7 +20,7 @@ using namespace Minotaur;
 CKruskalAlgorithm::CEdgeSet::CEdgeSet( const IGraphModel& graphModel ) : 
 	m_graphModel( graphModel )
 {
-	m_mstTreeEdges.clear();
+	m_mstEdges.clear();
 	m_graphModelRemaningEdges = graphModel.GetGraphModelEdges();
 
 	for ( auto graphModelNode : ( graphModel.GetGraphModelNodes() ) )
@@ -87,38 +87,38 @@ void CKruskalAlgorithm::CEdgeSet::m_AddEdgeToForest( const CEdgeModel& edgeToAdd
 			forestNodePair.second = ( forestNodePair.second == maxNodeId )? minNodeId : forestNodePair.second;
 		}
 		
-		m_mstTreeEdges.push_back(edgeToAdd);
+		m_mstEdges.push_back(edgeToAdd);
 	}
 	
 }
 
-void CKruskalAlgorithm::CEdgeSet::ExpandMSTTree( void )
+void CKruskalAlgorithm::CEdgeSet::ExpandMST( void )
 {
 	CEdgeModel cheapestMSTEdge = m_FindCheapestEdge();
 	m_EraseEdge( cheapestMSTEdge );
 	m_AddEdgeToForest( cheapestMSTEdge );
 }
 
-bool CKruskalAlgorithm::CEdgeSet::CanExpandMSTTree( void )
+bool CKruskalAlgorithm::CEdgeSet::CanExpandMST( void )
 {
-	bool canExpandMSTTree = false;
+	bool canExpandMST = false;
 	for ( auto remaningEdge : m_graphModelRemaningEdges )
 	{
 		CNodeModel nodeFrom = m_graphModel.GetGraphModelNode( remaningEdge.GetNodeFromId() );
 		CNodeModel nodeTo = m_graphModel.GetGraphModelNode( remaningEdge.GetNodeToId() );
 		if ( m_forest[nodeFrom] != m_forest[nodeTo] )
 		{
-			canExpandMSTTree = true;
+			canExpandMST = true;
 			break;
 		}
 	}
-	return canExpandMSTTree;
+	return canExpandMST;
 }
 
-std::shared_ptr < CTreeModel > CKruskalAlgorithm::CEdgeSet::BuildMSTTree( const CNodeModel& nodeRoot )
+std::shared_ptr < CTreeModel > CKruskalAlgorithm::CEdgeSet::BuildMST( const CNodeModel& nodeRoot )
 {
 	std::vector < std::pair < unsigned int, unsigned int > > mstEdgeDefinition;
-	for ( auto mstEdge : m_mstTreeEdges )
+	for ( auto mstEdge : m_mstEdges )
 	{
 		unsigned int nodeFromId = mstEdge.GetNodeFromId();
 		unsigned int nodeToId = mstEdge.GetNodeToId();
@@ -130,8 +130,8 @@ std::shared_ptr < CTreeModel > CKruskalAlgorithm::CEdgeSet::BuildMSTTree( const 
 		}
 	}
 	
-	std::shared_ptr < CTreeModel > mstTree( new CTreeModel(m_graphModel, mstEdgeDefinition) );
-	return mstTree;
+	std::shared_ptr < CTreeModel > mstKruskal( new CTreeModel(m_graphModel, mstEdgeDefinition) );
+	return mstKruskal;
 }
 
 CKruskalAlgorithm::CKruskalAlgorithm( void ) : 
@@ -148,10 +148,10 @@ CKruskalAlgorithm::~CKruskalAlgorithm( void )
 std::shared_ptr < CTreeModel > CKruskalAlgorithm::FindMST( const IGraphModel& graphModel, const CNodeModel& nodeRoot )
 {
 	CEdgeSet edgeSet = CEdgeSet( graphModel );
-	while ( edgeSet.CanExpandMSTTree() )
+	while ( edgeSet.CanExpandMST() )
 	{
-		edgeSet.ExpandMSTTree();
+		edgeSet.ExpandMST();
 	}
-	return ( edgeSet.BuildMSTTree( nodeRoot ) );
+	return ( edgeSet.BuildMST( nodeRoot ) );
 }
 

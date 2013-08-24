@@ -4,7 +4,7 @@
  * File: KruskalAlgorithm.h
  * Brief: Declaration of kruskal algorithm class.
  *
- * Date: .07.2013
+ * Date: 21.08.2013
  * Author: Andrzej Korycinski
  *
  * */
@@ -38,7 +38,7 @@ class CKruskalAlgorithm : public ITreeFinder
 			private:
 				const IGraphModel& m_graphModel;
 				
-				std::vector < CEdgeModel > m_mstTreeEdges;
+				std::vector < CEdgeModel > m_mstEdges;
 				std::vector < CEdgeModel > m_graphModelRemaningEdges;
 				std::map < CNodeModel, unsigned int, CNodeModel::SNodeModelLess > m_forest;
 				
@@ -51,9 +51,9 @@ class CKruskalAlgorithm : public ITreeFinder
 				explicit CEdgeSet( const IGraphModel& graphModel );
 				~CEdgeSet( void );
 		
-				void ExpandMSTTree( void );
-				bool CanExpandMSTTree( void );
-				std::shared_ptr < CTreeModel > BuildMSTTree( const CNodeModel& nodeRoot );
+				void ExpandMST( void );
+				bool CanExpandMST( void );
+				std::shared_ptr < CTreeModel > BuildMST( const CNodeModel& nodeRoot );
 		};
 };
 	
