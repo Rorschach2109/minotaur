@@ -26,7 +26,7 @@ class CEdgeModel
         double m_edgeWeight;
 
 	public:
-		CEdgeModel( void ) = default;
+		CEdgeModel( void );
         CEdgeModel( const unsigned int& nodeFromId, const unsigned int& nodeToId, const double& edgeWeight );
         ~CEdgeModel( void );
 

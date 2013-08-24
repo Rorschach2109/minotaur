@@ -11,7 +11,17 @@
 
 #include "EdgeModel.h"
 
+#include <limits>
+
 using namespace Minotaur;
+
+CEdgeModel::CEdgeModel( void ) : 
+	m_nodeFromId( 0 ),
+	m_nodeToId( 0 ),
+	m_edgeWeight( std::numeric_limits< double >::infinity() )
+{
+	
+}
 
 CEdgeModel::CEdgeModel( const unsigned int& nodeFromId, const unsigned int& nodeToId, const double& edgeWeight ) :
 	m_nodeFromId( nodeFromId ),
