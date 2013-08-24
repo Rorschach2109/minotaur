@@ -4,7 +4,7 @@
  * File: BoruvkaAlgorithmTest.h
  * Brief: Declaration of boruvka algorithm test class.
  *
- * Date: .07.2013
+ * Date: 23.08.2013
  * Author: Andrzej Korycinski
  *
  * */

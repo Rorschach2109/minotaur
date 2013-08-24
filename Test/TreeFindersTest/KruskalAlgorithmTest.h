@@ -4,7 +4,7 @@
  * File: KruskalAlgorithmTest.h
  * Brief: Declaration of kruskal algorithm test class.
  *
- * Date: .07.2013
+ * Date: 21.08.2013
  * Author: Andrzej Korycinski
  *
  * */

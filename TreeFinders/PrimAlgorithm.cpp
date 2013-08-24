@@ -4,7 +4,7 @@
  * File: PrimAlgorithm.cpp
  * Brief: Implementation of prim algorithm class.
  *
- * Date: .07.2013
+ * Date: 23.08.2013
  * Author: Andrzej Korycinski
  *
  * */
@@ -182,8 +182,8 @@ std::shared_ptr < CTreeModel > CPrimAlgorithm::CCut::BuildMST( void )
 		mstEdgeDefinition.push_back( std::make_pair(nodeFromId, nodeToId) );
 	}
 	
-	std::shared_ptr < CTreeModel > mst( new CTreeModel(m_graphModel, mstEdgeDefinition) );
-	return mst;
+	std::shared_ptr < CTreeModel > mstPrim( new CTreeModel(m_graphModel, mstEdgeDefinition) );
+	return mstPrim;
 }
 
 CPrimAlgorithm::CPrimAlgorithm( void ) : 

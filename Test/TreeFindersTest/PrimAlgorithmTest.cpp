@@ -4,7 +4,7 @@
  * File: PrimAlgorithmTest.cpp
  * Brief: Implementation of prim algorithm test class.
  *
- * Date: .07.2013
+ * Date: 23.08.2013
  * Author: Andrzej Korycinski
  *
  * */

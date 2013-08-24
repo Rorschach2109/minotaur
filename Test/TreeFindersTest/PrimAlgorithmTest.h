@@ -4,7 +4,7 @@
  * File: PrimAlgorithmTest.h
  * Brief: Declaration of prim algorithm test class.
  *
- * Date: .07.2013
+ * Date: 23.08.2013
  * Author: Andrzej Korycinski
  *
  * */
