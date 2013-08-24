@@ -16,6 +16,7 @@
 #include "NodeModel.h"
 #include "EdgeModel.h"
 #include "TreeModel.h"
+#include "PathModel.h"
 
 #include <vector>
 #include <utility>
@@ -41,6 +42,7 @@ class CSubGraphModelFactory : public CGraphModelFactory
 		std::shared_ptr < CTreeModel > squareModelMSTKruskal;
 		std::shared_ptr < CTreeModel > squareModelMSTPrim;
 		std::shared_ptr < CTreeModel > squareModelMSTBoruvka;
+		std::shared_ptr < CPathModel > squareFrom0To3Path;
 		
 		edgeDefinition infinityModelEdgeDefinition;
 		subGraphEdges infinitySubGraphModelEdges;
@@ -52,6 +54,7 @@ class CSubGraphModelFactory : public CGraphModelFactory
 		std::shared_ptr < CTreeModel > infinityModelMSTKruskal;
 		std::shared_ptr < CTreeModel > infinityModelMSTPrim;
 		std::shared_ptr < CTreeModel > infinityModelMSTBoruvka;
+		std::shared_ptr < CPathModel > infinityFrom0To6Path;
 		
 		edgeDefinition turtleModelEdgeDefinition;
 		edgeDefinition turtleModelMSTKruskalEdges;
@@ -60,6 +63,7 @@ class CSubGraphModelFactory : public CGraphModelFactory
 		std::shared_ptr < CTreeModel > turtleModelMSTKruskal;
 		std::shared_ptr < CTreeModel > turtleModelMSTPrim;
 		std::shared_ptr < CTreeModel > turtleModelMSTBoruvka;
+		std::shared_ptr < CPathModel > turtleFrom0To3Path;
 		
 		edgeDefinition doubleTriangleModelEdgeDefinition;
 		edgeDefinition doubleTriangleModelMSTKruskalEdges;
@@ -68,6 +72,8 @@ class CSubGraphModelFactory : public CGraphModelFactory
 		std::shared_ptr < CTreeModel > doubleTriangleModelMSTKruskal;
 		std::shared_ptr < CTreeModel > doubleTriangleModelMSTPrim;
 		std::shared_ptr < CTreeModel > doubleTriangleModelMSTBoruvka;
+		std::shared_ptr < CPathModel > doubleTriangleFrom0To5Path;
+		std::shared_ptr < CPathModel > doubleTriangleFrom2To5Path;
 		
 		edgeDefinition spiderNetModelMSTKruskalEdges;
 		edgeDefinition spiderNetModelMSTPrimEdges;
@@ -75,6 +81,8 @@ class CSubGraphModelFactory : public CGraphModelFactory
 		std::shared_ptr < CTreeModel > spiderNetModelMSTKruskal;
 		std::shared_ptr < CTreeModel > spiderNetModelMSTPrim;
 		std::shared_ptr < CTreeModel > spiderNetModelMSTBoruvka;
+		std::shared_ptr < CPathModel > spiderNetFrom0To7Path;
+		std::shared_ptr < CPathModel > spiderNetFrom5To0Path;
 		
 		// grape graph created by Marta Konieczna
 		edgeDefinition grapeModelMSTKruskalEdges;
@@ -83,6 +91,9 @@ class CSubGraphModelFactory : public CGraphModelFactory
 		std::shared_ptr < CTreeModel > grapeModelMSTKruskal;
 		std::shared_ptr < CTreeModel > grapeModelMSTPrim;
 		std::shared_ptr < CTreeModel > grapeModelMSTBoruvka;
+		std::shared_ptr < CPathModel > grapeFrom0To16Path;
+		std::shared_ptr < CPathModel > grapeFrom9To13Path;
+		
 };
 	
 } // namespace Minotaur
