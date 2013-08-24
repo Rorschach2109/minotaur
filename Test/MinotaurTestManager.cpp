@@ -45,7 +45,7 @@ void CMinotaurTestManager::m_RunDtoTests( void )
 void CMinotaurTestManager::m_RunModelTests( void )
 {
 	m_RunAllGraphModelTests();
-	//m_RunAllPathFindersTests();
+	m_RunAllPathFindersTests();
 	m_RunAllTreeFindersTests();
 	m_RunAllUtilsTests();
 }
