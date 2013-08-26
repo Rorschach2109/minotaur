@@ -22,9 +22,12 @@ typedef std::vector < std::pair < unsigned int, unsigned int > > edgeDefinition;
 	
 class CPathModel : public CSubGraphModel
 {
+	private:
+		edgeDefinition m_ConvertNodes( const std::vector < CNodeModel >& nodesDefinition );
+		
 	public:
 		CPathModel( void ) = delete;
-		CPathModel( const IGraphModel& parentGraph, const edgeDefinition& subGraphEdges );
+		CPathModel( const IGraphModel& parentGraph, const std::vector < CNodeModel >& nodesDefinition );
 		virtual ~CPathModel( void );
 		
 		virtual bool VerifySubGraphTopology( void ) const;

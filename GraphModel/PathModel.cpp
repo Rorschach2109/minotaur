@@ -13,8 +13,8 @@
 
 using namespace Minotaur;
 
-CPathModel::CPathModel( const IGraphModel& parentGraph, const edgeDefinition& subGraphEdges ) : 
-	CSubGraphModel( parentGraph, subGraphEdges )
+CPathModel::CPathModel( const IGraphModel& parentGraph, const std::vector < CNodeModel >& nodesDefinition ) : 
+	CSubGraphModel( parentGraph, m_ConvertNodes(nodesDefinition) )
 {
 	
 }
@@ -24,6 +24,17 @@ CPathModel::~CPathModel( void )
 	
 }
 
+edgeDefinition CPathModel::m_ConvertNodes( const std::vector < CNodeModel >& nodesDefinition )
+{
+	edgeDefinition edgeDef;
+	for ( unsigned int nodeCounter = 1; nodeCounter != nodesDefinition.size(); ++nodeCounter )
+	{
+		unsigned int nodeFromId = nodesDefinition[nodeCounter - 1].GetNodeId();
+		unsigned int nodeToId = nodesDefinition[nodeCounter].GetNodeId();
+		edgeDef.push_back( std::make_pair( nodeFromId, nodeToId ) );
+	}
+	return edgeDef;
+}
 
 bool CPathModel::VerifySubGraphTopology( void ) const
 {
