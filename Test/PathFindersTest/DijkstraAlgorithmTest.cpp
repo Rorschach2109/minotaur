@@ -10,13 +10,14 @@
  * */
  
 #include "DijkstraAlgorithmTest.h"
-
+#include "RelaxationProvider.h"
 #include "MinotaurTestDefines.h"
 
 using namespace Minotaur;
 
 CDijkstraAlgorithmTest::CDijkstraAlgorithmTest( void ) : 
-	m_dijkstraAlgorithmTest( CDijkstraAlgorithm() ),
+	m_relaxationProvider( CRelaxationProvider() ),
+	m_dijkstraAlgorithmTest( CDijkstraAlgorithm(m_relaxationProvider) ),
 	m_subGraphComparer( CSubGraphComparer() )
 {
 	m_FindSquareShortestPathTest();

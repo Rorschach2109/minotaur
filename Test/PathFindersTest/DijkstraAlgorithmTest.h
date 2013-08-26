@@ -14,6 +14,8 @@
 
 #include "AbstractMinotaurModelTest.h"
 #include "DijkstraAlgorithm.h"
+#include "AbstractDijkstraRelaxation.h"
+
 #include "SubGraphComparer.h"
 
 #include <memory>
@@ -24,6 +26,7 @@ namespace Minotaur
 class CDijkstraAlgorithmTest : public AbstractMinotaurModelTest
 {
 	private:
+		const AbstractDijkstraRelaxation& m_relaxationProvider;
 		CDijkstraAlgorithm m_dijkstraAlgorithmTest;
 		CSubGraphComparer m_subGraphComparer;
 		
