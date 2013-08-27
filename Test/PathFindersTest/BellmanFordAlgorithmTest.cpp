@@ -15,8 +15,11 @@
 
 using namespace Minotaur;
 
-CBellmanFordAlgorithmTest::CBellmanFordAlgorithmTest( void ) : 
-	m_bellmanFordAlgorithmTest( CBellmanFordAlgorithm() )
+CBellmanFordAlgorithmTest::CBellmanFordAlgorithmTest( void ) :
+	AbstractMinotaurModelTest(),
+	m_relaxationProvider( CRelaxationProvider() ),
+	m_bellmanFordAlgorithmTest( CBellmanFordAlgorithm(m_relaxationProvider) ),
+	m_subGraphComparer( CSubGraphComparer() )
 {
 	m_FindSquareShortestPathTest();
 	m_FindInfinityShortestPathTest();
@@ -182,8 +185,8 @@ void CBellmanFordAlgorithmTest::m_FindDoubleTriangleShortest2To5PathTest( void )
 
 void CBellmanFordAlgorithmTest::m_FindSpiderNetShortest0To7PathTest( void )
 {
-	CNodeModel nodeFrom = CNodeModel( 0, 0, 0 );
-	CNodeModel nodeTo = CNodeModel( 7, 0, 0 );
+	CNodeModel nodeFrom = CNodeModel( 0, 0, 2 );
+	CNodeModel nodeTo = CNodeModel( 7, 10, 4 );
 
 	std::shared_ptr < CPathModel > expectedValidPath = t_subGraphModelFactory.spiderNetFrom0To7Path;
 	std::shared_ptr < CPathModel > invalidPath = t_subGraphModelFactory.doubleTriangleFrom0To5Path;
@@ -209,10 +212,10 @@ void CBellmanFordAlgorithmTest::m_FindSpiderNetShortest0To7PathTest( void )
 
 void CBellmanFordAlgorithmTest::m_FindSpiderNetShortest5To0PathTest( void )
 {
-	CNodeModel nodeFrom = CNodeModel( 5, 0, 0 );
-	CNodeModel nodeTo = CNodeModel( 0, 0, 0 );
+	CNodeModel nodeTo = CNodeModel( 5, 6, 4 );
+	CNodeModel nodeFrom = CNodeModel( 0, 0, 2 );
 
-	std::shared_ptr < CPathModel > expectedValidPath = t_subGraphModelFactory.spiderNetFrom5To0Path;
+	std::shared_ptr < CPathModel > expectedValidPath = t_subGraphModelFactory.spiderNetFrom5To0PathBellmanFord;
 	std::shared_ptr < CPathModel > invalidPath = t_subGraphModelFactory.spiderNetFrom0To7Path;
 	
 	std::shared_ptr < CPathModel > actualPath = m_bellmanFordAlgorithmTest.FindShortestPath( *( t_graphModelFactory.spiderNetGraphModel ), nodeFrom, nodeTo );
@@ -236,8 +239,8 @@ void CBellmanFordAlgorithmTest::m_FindSpiderNetShortest5To0PathTest( void )
 
 void CBellmanFordAlgorithmTest::m_FindGrapeShortest0To16PathTest( void )
 {
-	CNodeModel nodeFrom = CNodeModel( 0, 0, 0 );
-	CNodeModel nodeTo = CNodeModel( 16, 0, 0 );
+	CNodeModel nodeFrom = CNodeModel( 0, 2, 0 );
+	CNodeModel nodeTo = CNodeModel( 16, 13, 14 );
 
 	std::shared_ptr < CPathModel > expectedValidPath = t_subGraphModelFactory.grapeFrom0To16Path;
 	std::shared_ptr < CPathModel > invalidPath = t_subGraphModelFactory.grapeFrom9To13Path;
@@ -263,8 +266,8 @@ void CBellmanFordAlgorithmTest::m_FindGrapeShortest0To16PathTest( void )
 
 void CBellmanFordAlgorithmTest::m_FindGrapeShortest9To13PathTest( void )
 {
-	CNodeModel nodeFrom = CNodeModel( 9, 0, 0 );
-	CNodeModel nodeTo = CNodeModel( 13, 0, 0 );
+	CNodeModel nodeFrom = CNodeModel( 9, 2, 10 );
+	CNodeModel nodeTo = CNodeModel( 13, 12, 9 );
 
 	std::shared_ptr < CPathModel > expectedValidPath = t_subGraphModelFactory.grapeFrom9To13Path;
 	std::shared_ptr < CPathModel > invalidPath = t_subGraphModelFactory.doubleTriangleFrom0To5Path;

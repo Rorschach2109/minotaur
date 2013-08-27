@@ -15,6 +15,7 @@
 #include "AbstractMinotaurModelTest.h"
 #include "BellmanFordAlgorithm.h"
 #include "SubGraphComparer.h"
+#include "RelaxationProvider.h"
 
 #include <memory>
 
@@ -24,6 +25,7 @@ namespace Minotaur
 class CBellmanFordAlgorithmTest : public AbstractMinotaurModelTest
 {
 	private:
+		const CRelaxationProvider& m_relaxationProvider;
 		CBellmanFordAlgorithm m_bellmanFordAlgorithmTest;
 		CSubGraphComparer m_subGraphComparer;
 		

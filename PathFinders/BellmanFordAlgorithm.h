@@ -13,14 +13,19 @@
 #define _MINOTAUR_BELLMANFORDALGORITHM_H_
 
 #include "IPathFinder.h"
+#include "RelaxationProvider.h"
 
 namespace Minotaur
 {
 	
 class CBellmanFordAlgorithm : public IPathFinder
 {
+	private:
+		const CRelaxationProvider& m_relaxationProvider;
+		
 	public:
-		CBellmanFordAlgorithm( void );
+		CBellmanFordAlgorithm( void ) = delete;
+		explicit CBellmanFordAlgorithm( const CRelaxationProvider& relaxationProvider );
 		virtual ~CBellmanFordAlgorithm( void );
 		
 		virtual std::shared_ptr < CPathModel > FindShortestPath( const IGraphModel& graphModel, const CNodeModel& nodeFrom, const CNodeModel& nodeTo );
