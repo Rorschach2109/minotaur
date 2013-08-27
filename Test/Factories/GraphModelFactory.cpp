@@ -312,14 +312,14 @@ void CGraphModelFactory::m_CreateSpiderNetModelUtils( void )
 	CAdjacencyListFactory adjFactory = CAdjacencyListFactory();
 	
 	spiderNetModelNodes.clear();
-	spiderNetModelNodes.push_back( CNodeModel( 0, 0, 0 ) );
-	spiderNetModelNodes.push_back( CNodeModel( 1, 0, 0 ) );
-	spiderNetModelNodes.push_back( CNodeModel( 2, 0, 0 ) );
-	spiderNetModelNodes.push_back( CNodeModel( 3, 0, 0 ) );
-	spiderNetModelNodes.push_back( CNodeModel( 4, 0, 0 ) );
-	spiderNetModelNodes.push_back( CNodeModel( 5, 0, 0 ) );
-	spiderNetModelNodes.push_back( CNodeModel( 6, 0, 0 ) );
-	spiderNetModelNodes.push_back( CNodeModel( 7, 0, 0 ) );
+	spiderNetModelNodes.push_back( CNodeModel( 0, 0, 2 ) );
+	spiderNetModelNodes.push_back( CNodeModel( 1, 2, 4 ) );
+	spiderNetModelNodes.push_back( CNodeModel( 2, 2, 0 ) );
+	spiderNetModelNodes.push_back( CNodeModel( 3, 4, 2 ) );
+	spiderNetModelNodes.push_back( CNodeModel( 4, 6, 0 ) );
+	spiderNetModelNodes.push_back( CNodeModel( 5, 6, 4 ) );
+	spiderNetModelNodes.push_back( CNodeModel( 6, 8, 2 ) );
+	spiderNetModelNodes.push_back( CNodeModel( 7, 10, 4 ) );
 	
 	spiderNetModelEdges.clear();
 	spiderNetModelEdges.push_back( CEdgeModel( 0, 1, 3.0 ) );
@@ -330,7 +330,6 @@ void CGraphModelFactory::m_CreateSpiderNetModelUtils( void )
 	spiderNetModelEdges.push_back( CEdgeModel( 2, 3, 2.0 ) );
 	spiderNetModelEdges.push_back( CEdgeModel( 2, 4, 5.0 ) );
 	spiderNetModelEdges.push_back( CEdgeModel( 3, 4, 4.0 ) );
-	spiderNetModelEdges.push_back( CEdgeModel( 3, 5, 6.0 ) );
 	spiderNetModelEdges.push_back( CEdgeModel( 3, 6, 3.0 ) );
 	spiderNetModelEdges.push_back( CEdgeModel( 4, 6, 6.0 ) );
 	spiderNetModelEdges.push_back( CEdgeModel( 5, 6, 2.0 ) );
@@ -370,7 +369,6 @@ void CGraphModelFactory::m_CreateSpiderNetModelAdjacencyList( void )
 					std::make_pair( spiderNetModelEdges[3], 1 ),
 					std::make_pair( spiderNetModelEdges[5], 2 ),
 					std::make_pair( spiderNetModelEdges[7], 4 ),
-					std::make_pair( spiderNetModelEdges[8], 5 ),
 					std::make_pair( spiderNetModelEdges[9], 6 )
 					} );
 	std::vector < std::pair < CEdgeModel, unsigned int > > node4Neighbors( {
@@ -380,7 +378,6 @@ void CGraphModelFactory::m_CreateSpiderNetModelAdjacencyList( void )
 					} );
 	std::vector < std::pair < CEdgeModel, unsigned int > > node5Neighbors( {
 					std::make_pair( spiderNetModelEdges[4], 1 ),
-					std::make_pair( spiderNetModelEdges[8], 3 ),
 					std::make_pair( spiderNetModelEdges[11], 6 ),
 					std::make_pair( spiderNetModelEdges[12], 7 )
 					} );
@@ -417,24 +414,24 @@ void CGraphModelFactory::m_CreateGrapeModelUtils( void )
 	CAdjacencyListFactory adjFactory = CAdjacencyListFactory();
 	
 	grapeModelNodes.clear();
-	grapeModelNodes.push_back( CNodeModel( 0, 0, 0 ) );
-	grapeModelNodes.push_back( CNodeModel( 1, 0, 0 ) );
-	grapeModelNodes.push_back( CNodeModel( 2, 0, 0 ) );
-	grapeModelNodes.push_back( CNodeModel( 3, 0, 0 ) );
-	grapeModelNodes.push_back( CNodeModel( 4, 0, 0 ) );
-	grapeModelNodes.push_back( CNodeModel( 5, 0, 0 ) );
-	grapeModelNodes.push_back( CNodeModel( 6, 0, 0 ) );
-	grapeModelNodes.push_back( CNodeModel( 7, 0, 0 ) );
-	grapeModelNodes.push_back( CNodeModel( 8, 0, 0 ) );
-	grapeModelNodes.push_back( CNodeModel( 9, 0, 0 ) );
-	grapeModelNodes.push_back( CNodeModel( 10, 0, 0 ) );
-	grapeModelNodes.push_back( CNodeModel( 11, 0, 0 ) );
-	grapeModelNodes.push_back( CNodeModel( 12, 0, 0 ) );
-	grapeModelNodes.push_back( CNodeModel( 13, 0, 0 ) );
-	grapeModelNodes.push_back( CNodeModel( 14, 0, 0 ) );
-	grapeModelNodes.push_back( CNodeModel( 15, 0, 0 ) );
-	grapeModelNodes.push_back( CNodeModel( 16, 0, 0 ) );
-	grapeModelNodes.push_back( CNodeModel( 17, 0, 0 ) );
+	grapeModelNodes.push_back( CNodeModel( 0, 2, 0 ) );
+	grapeModelNodes.push_back( CNodeModel( 1, 4, 2 ) );
+	grapeModelNodes.push_back( CNodeModel( 2, 0, 2 ) );
+	grapeModelNodes.push_back( CNodeModel( 3, 2, 4 ) );
+	grapeModelNodes.push_back( CNodeModel( 4, 6, 4 ) );
+	grapeModelNodes.push_back( CNodeModel( 5, 8, 6 ) );
+	grapeModelNodes.push_back( CNodeModel( 6, 5, 6 ) );
+	grapeModelNodes.push_back( CNodeModel( 7, 1, 6 ) );
+	grapeModelNodes.push_back( CNodeModel( 8, 2, 8 ) );
+	grapeModelNodes.push_back( CNodeModel( 9, 2, 10 ) );
+	grapeModelNodes.push_back( CNodeModel( 10, 4, 10 ) );
+	grapeModelNodes.push_back( CNodeModel( 11, 6, 8 ) );
+	grapeModelNodes.push_back( CNodeModel( 12, 10, 8 ) );
+	grapeModelNodes.push_back( CNodeModel( 13, 12, 9 ) );
+	grapeModelNodes.push_back( CNodeModel( 14, 10, 10 ) );
+	grapeModelNodes.push_back( CNodeModel( 15, 12, 12 ) );
+	grapeModelNodes.push_back( CNodeModel( 16, 13, 14 ) );
+	grapeModelNodes.push_back( CNodeModel( 17, 13, 12 ) );
 	
 	grapeModelEdges.clear();
 	grapeModelEdges.push_back( CEdgeModel( 0, 1, 2.0 ) );

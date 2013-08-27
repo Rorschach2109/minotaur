@@ -147,7 +147,7 @@ void CPrimAlgorithmTest::m_FindDoubleTriangleMSTTest( void )
 
 void CPrimAlgorithmTest::m_FindSpiderNetMSTTest( void )
 {
-	CNodeModel rootNode = CNodeModel( 0, 0, 0 );
+	CNodeModel rootNode = CNodeModel( 0, 0, 2 );
 	std::shared_ptr < CTreeModel > expectedValidTree = t_subGraphModelFactory.spiderNetModelMSTPrim;
 	std::shared_ptr < CTreeModel > invalidTree = t_subGraphModelFactory.spiderNetModelMSTKruskal;
 	
@@ -172,7 +172,7 @@ void CPrimAlgorithmTest::m_FindSpiderNetMSTTest( void )
 
 void CPrimAlgorithmTest::m_FindGrapeMSTTest( void )
 {
-	CNodeModel rootNode = CNodeModel( 0, 0, 0 );
+	CNodeModel rootNode = CNodeModel( 0, 2, 0 );
 	std::shared_ptr < CTreeModel > expectedValidTree = t_subGraphModelFactory.grapeModelMSTPrim;
 	std::shared_ptr < CTreeModel > invalidTree = t_subGraphModelFactory.doubleTriangleModelMSTPrim;
 	

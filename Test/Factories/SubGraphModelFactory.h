@@ -85,11 +85,13 @@ class CSubGraphModelFactory : public CGraphModelFactory
 		edgeDefinition spiderNetModelMSTBoruvkaEdges;
 		subGraphNodes spiderNetFrom0To7PathEdges;
 		subGraphNodes spiderNetFrom5To0PathEdges;
+		subGraphNodes spiderNetFrom5To0PathEdgesBellmanFord;
 		std::shared_ptr < CTreeModel > spiderNetModelMSTKruskal;
 		std::shared_ptr < CTreeModel > spiderNetModelMSTPrim;
 		std::shared_ptr < CTreeModel > spiderNetModelMSTBoruvka;
 		std::shared_ptr < CPathModel > spiderNetFrom0To7Path;
 		std::shared_ptr < CPathModel > spiderNetFrom5To0Path;
+		std::shared_ptr < CPathModel > spiderNetFrom5To0PathBellmanFord;
 		
 		// grape graph created by Marta Konieczna
 		edgeDefinition grapeModelMSTKruskalEdges;

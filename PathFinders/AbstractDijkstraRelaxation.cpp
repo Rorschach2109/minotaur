@@ -45,7 +45,7 @@ std::shared_ptr < CPathModel > AbstractDijkstraRelaxation::BuildPath( const IGra
 	
 	pathNodes.push_back(nodeFrom);
 	std::reverse( pathNodes.begin(), pathNodes.end() );
-	
+
 	std::shared_ptr < CPathModel > shortestPath( new CPathModel( graphModel, pathNodes ) );
 	return shortestPath;
 }

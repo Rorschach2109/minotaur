@@ -146,7 +146,7 @@ void CKruskalAlgorithmTest::m_FindDoubleTriangleMSTTest( void )
 
 void CKruskalAlgorithmTest::m_FindSpiderNetMSTTest( void )
 {
-	CNodeModel rootNode = CNodeModel( 0, 0, 0 );
+	CNodeModel rootNode = CNodeModel( 0, 0, 2 );
 	std::shared_ptr < CTreeModel > expectedValidTree = t_subGraphModelFactory.spiderNetModelMSTKruskal;
 	std::shared_ptr < CTreeModel > invalidTree = t_subGraphModelFactory.doubleTriangleModelMSTKruskal;
 	
@@ -171,7 +171,7 @@ void CKruskalAlgorithmTest::m_FindSpiderNetMSTTest( void )
 
 void CKruskalAlgorithmTest::m_FindGrapeMSTTest( void )
 {
-	CNodeModel rootNode = CNodeModel( 0, 0, 0 );
+	CNodeModel rootNode = CNodeModel( 0, 2, 0 );
 	std::shared_ptr < CTreeModel > expectedValidTree = t_subGraphModelFactory.grapeModelMSTKruskal;
 	std::shared_ptr < CTreeModel > invalidTree = t_subGraphModelFactory.doubleTriangleModelMSTKruskal;
 	

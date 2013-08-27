@@ -146,7 +146,7 @@ void CBoruvkaAlgorithmTest::m_FindDoubleTriangleMSTTest( void )
 
 void CBoruvkaAlgorithmTest::m_FindSpiderNetMSTTest( void )
 {
-	CNodeModel rootNode = CNodeModel( 0, 0, 0 );
+	CNodeModel rootNode = CNodeModel( 0, 0, 2 );
 	std::shared_ptr < CTreeModel > expectedValidTree = t_subGraphModelFactory.spiderNetModelMSTBoruvka;
 	std::shared_ptr < CTreeModel > invalidTree = t_subGraphModelFactory.doubleTriangleModelMSTBoruvka;
 	
@@ -171,7 +171,7 @@ void CBoruvkaAlgorithmTest::m_FindSpiderNetMSTTest( void )
 
 void CBoruvkaAlgorithmTest::m_FindGrapeMSTTest( void )
 {
-	CNodeModel rootNode = CNodeModel( 0, 0, 0 );
+	CNodeModel rootNode = CNodeModel( 0, 2, 0 );
 	std::shared_ptr < CTreeModel > expectedValidTree = t_subGraphModelFactory.grapeModelMSTBoruvka;
 	std::shared_ptr < CTreeModel > invalidTree = t_subGraphModelFactory.doubleTriangleModelMSTBoruvka;
 	

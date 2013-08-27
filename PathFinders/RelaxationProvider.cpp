@@ -55,7 +55,6 @@ bool CRelaxationProvider::Relax( const IGraphModel& graphModel, const CNodeModel
 	unsigned int nodeToId = nodeTo.GetNodeId();
 	
 	CEdgeModel candidateEdge = graphModel.GetGraphModelEdge(nodeFromId, nodeToId);
-	
 	double candidateDistance = m_aggregratedLabels[nodeFrom] + candidateEdge.GetEdgeWeight();
 	
 	if ( candidateDistance < m_aggregratedLabels[nodeTo] )

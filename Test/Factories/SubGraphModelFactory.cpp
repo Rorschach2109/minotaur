@@ -224,11 +224,19 @@ CSubGraphModelFactory::CSubGraphModelFactory( void ) :
 								CNodeModel( 2, 2, 0 ),
 								CNodeModel( 0, 0, 2 )
 								} ),
+	spiderNetFrom5To0PathEdgesBellmanFord( { 
+								CNodeModel( 0, 0, 2 ),
+								CNodeModel( 2, 2, 0 ),
+								CNodeModel( 3, 4, 2 ),
+								CNodeModel( 6, 8, 2 ),
+								CNodeModel( 5, 6, 4 )
+								} ),
 	spiderNetModelMSTKruskal( new CTreeModel( *( spiderNetGraphModel ), spiderNetModelMSTKruskalEdges ) ),
 	spiderNetModelMSTPrim( new CTreeModel( *( spiderNetGraphModel ), spiderNetModelMSTPrimEdges ) ),
 	spiderNetModelMSTBoruvka( new CTreeModel( *( spiderNetGraphModel ), spiderNetModelMSTBoruvkaEdges ) ),
 	spiderNetFrom0To7Path( new CPathModel( *( spiderNetGraphModel ), spiderNetFrom0To7PathEdges ) ),
 	spiderNetFrom5To0Path( new CPathModel( *( spiderNetGraphModel ), spiderNetFrom5To0PathEdges ) ),
+	spiderNetFrom5To0PathBellmanFord( new CPathModel( *( spiderNetGraphModel ), spiderNetFrom5To0PathEdgesBellmanFord ) ),
 	
 	grapeModelMSTKruskalEdges( {
 								std::make_pair( 0, 1 ),
