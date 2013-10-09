@@ -1,7 +1,7 @@
 /*
  * This file is part of minotaur.
  *
- * File: DijkstraRelaxation.h
+ * File: AbstractDijkstraRelaxation.h
  * Brief: Declaration of abstract dijkstra relaxation class.
  *
  * Date: 26.08.2013

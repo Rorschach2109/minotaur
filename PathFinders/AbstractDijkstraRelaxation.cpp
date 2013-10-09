@@ -1,7 +1,7 @@
 /*
  * This file is part of minotaur.
  *
- * File: DijkstraRelaxation.cpp
+ * File: AbstractDijkstraRelaxation.cpp
  * Brief: Implementation of abstract dijkstra relaxation class.
  *
  * Date: 26.08.2013

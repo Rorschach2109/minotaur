@@ -4,7 +4,7 @@
  * File: BellmanFordAlgorithm.cpp
  * Brief: Implementation of bellman-ford algorithm class.
  *
- * Date: .07.2013
+ * Date: 25.08.2013
  * Author: Andrzej Korycinski
  *
  * */
