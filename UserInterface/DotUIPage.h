@@ -1,0 +1,32 @@
+/*
+ * This file is part of minotaur.
+ *
+ * File: DotUIPage.h
+ * Brief: Declaration of dot user interface page class.
+ *
+ * Date: 09.10.2013
+ * Author: Andrzej Korycinski
+ *
+ * */
+
+#ifndef _MINOTAUR_DOTUIPAGE_H_
+#define _MINOTAUR_DOTUIPAGE_H_
+
+#include "AbstractRootOptionPage.h"
+
+namespace Minotaur
+{
+
+class CDotUIPage : public AbstractRootOptionPage
+{
+	public:
+		CDotUIPage( void );
+		virtual ~CDotUIPage( void );
+
+		virtual void DisplayOptions( void ) const;
+		virtual void ExecuteOption( void ) const;
+};
+
+} // namespace Minotaur
+
+#endif /* _MINOTAUR_DOTUIPAGE_H_ */
