@@ -13,7 +13,7 @@
 #define _MINOTAUR_ADJACENCYLISTTEST_H_
 
 #include "AbstractMinotaurModelTest.h"
-#include "GraphModel/AdjacencyList.h"
+#include "AdjacencyList.h"
  
 namespace Minotaur
 {

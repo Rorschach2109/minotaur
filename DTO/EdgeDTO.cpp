@@ -18,7 +18,7 @@ CEdgeDto::CEdgeDto( const unsigned int& nodeFromId, const unsigned int& nodeToId
 	m_nodeToId(nodeToId),
 	m_weight(weight)
 {
-	
+
 }
 
 CEdgeDto::~CEdgeDto( void )
