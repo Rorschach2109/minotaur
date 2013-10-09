@@ -13,7 +13,9 @@
 #define _MINOTAUR_MINOTAURTESTINCLUDES_H_
 
 #include "StreamInputGraphManagerTest.h"
+#include "DotInputGraphManagerTest.h"
 #include "StreamOutputGraphManagerTest.h"
+#include "DotOutputGraphManagerTest.h"
 
 #include "EdgeDTOTest.h"
 #include "GraphDTOTest.h"

@@ -64,8 +64,18 @@ void CMinotaurTestManager::m_RunAllDaoTests( void )
 	m_allTestNumber += m_minotaurTest->GetTestNumber();
 	m_failedTestNumber += m_minotaurTest->GetFailedTestNumber();
 	m_minotaurTest.reset();
-	
+
+	m_minotaurTest = std::shared_ptr< AbstractMinotaurDtoTest >( new CDotInputGraphManagerTest() );
+	m_allTestNumber += m_minotaurTest->GetTestNumber();
+	m_failedTestNumber += m_minotaurTest->GetFailedTestNumber();
+	m_minotaurTest.reset();
+
 	m_minotaurTest = std::shared_ptr< AbstractMinotaurDtoTest >( new CStreamOutputGraphManagerTest() );
+	m_allTestNumber += m_minotaurTest->GetTestNumber();
+	m_failedTestNumber += m_minotaurTest->GetFailedTestNumber();
+	m_minotaurTest.reset();
+
+	m_minotaurTest = std::shared_ptr< AbstractMinotaurDtoTest >( new CDotOutputGraphManagerTest() );
 	m_allTestNumber += m_minotaurTest->GetTestNumber();
 	m_failedTestNumber += m_minotaurTest->GetFailedTestNumber();
 	m_minotaurTest.reset();
