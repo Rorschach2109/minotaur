@@ -12,9 +12,12 @@
 #ifndef _MINOTAUR_ABSTRACTINPUTGRAPHMANAGER_H_
 #define _MINOTAUR_ABSTRACTINPUTGRAPHMANAGER_H_
 
-#include "DTO/GraphDTO.h"
+#include "NodeDTO.h"
+#include "EdgeDTO.h"
+#include "GraphDTO.h"
 
 #include <istream>
+#include <vector>
 
 namespace Minotaur
 {
@@ -23,6 +26,9 @@ class AbstractInputGraphManager
 {
 	protected:
 		std::istream& t_dtoGraphInputStream;
+
+		virtual void t_GetDtoNodes( std::vector < CNodeDto >& dtoNodes ) = 0;
+		virtual void t_GetDtoEdges( std::vector < CEdgeDto >& dtoEdges ) = 0;
 		
 	public:
 		AbstractInputGraphManager( void ) = delete;

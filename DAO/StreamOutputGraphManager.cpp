@@ -11,11 +11,12 @@
  
 #include "StreamOutputGraphManager.h"
 
-#include "DTO/NodeDTO.h"
-#include "DTO/EdgeDTO.h"
+#include "NodeDTO.h"
+#include "EdgeDTO.h"
 
 #include <string>
 #include <vector>
+#include <iomanip>
 
 using namespace Minotaur;
 
@@ -36,19 +37,13 @@ void CStreamOutputGraphManager::WriteGraphToOutput( const CGraphDto& dtoGraph ) 
 {
 	while ( m_graphsCount > m_graphsCounter )
 	{
-		m_WriteDtoGraphName(dtoGraph);
-		m_WriteDtoNodesEdges(dtoGraph);
+		t_WriteDtoGraphName(dtoGraph);
+		t_WriteDtoNodesEdges(dtoGraph);
 		++m_graphsCounter;	
 	}
 }
 
-void CStreamOutputGraphManager::m_WriteDtoGraphName( const CGraphDto& dtoGraph ) const
-{
-	std::string dtoGraphName = dtoGraph.GetDtoGraphName();
-	t_dtoGraphOutputStream << dtoGraphName << "\n\n";
-}
-
-void CStreamOutputGraphManager::m_WriteDtoNodesEdges( const CGraphDto& dtoGraph ) const
+void CStreamOutputGraphManager::t_WriteDtoNodesEdges( const CGraphDto& dtoGraph ) const
 {
 	m_dtoNodes = dtoGraph.GetNodesDto();
 	m_dtoEdges = dtoGraph.GetEdgesDto();
@@ -58,11 +53,17 @@ void CStreamOutputGraphManager::m_WriteDtoNodesEdges( const CGraphDto& dtoGraph 
 	
 	t_dtoGraphOutputStream << nodesCount << "\t" << edgesCount << "\n\n";
 	
-	m_WriteDtoNodes();
-	m_WriteDtoEdges();
+	t_WriteDtoNodes();
+	t_WriteDtoEdges();
 }
 
-void CStreamOutputGraphManager::m_WriteDtoNodes( void ) const
+void CStreamOutputGraphManager::t_WriteDtoGraphName( const CGraphDto& dtoGraph ) const
+{
+	std::string dtoGraphName = dtoGraph.GetDtoGraphName();
+	t_dtoGraphOutputStream << dtoGraphName << "\n\n";
+}
+
+void CStreamOutputGraphManager::t_WriteDtoNodes( void ) const
 {
 	for ( auto dtoNode : m_dtoNodes )
 	{
@@ -73,13 +74,13 @@ void CStreamOutputGraphManager::m_WriteDtoNodes( void ) const
 	t_dtoGraphOutputStream << "\n";
 }
 
-void CStreamOutputGraphManager::m_WriteDtoEdges( void ) const
+void CStreamOutputGraphManager::t_WriteDtoEdges( void ) const
 {
 	for ( auto dtoEdge : m_dtoEdges )
 	{
 		t_dtoGraphOutputStream << dtoEdge.GetNodeFromId() << "\t";
 		t_dtoGraphOutputStream << dtoEdge.GetNodeToId() << "\t";
-		t_dtoGraphOutputStream << dtoEdge.GetEdgeWeight() << "\n";
+		t_dtoGraphOutputStream << std::fixed << std::setprecision(1) << dtoEdge.GetEdgeWeight() << "\n";
 	}
 	t_dtoGraphOutputStream << "\n";
 }

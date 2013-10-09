@@ -14,12 +14,7 @@
 
 #include "AbstractInputGraphManager.h"
 
-#include "NodeDTO.h"
-#include "EdgeDTO.h"
-
-#include <istream>
 #include <string>
-#include <vector>
 
 namespace Minotaur
 {
@@ -35,8 +30,10 @@ class CStreamInputGraphManager : public AbstractInputGraphManager
 
 		void m_SetGraphsCount( const unsigned int& graphsCount );
 		bool m_HasNextGraph( void ) const;
-		void m_GetDtoNodes( std::vector < CNodeDto >& dtoNodes );
-		void m_GetDtoEdges( std::vector < CEdgeDto >& dtoEdges );
+
+	protected:
+		virtual void t_GetDtoNodes( std::vector < CNodeDto >& dtoNodes );
+		virtual void t_GetDtoEdges( std::vector < CEdgeDto >& dtoEdges );
 		
 	public:
 		CStreamInputGraphManager( void ) = delete;

@@ -16,7 +16,6 @@
 #include "NodeDTO.h"
 #include "EdgeDTO.h"
 
-#include <ostream>
 #include <vector>
 
 namespace Minotaur
@@ -24,18 +23,19 @@ namespace Minotaur
 
 class CStreamOutputGraphManager : public AbstractOutputGraphManager
 {
+	private:
 		const unsigned int m_graphsCount;
 		mutable unsigned int m_graphsCounter;
 		
 		mutable std::vector < CNodeDto > m_dtoNodes;
 		mutable std::vector < CEdgeDto > m_dtoEdges;
 		
-		void m_WriteDtoGraphName( const CGraphDto& dtoGraph ) const;
+	protected:
+		virtual void t_WriteDtoNodesEdges( const CGraphDto& dtoGraph ) const;
+		virtual void t_WriteDtoGraphName( const CGraphDto& dtoGraph ) const;
+		virtual void t_WriteDtoNodes( void ) const;
+		virtual void t_WriteDtoEdges( void ) const;
 		
-		void m_WriteDtoNodesEdges( const CGraphDto& dtoGraph) const;
-		void m_WriteDtoNodes( void ) const;
-		void m_WriteDtoEdges( void ) const;
-
 	public:
 		CStreamOutputGraphManager( void ) = delete;
 		CStreamOutputGraphManager( std::ostream& graphOutputStream, const unsigned int& graphsCount );

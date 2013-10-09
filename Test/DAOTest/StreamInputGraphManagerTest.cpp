@@ -35,20 +35,116 @@ CStreamInputGraphManagerTest::~CStreamInputGraphManagerTest( void )
 
 void CStreamInputGraphManagerTest::m_GetSingleNextGraphTest( void )
 {
+	m_GetSquareGraphTest();
+	m_GetInfinityGraphTest();
+	m_GetTurtleGraphTest();
+	m_GetDoubleTriangleGraphTest();
+	m_GetSpiderNetGraphTest();
+	m_GetGrapeGraphTest();
+}
+
+void CStreamInputGraphManagerTest::m_GetSquareGraphTest( void )
+{
+	t_testNumber += 2;
+
+	std::string singleGraphString = "1\n\n" + t_dtoGraphFactory.squareDtoGraphString;
+	std::istringstream singleGraphStream(singleGraphString);
+	CGraphDto invalidDtoGraph = t_dtoGraphFactory.infinityDtoGraph;
+	unsigned int graphsCount = 1;
+	CStreamInputGraphManager inputGraphManager = CStreamInputGraphManager(singleGraphStream, graphsCount);
+
+	CGraphDto actualDtoGraph = inputGraphManager.GetNextGraph();
+	CGraphDto expectedDtoGraph = t_dtoGraphFactory.squareDtoGraph;
+
+	CHECK_EQUAL(expectedDtoGraph, actualDtoGraph, t_failedTestNumber);
+	CHECK_NOT_EQUAL(invalidDtoGraph, actualDtoGraph, t_failedTestNumber);
+}
+
+void CStreamInputGraphManagerTest::m_GetInfinityGraphTest( void )
+{
+	t_testNumber += 2;
+
+	std::string singleGraphString = "1\n\n" + t_dtoGraphFactory.infinityDtoGraphString;
+	std::istringstream singleGraphStream(singleGraphString);
+	CGraphDto invalidDtoGraph = t_dtoGraphFactory.turtleDtoGraph;
+	unsigned int graphsCount = 1;
+	CStreamInputGraphManager inputGraphManager = CStreamInputGraphManager(singleGraphStream, graphsCount);
+
+	CGraphDto actualDtoGraph = inputGraphManager.GetNextGraph();
+	CGraphDto expectedDtoGraph = t_dtoGraphFactory.infinityDtoGraph;
+
+	CHECK_EQUAL(expectedDtoGraph, actualDtoGraph, t_failedTestNumber);
+	CHECK_NOT_EQUAL(invalidDtoGraph, actualDtoGraph, t_failedTestNumber);
+}
+
+void CStreamInputGraphManagerTest::m_GetTurtleGraphTest( void )
+{
 	t_testNumber += 2;
 
 	std::string singleGraphString = "1\n\n" + t_dtoGraphFactory.turtleDtoGraphString;
+	std::istringstream singleGraphStream(singleGraphString);
+	CGraphDto invalidDtoGraph = t_dtoGraphFactory.grapeDtoGraph;
+	unsigned int graphsCount = 1;
+	CStreamInputGraphManager inputGraphManager = CStreamInputGraphManager(singleGraphStream, graphsCount);
+
+	CGraphDto actualDtoGraph = inputGraphManager.GetNextGraph();
+	CGraphDto expectedDtoGraph = t_dtoGraphFactory.turtleDtoGraph;
+
+	CHECK_EQUAL(expectedDtoGraph, actualDtoGraph, t_failedTestNumber);
+	CHECK_NOT_EQUAL(invalidDtoGraph, actualDtoGraph, t_failedTestNumber);
+}
+
+void CStreamInputGraphManagerTest::m_GetDoubleTriangleGraphTest( void )
+{
+	t_testNumber += 2;
+
+	std::string singleGraphString = "1\n\n" + t_dtoGraphFactory.doubleTriangleDtoGraphString;
+	std::istringstream singleGraphStream(singleGraphString);
+	CGraphDto invalidDtoGraph = t_dtoGraphFactory.spiderNetDtoGraph;
+	unsigned int graphsCount = 1;
+	CStreamInputGraphManager inputGraphManager = CStreamInputGraphManager(singleGraphStream, graphsCount);
+
+	CGraphDto actualDtoGraph = inputGraphManager.GetNextGraph();
+	CGraphDto expectedDtoGraph = t_dtoGraphFactory.doubleTriangleDtoGraph;
+
+	CHECK_EQUAL(expectedDtoGraph, actualDtoGraph, t_failedTestNumber);
+	CHECK_NOT_EQUAL(invalidDtoGraph, actualDtoGraph, t_failedTestNumber);
+}
+
+void CStreamInputGraphManagerTest::m_GetSpiderNetGraphTest( void )
+{
+	t_testNumber += 2;
+
+	std::string singleGraphString = "1\n\n" + t_dtoGraphFactory.spiderNetDtoGraphString;
+	std::istringstream singleGraphStream(singleGraphString);
+	CGraphDto invalidDtoGraph = t_dtoGraphFactory.doubleTriangleDtoGraph;
+	unsigned int graphsCount = 1;
+	CStreamInputGraphManager inputGraphManager = CStreamInputGraphManager(singleGraphStream, graphsCount);
+
+	CGraphDto actualDtoGraph = inputGraphManager.GetNextGraph();
+	CGraphDto expectedDtoGraph = t_dtoGraphFactory.spiderNetDtoGraph;
+
+	CHECK_EQUAL(expectedDtoGraph, actualDtoGraph, t_failedTestNumber);
+	CHECK_NOT_EQUAL(invalidDtoGraph, actualDtoGraph, t_failedTestNumber);
+}
+
+void CStreamInputGraphManagerTest::m_GetGrapeGraphTest( void )
+{
+	t_testNumber += 2;
+
+	std::string singleGraphString = "1\n\n" + t_dtoGraphFactory.grapeDtoGraphString;
 	std::istringstream singleGraphStream(singleGraphString);
 	CGraphDto invalidDtoGraph = t_dtoGraphFactory.doubleTriangleDtoGraph;
 	unsigned int graphsCount = 1;
 	CStreamInputGraphManager inputGraphManager = CStreamInputGraphManager(singleGraphStream, graphsCount);
 	
 	CGraphDto actualDtoGraph = inputGraphManager.GetNextGraph();
-	CGraphDto expectedDtoGraph = t_dtoGraphFactory.turtleDtoGraph;
+	CGraphDto expectedDtoGraph = t_dtoGraphFactory.grapeDtoGraph;
 		
 	CHECK_EQUAL(expectedDtoGraph, actualDtoGraph, t_failedTestNumber);
 	CHECK_NOT_EQUAL(invalidDtoGraph, actualDtoGraph, t_failedTestNumber);
 }
+
 
 void CStreamInputGraphManagerTest::m_GetMultipleNextGraphTest( void )
 {

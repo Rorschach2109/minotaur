@@ -21,6 +21,13 @@ class CStreamInputGraphManagerTest : public AbstractMinotaurDtoTest
 {
 	private:
 		void m_GetSingleNextGraphTest( void );
+		void m_GetSquareGraphTest( void );
+		void m_GetInfinityGraphTest( void );
+		void m_GetTurtleGraphTest( void );
+		void m_GetDoubleTriangleGraphTest( void );
+		void m_GetSpiderNetGraphTest( void );
+		void m_GetGrapeGraphTest( void );
+
 		void m_GetMultipleNextGraphTest( void );
 	
 	public:
