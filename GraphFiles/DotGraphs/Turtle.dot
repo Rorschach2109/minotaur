@@ -1,0 +1,17 @@
+graph Turtle
+{
+	graph[center = true, margin = 0.2, nodesep = 0.1, ranksep = 0.3]
+	node[shape = circle, fontsize = 8];
+	edge[arrowsize = 0.6, fontsize = 8];
+
+	0 [pos = "0, 0"];
+	1 [pos = "2, 0"];
+	2 [pos = "4, 2"];
+	3 [pos = "6, 0"];
+
+	0 -- 1 [label = "2.1"];
+	1 -- 2 [label = "2.5"];
+	1 -- 3 [label = "4.2"];
+	2 -- 3 [label = "1.2"];
+}
+
