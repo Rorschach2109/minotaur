@@ -35,37 +35,13 @@ void CStreamInputGraphManager::m_SetGraphsCount( const unsigned int& graphsCount
 	t_dtoGraphInputStream >> graphsFileCount;
 	m_graphsCount = ( graphsFileCount < graphsCount )? graphsFileCount : graphsCount;
 }
-		
-CGraphDto CStreamInputGraphManager::GetNextGraph( void )
-{
-	if ( m_HasNextGraph() )
-	{
-		++m_graphCounter;
-
-		t_dtoGraphInputStream >> m_graphName;
-
-		t_dtoGraphInputStream >> m_nodesCount;
-		t_dtoGraphInputStream >> m_edgesCount;
-
-		std::vector < CNodeDto > dtoNodes;
-		m_GetDtoNodes(dtoNodes);
-
-		std::vector < CEdgeDto > dtoEdges;
-		m_GetDtoEdges(dtoEdges);
-		
-		CGraphDto dtoGraph(m_graphName, dtoNodes, dtoEdges);
-		
-		return dtoGraph;
-	}
-	return ( CGraphDto() );
-}
 
 bool CStreamInputGraphManager::m_HasNextGraph( void ) const
 {
 	return ( m_graphsCount > m_graphCounter );
 }	
 
-void CStreamInputGraphManager::m_GetDtoNodes( std::vector < CNodeDto >& dtoNodes )
+void CStreamInputGraphManager::t_GetDtoNodes( std::vector < CNodeDto >& dtoNodes )
 {
 	unsigned int nodeDtoId = 0;
 	unsigned int nodeDtoX = 0;
@@ -80,7 +56,7 @@ void CStreamInputGraphManager::m_GetDtoNodes( std::vector < CNodeDto >& dtoNodes
 	}
 }
 
-void CStreamInputGraphManager::m_GetDtoEdges( std::vector < CEdgeDto >& dtoEdges )
+void CStreamInputGraphManager::t_GetDtoEdges( std::vector < CEdgeDto >& dtoEdges )
 {
 	unsigned int nodeFromId = 0;
 	unsigned int nodeToId = 0;
@@ -93,4 +69,28 @@ void CStreamInputGraphManager::m_GetDtoEdges( std::vector < CEdgeDto >& dtoEdges
 		t_dtoGraphInputStream >> edgeWeight;
 		dtoEdges.push_back( CEdgeDto(nodeFromId, nodeToId, edgeWeight) );
 	}
+}
+
+CGraphDto CStreamInputGraphManager::GetNextGraph( void )
+{
+	if ( m_HasNextGraph() )
+	{
+		++m_graphCounter;
+
+		t_dtoGraphInputStream >> m_graphName;
+
+		t_dtoGraphInputStream >> m_nodesCount;
+		t_dtoGraphInputStream >> m_edgesCount;
+
+		std::vector < CNodeDto > dtoNodes;
+		t_GetDtoNodes(dtoNodes);
+
+		std::vector < CEdgeDto > dtoEdges;
+		t_GetDtoEdges(dtoEdges);
+
+		CGraphDto dtoGraph(m_graphName, dtoNodes, dtoEdges);
+
+		return dtoGraph;
+	}
+	return ( CGraphDto() );
 }
