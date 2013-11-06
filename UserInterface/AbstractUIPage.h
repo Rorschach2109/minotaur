@@ -12,13 +12,25 @@
 #ifndef _MINOTAUR_ABSTRACTUIPAGE_H_
 #define _MINOTAUR_ABSTRACTUIPAGE_H_
 
+#include <string>
+
 namespace Minotaur
 {
+
+enum EUIPageOption
+{
+	EXIT_PAGE = 99
+};
 
 class AbstractUIPage
 {
 	protected:
 		mutable unsigned int t_optionId;
+		const std::string t_noFileLoadedMessage;
+		const std::string t_goodFileMessage;
+		const std::string t_wrongFileMessage;
+		const std::string t_wrongOptionMessage;
+		const std::string t_wrongCommandMessage;
 
 		unsigned int t_WaitForInput( void ) const;
 

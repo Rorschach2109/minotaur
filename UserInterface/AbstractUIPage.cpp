@@ -13,11 +13,17 @@
 
 #include <limits>
 #include <iostream>
+#include <unistd.h>
 
 using namespace Minotaur;
 
 AbstractUIPage::AbstractUIPage( void ) :
-		t_optionId( std::numeric_limits<unsigned int>::max() )
+		t_optionId( std::numeric_limits<unsigned int>::max() ),
+		t_noFileLoadedMessage("\nAt First Load Graph File!\n\n"),
+		t_goodFileMessage("\nFile Opened\n\n"),
+		t_wrongFileMessage("\nWrong File!\n\n"),
+		t_wrongOptionMessage("\nWrong Option!\n\n"),
+		t_wrongCommandMessage("\nWrong Command!\n\n")
 {
 
 }
@@ -32,7 +38,7 @@ unsigned int AbstractUIPage::t_WaitForInput( void ) const
 	unsigned int optionId = std::numeric_limits < unsigned int >::max();
 	while( true )
 	{
-	        std::cin >> optionId;
+			std::cin >> optionId;
 	        if ( std::cin.fail())
 	        {
 	                std::cout << "Not a number\n";
@@ -49,11 +55,22 @@ unsigned int AbstractUIPage::t_WaitForInput( void ) const
 
 void AbstractUIPage::RunPage( void ) const
 {
-	while ( 99 != t_optionId )
+	while ( true )
 	{
-		system("CLS");
+		std::system("clear");
 		DisplayOptions();
 		t_optionId = t_WaitForInput();
-		ExecuteOption();
+		if ( EUIPageOption::EXIT_PAGE != t_optionId )
+		{
+			ExecuteOption();
+			sleep(1);
+			std::system("clear");
+			t_optionId = std::numeric_limits<unsigned int>::max();
+		}
+		else
+		{
+			return;
+		}
 	}
+	std::system("clear");
 }

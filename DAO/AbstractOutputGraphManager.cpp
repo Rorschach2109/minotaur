@@ -23,3 +23,4 @@ AbstractOutputGraphManager::~AbstractOutputGraphManager( void )
 {
 	
 }
+

@@ -19,12 +19,15 @@ namespace Minotaur
 
 class CDotUIPage : public AbstractRootOptionPage
 {
+	protected:
+		virtual void t_ProcessLoadFile( void ) const;
+		virtual void t_ProcessConvertFile( void ) const;
+
 	public:
 		CDotUIPage( void );
 		virtual ~CDotUIPage( void );
 
 		virtual void DisplayOptions( void ) const;
-		virtual void ExecuteOption( void ) const;
 };
 
 } // namespace Minotaur

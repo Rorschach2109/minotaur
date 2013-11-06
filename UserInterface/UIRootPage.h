@@ -19,6 +19,13 @@ namespace Minotaur
 
 class AbstractRootOptionPage;
 
+enum ERootOption
+{
+	AK_GRAPH_FILE = 1,
+	DOT_GRAPH_FILE,
+	EXIT_ROOT = EXIT_PAGE
+};
+
 class CUIRootPage : public AbstractUIPage
 {
 	private:

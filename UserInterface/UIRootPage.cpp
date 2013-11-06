@@ -14,7 +14,7 @@
 #include "AKUIPage.h"
 #include "DotUIPage.h"
 
-#include <iostream>
+#include <cstdlib>
 #include <unistd.h>
 
 using namespace Minotaur;
@@ -37,27 +37,28 @@ CUIRootPage::~CUIRootPage( void )
 
 void CUIRootPage::DisplayOptions( void ) const
 {
-	std::cout << "*****Root Page*****\n\n";
-	std::cout << "1.\tAK Graph File\n";
-	std::cout << "2.\tDot Graph File\n";
-	std::cout << "\n*******************\n";
-	std::cout << "99.\tEnd\n\n";
+	printf("*****Root Page*****\n\n");
+	printf("1.\tAK Graph File\n");
+	printf("2.\tDot Graph File\n");
+	printf("\n*******************\n");
+	printf("99.\tEnd\n\n");
 }
 
 void CUIRootPage::ExecuteOption( void ) const
 {
 	switch( t_optionId )
 	{
-	case 1:
+	case ERootOption::AK_GRAPH_FILE:
 		m_ProcessAKGraphFile();
 		break;
-	case 2:
+	case ERootOption::DOT_GRAPH_FILE:
 		m_ProcessDotGraphFile();
 		break;
+	case ERootOption::EXIT_ROOT:
+		printf("\nExit");
+		break;
 	default:
-		std::cout << "\n\nWrong Option!\n\n";
-		sleep(2);
-		this->RunPage();
+		printf("%s", t_wrongOptionMessage.c_str() );
 	}
 }
 
