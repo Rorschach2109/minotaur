@@ -25,50 +25,24 @@ CDotUIPage::CDotUIPage( void ) :
 
 CDotUIPage::~CDotUIPage( void )
 {
-	if ( nullptr != t_graphStream )
-	{
-		delete t_graphStream;
-		t_graphStream = nullptr;
-	}
 }
 
 void CDotUIPage::t_ProcessLoadFile( void ) const
 {
-	t_GetGraphName();
-	std::string graphFilePath = "./../GraphFiles/DotGraphs/" + t_graphName;
-
-	t_graphStream = new std::ifstream( graphFilePath.c_str() );
-
-	if ( ( nullptr != t_graphStream ) && ( t_graphStream->good() ) )
-	{
-		printf("%s", t_goodFileMessage.c_str() );
-	}
-	else
-	{
-		printf("%s", t_wrongFileMessage.c_str() );
-	}
-	t_inputGraphManager = new CDotInputGraphManager(*t_graphStream);
 }
 
-void CDotUIPage::t_ProcessConvertFile( void ) const
+void CDotUIPage::t_ProcessConvertInputFile( void ) const
 {
-	if ( ( nullptr != t_graphStream ) && ( t_graphStream->good() ) )
-	{
-		std::string systemCommand = "perl ./../PerlParser/DotToAKConverter " + t_graphName;
+}
 
-		if ( 0 != system( systemCommand.c_str() ) )
-		{
-			printf("\n\nDot file saved in GraphFiles/AKGraphs Directory.\nName of File: %s", t_graphName.c_str());
-		}
-		else
-		{
-			printf("%s", t_wrongCommandMessage.c_str() );
-		}
-	}
-	else
-	{
-		printf("%s", t_noFileLoadedMessage.c_str() );
-	}
+void CDotUIPage::t_ProcessPrintInputGraph( void ) const
+{
+	
+}
+
+void CDotUIPage::t_ProcessPrintResultGraph( void ) const
+{
+	
 }
 
 void CDotUIPage::DisplayOptions( void ) const
@@ -77,7 +51,8 @@ void CDotUIPage::DisplayOptions( void ) const
 	printf("1.\tLoad Dot Graph File\n");
 	printf("2.\tConvert to AK Graph File\n");
 	printf("3.\tChoose Algorithm\n");
-	printf("4.\tPrint Graph\n");
+	printf("4.\tPrint Input Graph\n");
+	printf("5.\tPrint Result Graph\n");
 	printf("\n*******************\n");
 	printf("99.\tEnd\n\n");
 }

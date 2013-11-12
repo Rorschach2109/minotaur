@@ -21,7 +21,9 @@ class CDotUIPage : public AbstractRootOptionPage
 {
 	protected:
 		virtual void t_ProcessLoadFile( void ) const;
-		virtual void t_ProcessConvertFile( void ) const;
+		virtual void t_ProcessConvertInputFile( void ) const;
+		virtual void t_ProcessPrintInputGraph( void ) const;
+		virtual void t_ProcessPrintResultGraph( void ) const;
 
 	public:
 		CDotUIPage( void );
