@@ -63,6 +63,10 @@ void AbstractUIPage::RunPage( void ) const
 		if ( EUIPageOption::EXIT_PAGE != t_optionId )
 		{
 			ExecuteOption();
+			if ( EUIPageOption::EXIT_PAGE == t_optionId )
+			{
+				return;
+			}
 			sleep(1);
 			std::system("clear");
 			t_optionId = std::numeric_limits<unsigned int>::max();
