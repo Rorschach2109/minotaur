@@ -15,24 +15,42 @@
 #include "AlgorithmIncludes.h"
 #include "GraphDTO.h"
 #include "IGraphModel.h"
-#include "SubGraphModel.h"
+#include "SubGraphToGraphAdapter.h"
 #include "AdjacencyListFactory.h"
+#include "SubGraphToGraphAdapter.h"
+
+#include "NodeModel.h"
+#include "EdgeModel.h"
+#include "NodeDTO.h"
+#include "EdgeDTO.h"
+#include "GraphDTO.h"
+
+#include "StreamOutputGraphManager.h"
+#include "DotOutputGraphManager.h"
 
 #include "IPathFinder.h"
 #include "ITreeFinder.h"
 
 #include <cstdlib>
 #include <unistd.h>
+#include <memory>
+#include <vector>
+#include <fstream>
+#include <iostream>
 
 using namespace Minotaur;
 
-CAlgorithmUIPage::CAlgorithmUIPage( AbstractInputGraphManager* inputGraphManager ) :
+CAlgorithmUIPage::CAlgorithmUIPage( AbstractInputGraphManager* inputGraphManager, const std::string& graphName ) :
 		AbstractUIPage(),
+		m_nodeFromId( 0 ),
+		m_nodeToId( 0 ),
 		m_inputGraphManager( inputGraphManager ),
+		m_outputGraphManager( nullptr ),
 		m_graphModel( nullptr ),
 		m_resultSubGraph( nullptr ),
 		m_treeFinder( nullptr ),
-		m_pathFinder( nullptr )
+		m_pathFinder( nullptr ),
+		m_subGraphName( graphName )
 {
 
 }
@@ -62,15 +80,13 @@ void CAlgorithmUIPage::DisplayOptions( void ) const
 	printf("1.\tKruskal Algorithm\n");
 	printf("2.\tPrim Algorithm\n");
 	printf("3.\tBoruvka Algorithm\n");
-	printf("4.\tAll MST Algorithms\n\n");
 
-	printf("\t===== PATH =====\n");
+	printf("\n\t===== PATH =====\n");
 
-	printf("5.\tDijkstra Algorithm\n");
-	printf("6.\tBellman-Ford Algorithm\n");
-	printf("7.\tAll Paths Algorithms\n\n");
+	printf("4.\tDijkstra Algorithm\n");
+	printf("5.\tBellman-Ford Algorithm\n");
 
-	printf("99.\tEnd\n\n");
+	printf("\n99.\tEnd\n\n");
 }
 
 void CAlgorithmUIPage::ExecuteOption( void ) const
@@ -89,10 +105,6 @@ void CAlgorithmUIPage::ExecuteOption( void ) const
 		m_LoadGraph();
 		m_BoruvkaAlgorithm();
 		break;
-	case EAlgorithmOptionId::ALL_MST:
-		m_LoadGraph();
-		m_AllMSTAlgorithms();
-		break;
 	case EAlgorithmOptionId::DIJKSTRA:
 		m_LoadGraph();
 		m_DijkstraAlgorithm();
@@ -101,17 +113,17 @@ void CAlgorithmUIPage::ExecuteOption( void ) const
 		m_LoadGraph();
 		m_BellmanFordAlgorithm();
 		break;
-	case EAlgorithmOptionId::ALL_PATHS:
-		m_LoadGraph();
-		m_AllPathAlgorithms();
-		break;
 	case EAlgorithmOptionId::EXIT_ALGORITHM:
-		printf("\nExit");
 		break;
 	default:
 		printf("%s", t_wrongOptionMessage.c_str() );
 	}
 	m_graphModel.reset();
+}
+
+const std::string& CAlgorithmUIPage::GetSubGraphName( void ) const
+{
+	return m_subGraphName;
 }
 
 void CAlgorithmUIPage::m_LoadGraph( void ) const
@@ -121,55 +133,159 @@ void CAlgorithmUIPage::m_LoadGraph( void ) const
 	m_graphModel = adjacencyListFactory.CreateFromDto( loadedDTOGraph.GetNodesDto(), loadedDTOGraph.GetEdgesDto() );
 }
 
+void CAlgorithmUIPage::m_WriteGraphToFile( void ) const
+{
+	if ( nullptr != m_resultSubGraph )
+	{
+		std::vector<CNodeDto> dtoNodes;
+
+		for ( auto modelNode : m_resultSubGraph->GetGraphModelNodes() )
+		{
+			unsigned int nodeId = modelNode.GetNodeId();
+			unsigned int nodeX = modelNode.GetNodeX();
+			unsigned int nodeY = modelNode.GetNodeY();
+		
+			CNodeDto dtoNode = CNodeDto(nodeId, nodeX, nodeY);
+			dtoNodes.push_back( dtoNode );
+		}
+
+		std::vector<CEdgeDto> dtoEdges;
+		for ( auto modelEdge :  m_resultSubGraph->GetGraphModelEdges() )
+		{
+			unsigned int nodeFromId = modelEdge.GetNodeFromId();
+			unsigned int nodeToId = modelEdge.GetNodeToId();
+			double edgeWeight = modelEdge.GetEdgeWeight();
+			
+			CEdgeDto dtoEdge = CEdgeDto(nodeFromId, nodeToId, edgeWeight);
+			dtoEdges.push_back( dtoEdge );
+		}
+
+		CGraphDto dtoGraph = CGraphDto(m_subGraphName, dtoNodes, dtoEdges);
+		
+		std::ofstream streamOutputStream;
+		std::string streamPath = "./../GraphFiles/AKGraphs/" + m_subGraphName;
+		streamOutputStream.open( streamPath.c_str() );
+		
+		CStreamOutputGraphManager streamOutputGraphManager = CStreamOutputGraphManager(streamOutputStream, 1);
+		streamOutputGraphManager.WriteGraphToOutput(dtoGraph);
+		
+		streamOutputStream.close();
+		
+		std::string systemCommand = "perl ./../PerlParser/AKToDotConverter.pl " + m_subGraphName;
+		system( systemCommand.c_str() );
+	}
+}
+
+void CAlgorithmUIPage::m_GetNodesId( void ) const
+{
+	printf("Get NodeFromId: ");
+	std::cin >> m_nodeFromId;
+	printf("Get NodeToId: ");
+	std::cin >> m_nodeToId;
+}
+
+bool CAlgorithmUIPage::m_CheckNodesId( void ) const
+{
+	bool result = m_graphModel->ContainsNode(m_nodeFromId) && 
+		m_graphModel->ContainsNode(m_nodeToId);
+	return result;
+}
+		
 void CAlgorithmUIPage::m_KruskalAlgorithm( void ) const
 {
+	m_subGraphName = "KruskalMST" + m_subGraphName;
 	m_treeFinder = new CKruskalAlgorithm();
-
-	delete m_treeFinder;
-	m_treeFinder = nullptr;
+	std::shared_ptr < CSubGraphModel > kruskalMST = m_treeFinder->FindMST( *m_graphModel, m_graphModel->GetGraphModelNodes().front() );
+	CSubGraphToGraphAdapter subgraphAdapter(*kruskalMST);
+	m_resultSubGraph = std::make_shared < CSubGraphToGraphAdapter > ( subgraphAdapter );
+	m_WriteGraphToFile();
+	m_ExitAlgorithmPage();
 }
 
 void CAlgorithmUIPage::m_PrimAlgorithm( void ) const
 {
+	m_subGraphName = "PrimMST" + m_subGraphName;
 	m_treeFinder = new CPrimAlgorithm();
-
-	delete m_treeFinder;
-	m_treeFinder = nullptr;
+	std::shared_ptr < CSubGraphModel > primMST = m_treeFinder->FindMST( *m_graphModel, m_graphModel->GetGraphModelNodes().front() );
+	CSubGraphToGraphAdapter subgraphAdapter(*primMST);
+	m_resultSubGraph = std::make_shared < CSubGraphToGraphAdapter > ( subgraphAdapter );
+	m_WriteGraphToFile();
+	m_ExitAlgorithmPage();
 }
 
 void CAlgorithmUIPage::m_BoruvkaAlgorithm( void ) const
 {
+	m_subGraphName = "BoruvkaMST" + m_subGraphName;
 	m_treeFinder = new CBoruvkaAlgorithm();
-
-	delete m_treeFinder;
-	m_treeFinder = nullptr;
-}
-
-void CAlgorithmUIPage::m_AllMSTAlgorithms( void ) const
-{
-	m_KruskalAlgorithm();
-	m_PrimAlgorithm();
-	m_BoruvkaAlgorithm();
+	std::shared_ptr < CSubGraphModel > boruvkaMST = m_treeFinder->FindMST( *m_graphModel, m_graphModel->GetGraphModelNodes().front() );
+	CSubGraphToGraphAdapter subgraphAdapter(*boruvkaMST);
+	m_resultSubGraph = std::make_shared < CSubGraphToGraphAdapter > ( subgraphAdapter );
+	m_WriteGraphToFile();
+	m_ExitAlgorithmPage();
 }
 
 void CAlgorithmUIPage::m_DijkstraAlgorithm( void ) const
 {
-	m_pathFinder = new CDijkstraAlgorithm();
-
+	m_subGraphName = "Dijkstra" + m_subGraphName;
+	CRelaxationProvider relaxationProvider;
+	m_pathFinder = new CDijkstraAlgorithm(relaxationProvider);
+	m_GetNodesId();
+	if( m_CheckNodesId() )
+	{
+		std::shared_ptr < CSubGraphModel > dijkstraPath = m_pathFinder->FindShortestPath( *m_graphModel, m_graphModel->GetGraphModelNode(m_nodeFromId), 
+			m_graphModel->GetGraphModelNode(m_nodeToId) );
+		CSubGraphToGraphAdapter subgraphAdapter(*dijkstraPath);
+		m_resultSubGraph = std::make_shared < CSubGraphToGraphAdapter > ( subgraphAdapter );
+		m_WriteGraphToFile();
+	}
+	else
+	{
+		printf("Wrong Nodes!\n\n");
+	}
+	
 	delete m_pathFinder;
+	
 	m_pathFinder = nullptr;
+	m_ExitAlgorithmPage();
 }
 
 void CAlgorithmUIPage::m_BellmanFordAlgorithm( void ) const
 {
-	m_pathFinder = new CBellmanFordAlgorithm();
-
+	m_subGraphName = "BellmanFord" + m_subGraphName;
+	CRelaxationProvider relaxationProvider;
+	m_pathFinder = new CBellmanFordAlgorithm(relaxationProvider);
+	m_GetNodesId();
+	if( m_CheckNodesId() )
+	{
+		std::shared_ptr < CSubGraphModel > bellmanFordPath = m_pathFinder->FindShortestPath( *m_graphModel, m_graphModel->GetGraphModelNode(m_nodeFromId), 
+			m_graphModel->GetGraphModelNode(m_nodeToId) );
+		CSubGraphToGraphAdapter subgraphAdapter(*bellmanFordPath);
+		m_resultSubGraph = std::make_shared < CSubGraphToGraphAdapter > ( subgraphAdapter );
+		m_WriteGraphToFile();
+	}
+	else
+	{
+		printf("Wrong Nodes!\n\n");
+	}	
+	
 	delete m_pathFinder;
 	m_pathFinder = nullptr;
+	
+	m_ExitAlgorithmPage();
 }
 
-void CAlgorithmUIPage::m_AllPathAlgorithms( void ) const
+void CAlgorithmUIPage::m_ExitAlgorithmPage( void ) const
 {
-	m_DijkstraAlgorithm();
-	m_AllPathAlgorithms();
+	if ( nullptr != m_treeFinder )
+	{
+		delete m_treeFinder;
+		m_treeFinder = nullptr;
+	}
+	if ( nullptr != m_pathFinder )
+	{
+		delete m_pathFinder;
+		m_pathFinder = nullptr;
+	}
+	t_optionId = EAlgorithmOptionId::EXIT_ALGORITHM;
+	this->ExecuteOption();
 }
