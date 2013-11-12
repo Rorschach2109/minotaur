@@ -16,8 +16,8 @@ use warnings;
 
 if ( defined( my $graphName = $ARGV[0] ) )
 {
-	my $akFilePath = "./GraphFiles/AKGraphs/" . $graphName;
-	my $dotFilePath = "./GraphFiles/DotGraphs/" . $graphName . ".dot";
+	my $akFilePath = "./../GraphFiles/AKGraphs/" . $graphName;
+	my $dotFilePath = "./../GraphFiles/DotGraphs/" . $graphName . ".dot";
 
 	sub IgnoreTillEmptyLine
 	{

@@ -26,7 +26,8 @@ CPrimAlgorithm::CCut::CCut( const IGraphModel& graphModel, const CNodeModel& nod
 
 CPrimAlgorithm::CCut::~CCut( void )
 {
-	
+	m_mstNodes.clear();
+	m_cutEdges.clear();
 }			
 
 CEdgeModel CPrimAlgorithm::CCut::m_FindCheapestEdge( void )

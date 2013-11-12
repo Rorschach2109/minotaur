@@ -55,6 +55,6 @@ void CDotOutputGraphManager::WriteGraphToOutput( const CGraphDto& dtoGraph ) con
 	m_streamOutputGraphManager = new CStreamOutputGraphManager(t_dtoGraphOutputStream, 1);
 	m_streamOutputGraphManager->WriteGraphToOutput(dtoGraph);
 
-	std::string systemCommand = "perl ./PerlParser/AKToDotConverter.pl " + dtoGraph.GetDtoGraphName();
+	std::string systemCommand = "perl ./../PerlParser/AKToDotConverter.pl " + dtoGraph.GetDtoGraphName();
 	std::system( systemCommand.c_str() );
 }
