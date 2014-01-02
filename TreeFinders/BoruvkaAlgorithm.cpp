@@ -14,6 +14,7 @@
 
 #include <limits>
 #include <utility>
+#include <chrono> 
 
 using namespace Minotaur;
 
@@ -165,9 +166,16 @@ CBoruvkaAlgorithm::~CBoruvkaAlgorithm( void )
 {
 	
 }
-	
+#include <iostream>
 std::shared_ptr < CTreeModel > CBoruvkaAlgorithm::FindMST( const IGraphModel& graphModel, const CNodeModel& nodeRoot )
 {
+	CMinotaurMemory minotaurMemoryBeforeAlgorithm;
+	//CMinotaurMemory minotaurMemoryAfterAlgorithm;
+	
+	minotaurMemoryBeforeAlgorithm.SetMemory();
+	
+	auto startTime = std::chrono::high_resolution_clock::now();
+	
 	CCut cut = CCut(graphModel);
 	
 	while ( cut.CanExpandMSTBoruvka() )
@@ -175,6 +183,16 @@ std::shared_ptr < CTreeModel > CBoruvkaAlgorithm::FindMST( const IGraphModel& gr
 		cut.ExpandMSTBoruvka();
 	}
 	std::shared_ptr < CTreeModel > mstBoruvka = cut.BuildMSTBoruvka();
+	
+	auto endTime = std::chrono::high_resolution_clock::now();
+	auto executionTime = std::chrono::duration_cast<std::chrono::microseconds>(endTime - startTime);
+	t_executionTime = executionTime.count();
+
+	//minotaurMemoryAfterAlgorithm.SetMemory();
+	
+	t_minotaurMemoryUsage = minotaurMemoryBeforeAlgorithm;// - minotaurMemoryBeforeAlgorithm;
+	int a = 0;
+	std::cout << "Boruvka used" << ((char*)&minotaurMemoryBeforeAlgorithm - (char*)&a) << " bytes of stack ";
 	
 	return mstBoruvka;
 }

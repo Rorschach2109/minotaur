@@ -176,6 +176,76 @@ void CAlgorithmUIPage::m_WriteGraphToFile( void ) const
 	}
 }
 
+void CAlgorithmUIPage::m_WriteMSTExecutionTimeToFile( const std::string& algorithmName ) const
+{
+	if ( m_treeFinder && !m_resultSubGraph )
+	{
+		std::ofstream streamOutputStream;
+		std::string streamPath = "./../ExecutionTime/MST/" + algorithmName;
+		streamOutputStream.open( streamPath.c_str(), std::ios::app );
+		
+		unsigned long long executionTime = m_treeFinder->GetExecutionTime();
+		
+		streamOutputStream << m_subGraphName << "\t" << executionTime << "\n";
+		
+		streamOutputStream.close();
+	}
+}
+
+void CAlgorithmUIPage::m_WritePathExecutionTimeToFile( const std::string& algorithmName ) const
+{
+	if ( m_pathFinder && !m_resultSubGraph )
+	{
+		std::ofstream streamOutputStream;
+		std::string streamPath = "./../ExecutionTime/Path/" + algorithmName;
+		streamOutputStream.open( streamPath.c_str(), std::ios::app );
+		
+		unsigned long long executionTime = m_pathFinder->GetExecutionTime();
+		
+		streamOutputStream << m_subGraphName << "\t" << executionTime << "\n";
+		
+		streamOutputStream.close();
+	}
+}
+
+void CAlgorithmUIPage::m_WriteMSTMemoryUsageToFile( const std::string& algorithmName ) const
+{
+	if ( m_treeFinder && !m_resultSubGraph )
+	{
+		std::ofstream streamOutputStream;
+		std::string streamPath = "./../MemoryUsage/MST/" + algorithmName;
+		streamOutputStream.open( streamPath.c_str(), std::ios::app );
+
+		auto minotaurMemoryUsage = m_treeFinder->GetMemoryUsage();
+		double residentSetSizeMemory = minotaurMemoryUsage.GetResidentSetSizeMemory();
+		double sharedMemorySize = minotaurMemoryUsage.GetSharedMemorySize();
+		double privateMemorySize = minotaurMemoryUsage.GetPrivateMemorySize();
+
+		streamOutputStream << m_subGraphName << "\t" << residentSetSizeMemory << "\t" << sharedMemorySize << "\t" << privateMemorySize << "\n";
+		
+		streamOutputStream.close();
+	}
+}
+
+void CAlgorithmUIPage::m_WritePathMemoryUsageToFile( const std::string& algorithmName ) const
+{
+	if ( m_pathFinder && !m_resultSubGraph )
+	{
+		std::ofstream streamOutputStream;
+		std::string streamPath = "./../MemoryUsage/Path/" + algorithmName;
+		streamOutputStream.open( streamPath.c_str(), std::ios::app );
+
+		auto minotaurMemoryUsage = m_pathFinder->GetMemoryUsage();
+		double residentSetSizeMemory = minotaurMemoryUsage.GetResidentSetSizeMemory();
+		double sharedMemorySize = minotaurMemoryUsage.GetSharedMemorySize();
+		double privateMemorySize = minotaurMemoryUsage.GetPrivateMemorySize();
+
+		streamOutputStream << m_subGraphName << "\t" << residentSetSizeMemory << "\t" << sharedMemorySize << "\t" << privateMemorySize << "\n";
+		
+		streamOutputStream.close();
+	}	
+}
+
 void CAlgorithmUIPage::m_GetNodesId( void ) const
 {
 	printf("Get NodeFromId: ");
@@ -196,8 +266,13 @@ void CAlgorithmUIPage::m_KruskalAlgorithm( void ) const
 	m_subGraphName = "KruskalMST" + m_subGraphName;
 	m_treeFinder = new CKruskalAlgorithm();
 	std::shared_ptr < CSubGraphModel > kruskalMST = m_treeFinder->FindMST( *m_graphModel, m_graphModel->GetGraphModelNodes().front() );
+	
+	m_WriteMSTExecutionTimeToFile("Kruskal");
+	m_WriteMSTMemoryUsageToFile("Kruskal");
+	
 	CSubGraphToGraphAdapter subgraphAdapter(*kruskalMST);
 	m_resultSubGraph = std::make_shared < CSubGraphToGraphAdapter > ( subgraphAdapter );
+	
 	m_WriteGraphToFile();
 	m_ExitAlgorithmPage();
 }
@@ -207,8 +282,13 @@ void CAlgorithmUIPage::m_PrimAlgorithm( void ) const
 	m_subGraphName = "PrimMST" + m_subGraphName;
 	m_treeFinder = new CPrimAlgorithm();
 	std::shared_ptr < CSubGraphModel > primMST = m_treeFinder->FindMST( *m_graphModel, m_graphModel->GetGraphModelNodes().front() );
+	
+	m_WriteMSTExecutionTimeToFile("Prim");
+	m_WriteMSTMemoryUsageToFile("Prim");
+	
 	CSubGraphToGraphAdapter subgraphAdapter(*primMST);
 	m_resultSubGraph = std::make_shared < CSubGraphToGraphAdapter > ( subgraphAdapter );
+	
 	m_WriteGraphToFile();
 	m_ExitAlgorithmPage();
 }
@@ -218,8 +298,13 @@ void CAlgorithmUIPage::m_BoruvkaAlgorithm( void ) const
 	m_subGraphName = "BoruvkaMST" + m_subGraphName;
 	m_treeFinder = new CBoruvkaAlgorithm();
 	std::shared_ptr < CSubGraphModel > boruvkaMST = m_treeFinder->FindMST( *m_graphModel, m_graphModel->GetGraphModelNodes().front() );
+	
+	m_WriteMSTExecutionTimeToFile("Boruvka");
+	m_WriteMSTMemoryUsageToFile("Boruvka");
+	
 	CSubGraphToGraphAdapter subgraphAdapter(*boruvkaMST);
 	m_resultSubGraph = std::make_shared < CSubGraphToGraphAdapter > ( subgraphAdapter );
+	
 	m_WriteGraphToFile();
 	m_ExitAlgorithmPage();
 }
@@ -233,9 +318,14 @@ void CAlgorithmUIPage::m_DijkstraAlgorithm( void ) const
 	if( m_CheckNodesId() )
 	{
 		std::shared_ptr < CSubGraphModel > dijkstraPath = m_pathFinder->FindShortestPath( *m_graphModel, m_graphModel->GetGraphModelNode(m_nodeFromId), 
-			m_graphModel->GetGraphModelNode(m_nodeToId) );
+		m_graphModel->GetGraphModelNode(m_nodeToId) );
+		
+		m_WritePathExecutionTimeToFile("Dijkstra");
+		m_WritePathMemoryUsageToFile("Dijkstra");
+		
 		CSubGraphToGraphAdapter subgraphAdapter(*dijkstraPath);
 		m_resultSubGraph = std::make_shared < CSubGraphToGraphAdapter > ( subgraphAdapter );
+		
 		m_WriteGraphToFile();
 	}
 	else
@@ -258,9 +348,14 @@ void CAlgorithmUIPage::m_BellmanFordAlgorithm( void ) const
 	if( m_CheckNodesId() )
 	{
 		std::shared_ptr < CSubGraphModel > bellmanFordPath = m_pathFinder->FindShortestPath( *m_graphModel, m_graphModel->GetGraphModelNode(m_nodeFromId), 
-			m_graphModel->GetGraphModelNode(m_nodeToId) );
+		m_graphModel->GetGraphModelNode(m_nodeToId) );
+		
+		m_WritePathExecutionTimeToFile("Bellman-Ford");
+		m_WritePathMemoryUsageToFile("Bellman-Ford");
+		
 		CSubGraphToGraphAdapter subgraphAdapter(*bellmanFordPath);
 		m_resultSubGraph = std::make_shared < CSubGraphToGraphAdapter > ( subgraphAdapter );
+		
 		m_WriteGraphToFile();
 	}
 	else

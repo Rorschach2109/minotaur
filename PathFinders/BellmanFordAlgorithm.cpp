@@ -9,7 +9,10 @@
  *
  * */
 
+
 #include "BellmanFordAlgorithm.h"
+
+#include <chrono>
 
 using namespace Minotaur;
 
@@ -27,6 +30,8 @@ CBellmanFordAlgorithm::~CBellmanFordAlgorithm( void )
 
 std::shared_ptr < CPathModel > CBellmanFordAlgorithm::FindShortestPath( const IGraphModel& graphModel, const CNodeModel& nodeFrom, const CNodeModel& nodeTo )
 {
+	auto startTime = std::chrono::high_resolution_clock::now();
+
 	CNodeModel::SNodeModelLess nodeModelLess = CNodeModel::SNodeModelLess();
 	CNodeModel nodeRoot = ( nodeModelLess(nodeFrom, nodeTo) )? nodeFrom : nodeTo;
 	CNodeModel nodeDestination = ( nodeRoot.operator ==(nodeFrom) )? nodeTo : nodeFrom;
@@ -43,6 +48,10 @@ std::shared_ptr < CPathModel > CBellmanFordAlgorithm::FindShortestPath( const IG
 		m_relaxationProvider.Relax(graphModel, currentEdgeNodeFrom, currentEdgeNodeTo);
 		m_relaxationProvider.Relax(graphModel, currentEdgeNodeTo, currentEdgeNodeFrom);
 	}
+
+	auto endTime = std::chrono::high_resolution_clock::now();
+	auto executionTime = std::chrono::duration_cast<std::chrono::microseconds>(endTime - startTime);
+	t_executionTime = executionTime.count();
 	
 	return ( m_relaxationProvider.BuildPath(graphModel, nodeRoot, nodeDestination) );
 }

@@ -64,6 +64,13 @@ class CAlgorithmUIPage : public AbstractUIPage
 		
 		void m_LoadGraph( void ) const;
 		void m_WriteGraphToFile( void ) const;
+		
+		void m_WriteMSTExecutionTimeToFile( const std::string& algorithmName ) const;
+		void m_WritePathExecutionTimeToFile( const std::string& algorithmName ) const;
+		
+		void m_WriteMSTMemoryUsageToFile( const std::string& algorithmName ) const;
+		void m_WritePathMemoryUsageToFile( const std::string& algorithmName ) const;
+		
 		void m_GetNodesId( void ) const;
 		bool m_CheckNodesId( void ) const;
 

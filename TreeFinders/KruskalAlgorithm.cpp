@@ -14,6 +14,7 @@
 
 #include <limits>
 #include <utility>
+#include <chrono>
 
 using namespace Minotaur;
 
@@ -147,11 +148,18 @@ CKruskalAlgorithm::~CKruskalAlgorithm( void )
 	
 std::shared_ptr < CTreeModel > CKruskalAlgorithm::FindMST( const IGraphModel& graphModel, const CNodeModel& nodeRoot )
 {
+	auto startTime = std::chrono::high_resolution_clock::now();
+
 	CEdgeSet edgeSet = CEdgeSet( graphModel );
 	while ( edgeSet.CanExpandMST() )
 	{
 		edgeSet.ExpandMST();
 	}
+
+	auto endTime = std::chrono::high_resolution_clock::now();
+	auto executionTime = std::chrono::duration_cast<std::chrono::microseconds>(endTime - startTime);
+	t_executionTime = executionTime.count();
+
 	return ( edgeSet.BuildMST( nodeRoot ) );
 }
 

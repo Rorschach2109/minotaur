@@ -12,6 +12,7 @@
 #include "DijkstraAlgorithm.h"
 
 #include <vector>
+#include <chrono>
 
 using namespace Minotaur;
 
@@ -42,6 +43,8 @@ CNodeModel CDijkstraAlgorithm::m_GetCheapestNode( const std::set < CNodeModel, C
 
 std::shared_ptr < CPathModel > CDijkstraAlgorithm::FindShortestPath( const IGraphModel& graphModel, const CNodeModel& nodeFrom, const CNodeModel& nodeTo )
 {
+	auto startTime = std::chrono::high_resolution_clock::now();
+
 	std::set < CNodeModel, CNodeModel::SNodeModelLess > openNodes;
 	std::set < CNodeModel, CNodeModel::SNodeModelLess > closedNodes;
 	
@@ -70,6 +73,10 @@ std::shared_ptr < CPathModel > CDijkstraAlgorithm::FindShortestPath( const IGrap
 			}
 		}
 	}
+
+	auto endTime = std::chrono::high_resolution_clock::now();
+	auto executionTime = std::chrono::duration_cast<std::chrono::microseconds>(endTime - startTime);
+	t_executionTime = executionTime.count();
 
 	return ( m_relaxationProvider.BuildPath(graphModel, nodeFrom, nodeTo) );
 }

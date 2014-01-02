@@ -79,7 +79,7 @@ if ( defined( my $graphName = $ARGV[0] ) )
 		while ( <DOT_GRAPH_FILE> )
 		{
 			chomp;
-			if ( $_ =~ /\s+([0-9]+)\s*--\s*([0-9]+).+" *([0-9]+\.[0-9]) *".+\s*/ )
+			if ( $_ =~ /\s+([0-9]+)\s*--\s*([0-9]+).+" *([0-9]+\.[0-9]+) *".+\s*/ )
 			{
 				print AK_GRAPH_FILE "$1\t$2\t$3\n";
 				$edgesNumber++;

@@ -14,6 +14,7 @@
 
 #include <limits>
 #include <utility>
+#include <chrono>
 
 using namespace Minotaur;
 
@@ -200,12 +201,18 @@ CPrimAlgorithm::~CPrimAlgorithm( void )
 
 std::shared_ptr < CTreeModel > CPrimAlgorithm::FindMST( const IGraphModel& graphModel, const CNodeModel& nodeRoot )
 {
+	auto startTime = std::chrono::high_resolution_clock::now();
+
 	CCut cut = CCut(graphModel, nodeRoot);
 	
 	while ( !( cut.GraphModelContained() ) && ( cut.CanExpandMST() ) )
 	{
 		cut.ExpandMST();
 	}
+
+	auto endTime = std::chrono::high_resolution_clock::now();
+	auto executionTime = std::chrono::duration_cast<std::chrono::microseconds>(endTime - startTime);
+	t_executionTime = executionTime.count();
 		
 	return ( cut.BuildMST() );
 }

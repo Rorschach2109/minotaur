@@ -15,6 +15,7 @@
 #include "PathModel.h"
 #include "IGraphModel.h"
 #include "NodeModel.h"
+#include "MinotaurMemory.h"
 
 #include <memory>
 
@@ -23,6 +24,10 @@ namespace Minotaur
 
 class IPathFinder
 {
+	protected:
+		unsigned long long t_executionTime;
+		CMinotaurMemory t_minotaurMemoryUsage;
+
 	public:
 		IPathFinder( void ) = default;
 		virtual ~IPathFinder( void )
@@ -31,6 +36,16 @@ class IPathFinder
 		}
 		
 		virtual std::shared_ptr < CPathModel > FindShortestPath( const IGraphModel& graphModel, const CNodeModel& nodeFrom, const CNodeModel& nodeTo ) = 0;
+		
+		unsigned long long GetExecutionTime( void ) const
+		{
+			return t_executionTime;
+		}
+
+		const CMinotaurMemory& GetMemoryUsage( void ) const
+		{
+			return t_minotaurMemoryUsage;
+		}
 };
 	
 } // namespace Minotaur

@@ -14,6 +14,7 @@
 
 #include "IGraphModel.h"
 #include "NodeModel.h"
+#include "MinotaurMemory.h"
 
 #include <memory>
 
@@ -24,6 +25,10 @@ class CTreeModel;
 
 class ITreeFinder
 {
+	protected:
+		unsigned long long t_executionTime;
+		CMinotaurMemory t_minotaurMemoryUsage;
+		
 	public:
 		ITreeFinder( void ) = default;
 		virtual ~ITreeFinder( void )
@@ -32,6 +37,16 @@ class ITreeFinder
 		}
 		
 		virtual std::shared_ptr < CTreeModel > FindMST( const IGraphModel& graphModel, const CNodeModel& nodeRoot ) = 0;
+		
+		unsigned long long GetExecutionTime( void ) const
+		{
+			return t_executionTime;
+		}
+
+		const CMinotaurMemory& GetMemoryUsage( void ) const
+		{
+			return t_minotaurMemoryUsage;
+		}
 };
 	
 } // namespace Minotaur
