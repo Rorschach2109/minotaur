@@ -27,6 +27,13 @@ CRelaxationProvider::~CRelaxationProvider( void )
 	
 }
 
+void CRelaxationProvider::ComputeHeapMemoryUsage( void )
+{
+	heapMemoryUsed = sizeof( std::vector < CNodeModel > ) + 3 * sizeof(CNodeModel) + sizeof( std::shared_ptr < CPathModel > ) + 
+				2 * sizeof(double) + 4 * sizeof(unsigned int) + 2 * sizeof(bool) + sizeof(CEdgeModel) + 
+				sizeof(CRelaxationProvider);
+}
+
 void CRelaxationProvider::Reset( const IGraphModel& graphModel, const CNodeModel& nodeFrom ) const
 {
 	for ( auto graphNode : graphModel.GetGraphModelNodes() )
@@ -66,14 +73,21 @@ bool CRelaxationProvider::Relax( const IGraphModel& graphModel, const CNodeModel
 		
 		relaxResult = true;
 	}
-	
+
 	return relaxResult;
 }
 
 bool CRelaxationProvider::IsCheaper( const CNodeModel& lNode, const CNodeModel& rNode ) const
 {
-	bool lIsCheaper = ( m_aggregratedLabels.at(lNode) < m_aggregratedLabels.at(rNode) );
-	return lIsCheaper;
+	try
+	{
+		bool lIsCheaper = ( m_aggregratedLabels.at(lNode) < m_aggregratedLabels.at(rNode) );
+		return lIsCheaper;
+	}
+	catch( ... )
+	{
+		return false;
+	}
 }
 
 const std::map < unsigned int, double >& CRelaxationProvider::GetSpecMetrics( void ) const

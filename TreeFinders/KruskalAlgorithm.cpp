@@ -18,8 +18,12 @@
 
 using namespace Minotaur;
 
+extern unsigned long long g_stackMemoryAllocated;
+extern unsigned long long g_stackMemoryFreed;
+
 CKruskalAlgorithm::CEdgeSet::CEdgeSet( const IGraphModel& graphModel ) : 
-	m_graphModel( graphModel )
+	m_graphModel( graphModel ),
+	heapMemoryUsed( 0 )
 {
 	m_mstEdges.clear();
 	m_graphModelRemaningEdges = graphModel.GetGraphModelEdges();
@@ -40,7 +44,7 @@ CEdgeModel CKruskalAlgorithm::CEdgeSet::m_FindCheapestEdge( void )
 {
 	CEdgeModel cheapestEdge = CEdgeModel();
 	double cheapestWeight = std::numeric_limits< double >::infinity();
-	
+
 	for ( auto edge : m_graphModelRemaningEdges )
 	{
 		double currentEdgeWeight = edge.GetEdgeWeight();
@@ -50,6 +54,7 @@ CEdgeModel CKruskalAlgorithm::CEdgeSet::m_FindCheapestEdge( void )
 			cheapestWeight = currentEdgeWeight;
 		}
 	}
+	
 	return cheapestEdge;
 }
 
@@ -90,7 +95,6 @@ void CKruskalAlgorithm::CEdgeSet::m_AddEdgeToForest( const CEdgeModel& edgeToAdd
 		
 		m_mstEdges.push_back(edgeToAdd);
 	}
-	
 }
 
 void CKruskalAlgorithm::CEdgeSet::ExpandMST( void )
@@ -103,22 +107,25 @@ void CKruskalAlgorithm::CEdgeSet::ExpandMST( void )
 bool CKruskalAlgorithm::CEdgeSet::CanExpandMST( void )
 {
 	bool canExpandMST = false;
-	for ( auto remaningEdge : m_graphModelRemaningEdges )
+
+	for ( auto remainingEdge : m_graphModelRemaningEdges )
 	{
-		CNodeModel nodeFrom = m_graphModel.GetGraphModelNode( remaningEdge.GetNodeFromId() );
-		CNodeModel nodeTo = m_graphModel.GetGraphModelNode( remaningEdge.GetNodeToId() );
+		CNodeModel nodeFrom = m_graphModel.GetGraphModelNode( remainingEdge.GetNodeFromId() );
+		CNodeModel nodeTo = m_graphModel.GetGraphModelNode( remainingEdge.GetNodeToId() );
 		if ( m_forest[nodeFrom] != m_forest[nodeTo] )
 		{
 			canExpandMST = true;
 			break;
 		}
 	}
+
 	return canExpandMST;
 }
 
 std::shared_ptr < CTreeModel > CKruskalAlgorithm::CEdgeSet::BuildMST( const CNodeModel& nodeRoot )
 {
 	std::vector < std::pair < unsigned int, unsigned int > > mstEdgeDefinition;
+
 	for ( auto mstEdge : m_mstEdges )
 	{
 		unsigned int nodeFromId = mstEdge.GetNodeFromId();
@@ -132,6 +139,7 @@ std::shared_ptr < CTreeModel > CKruskalAlgorithm::CEdgeSet::BuildMST( const CNod
 	}
 	
 	std::shared_ptr < CTreeModel > mstKruskal( new CTreeModel(m_graphModel, mstEdgeDefinition) );
+	
 	return mstKruskal;
 }
 
@@ -145,21 +153,40 @@ CKruskalAlgorithm::~CKruskalAlgorithm( void )
 {
 	
 }
+
+void CKruskalAlgorithm::t_ComputeHeapMemoryUsage( void )
+{
+        t_minotaurHeapMemoryUsage =  sizeof(CEdgeSet) + 2 * sizeof(std::shared_ptr < CTreeModel > ) +
+					5 * sizeof(CEdgeModel) + 6 * sizeof(CNodeModel) + 7 * sizeof(unsigned int) +
+					sizeof(bool) + 2 * sizeof(double) + sizeof( std::vector < std::pair < unsigned int, unsigned int > > ) + 
+					sizeof(CKruskalAlgorithm);
+}
+
 	
 std::shared_ptr < CTreeModel > CKruskalAlgorithm::FindMST( const IGraphModel& graphModel, const CNodeModel& nodeRoot )
 {
+	unsigned long long stackMemoryAllocatedBefore = g_stackMemoryAllocated;
+	unsigned long long stackMemoryFreedBefore = g_stackMemoryFreed;
+
 	auto startTime = std::chrono::high_resolution_clock::now();
 
 	CEdgeSet edgeSet = CEdgeSet( graphModel );
+
 	while ( edgeSet.CanExpandMST() )
 	{
 		edgeSet.ExpandMST();
 	}
 
+	std::shared_ptr < CTreeModel > mstKruskal = edgeSet.BuildMST( nodeRoot );
+	
 	auto endTime = std::chrono::high_resolution_clock::now();
 	auto executionTime = std::chrono::duration_cast<std::chrono::microseconds>(endTime - startTime);
 	t_executionTime = executionTime.count();
+	
+	t_minotaurStackMemoryAllocated = g_stackMemoryAllocated - stackMemoryAllocatedBefore;
+	t_minotaurStackMemoryFreed = g_stackMemoryFreed - stackMemoryFreedBefore;
 
-	return ( edgeSet.BuildMST( nodeRoot ) );
+	t_ComputeHeapMemoryUsage();
+
+	return ( mstKruskal );
 }
-

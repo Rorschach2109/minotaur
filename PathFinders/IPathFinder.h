@@ -15,7 +15,6 @@
 #include "PathModel.h"
 #include "IGraphModel.h"
 #include "NodeModel.h"
-#include "MinotaurMemory.h"
 
 #include <memory>
 
@@ -25,8 +24,12 @@ namespace Minotaur
 class IPathFinder
 {
 	protected:
+		virtual void t_ComputeHeapMemoryUsage( void ) = 0;
+
 		unsigned long long t_executionTime;
-		CMinotaurMemory t_minotaurMemoryUsage;
+		unsigned long long t_minotaurStackMemoryAllocated;
+		unsigned long long t_minotaurStackMemoryFreed;
+		unsigned long long t_minotaurHeapMemoryUsage;
 
 	public:
 		IPathFinder( void ) = default;
@@ -42,9 +45,19 @@ class IPathFinder
 			return t_executionTime;
 		}
 
-		const CMinotaurMemory& GetMemoryUsage( void ) const
+		unsigned long long GetStackMemoryAllocated( void ) const
 		{
-			return t_minotaurMemoryUsage;
+			return t_minotaurStackMemoryAllocated;
+		}
+		
+		unsigned long long GetStackMemoryFreed( void ) const
+		{
+			return t_minotaurStackMemoryFreed;
+		}
+		
+		unsigned long long GetHeapMemoryUsage( void ) const
+		{
+			return t_minotaurHeapMemoryUsage;
 		}
 };
 	

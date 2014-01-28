@@ -25,7 +25,7 @@ class CRelaxationProvider : public AbstractDijkstraRelaxation
 	private:
 		mutable std::map < CNodeModel, double, CNodeModel::SNodeModelLess > m_aggregratedLabels;
 		mutable std::map < unsigned int, double > m_specMetrics;
-		
+
 	public:
 		CRelaxationProvider( void );
 		virtual ~CRelaxationProvider( void );
@@ -33,6 +33,8 @@ class CRelaxationProvider : public AbstractDijkstraRelaxation
 		virtual void Reset( const IGraphModel& graphModel, const CNodeModel& nodeFrom ) const;
 		virtual bool Relax( const IGraphModel& graphModel, const CNodeModel& nodeFrom, const CNodeModel& nodeTo ) const;
 		virtual bool IsCheaper( const CNodeModel& lNode, const CNodeModel& rNode ) const;
+		
+		virtual void ComputeHeapMemoryUsage( void );
 		
 		const std::map < unsigned int, double >& GetSpecMetrics( void ) const;
 };

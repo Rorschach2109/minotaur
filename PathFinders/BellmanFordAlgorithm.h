@@ -22,7 +22,10 @@ class CBellmanFordAlgorithm : public IPathFinder
 {
 	private:
 		const CRelaxationProvider& m_relaxationProvider;
-		
+	
+	protected:
+		virtual void t_ComputeHeapMemoryUsage( void );
+	
 	public:
 		CBellmanFordAlgorithm( void ) = delete;
 		explicit CBellmanFordAlgorithm( const CRelaxationProvider& relaxationProvider );

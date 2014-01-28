@@ -26,11 +26,23 @@ class CTreeModel;
 class ITreeFinder
 {
 	protected:
+		virtual void t_ComputeHeapMemoryUsage( void ) = 0;
+
 		unsigned long long t_executionTime;
-		CMinotaurMemory t_minotaurMemoryUsage;
+		unsigned long long t_minotaurStackMemoryAllocated;
+		unsigned long long t_minotaurStackMemoryFreed;
+		unsigned long long t_minotaurHeapMemoryUsage;
 		
 	public:
-		ITreeFinder( void ) = default;
+		ITreeFinder( void ) : 
+			t_executionTime ( 0 ),
+			t_minotaurStackMemoryAllocated ( 0 ),
+			t_minotaurStackMemoryFreed ( 0 ),
+			t_minotaurHeapMemoryUsage ( 0 )
+		{
+				
+		}
+
 		virtual ~ITreeFinder( void )
 		{
 			
@@ -43,9 +55,19 @@ class ITreeFinder
 			return t_executionTime;
 		}
 
-		const CMinotaurMemory& GetMemoryUsage( void ) const
+		unsigned long long GetStackMemoryAllocated( void ) const
 		{
-			return t_minotaurMemoryUsage;
+			return t_minotaurStackMemoryAllocated;
+		}
+		
+		unsigned long long GetStackMemoryFreed( void ) const
+		{
+			return t_minotaurStackMemoryFreed;
+		}
+		
+		unsigned long long GetHeapMemoryUsage( void ) const
+		{
+			return t_minotaurHeapMemoryUsage;
 		}
 };
 	

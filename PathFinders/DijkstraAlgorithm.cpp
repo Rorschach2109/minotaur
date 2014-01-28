@@ -16,16 +16,27 @@
 
 using namespace Minotaur;
 
+extern unsigned long long g_stackMemoryAllocated;
+extern unsigned long long g_stackMemoryFreed;
+
 CDijkstraAlgorithm::CDijkstraAlgorithm( const AbstractDijkstraRelaxation& relaxationProvider ) : 
 	IPathFinder(),
 	m_relaxationProvider( relaxationProvider )
 {
-	
+
 }
 
 CDijkstraAlgorithm::~CDijkstraAlgorithm( void )
 {
 	
+}
+
+void CDijkstraAlgorithm::t_ComputeHeapMemoryUsage( void )
+{
+	t_minotaurHeapMemoryUsage = 4 * sizeof(CNodeModel) + 2 * sizeof(unsigned int) + sizeof( std::shared_ptr < CPathModel > ) + 
+					sizeof(bool) + 2 * sizeof( std::set < CNodeModel, CNodeModel::SNodeModelLess > ) + 
+					sizeof( std::vector < CNodeModel > ) + sizeof(CDijkstraAlgorithm) + 
+					m_relaxationProvider.heapMemoryUsed;
 }
 
 CNodeModel CDijkstraAlgorithm::m_GetCheapestNode( const std::set < CNodeModel, CNodeModel::SNodeModelLess >& openNodes )
@@ -43,6 +54,9 @@ CNodeModel CDijkstraAlgorithm::m_GetCheapestNode( const std::set < CNodeModel, C
 
 std::shared_ptr < CPathModel > CDijkstraAlgorithm::FindShortestPath( const IGraphModel& graphModel, const CNodeModel& nodeFrom, const CNodeModel& nodeTo )
 {
+	unsigned long long stackMemoryAllocatedBefore = g_stackMemoryAllocated;
+	unsigned long long stackMemoryFreedBefore = g_stackMemoryFreed;
+
 	auto startTime = std::chrono::high_resolution_clock::now();
 
 	std::set < CNodeModel, CNodeModel::SNodeModelLess > openNodes;
@@ -67,6 +81,9 @@ std::shared_ptr < CPathModel > CDijkstraAlgorithm::FindShortestPath( const IGrap
 			}
 
 			bool relaxed = m_relaxationProvider.Relax(graphModel, cheapestNode, neighborNode);
+			
+			t_minotaurHeapMemoryUsage += ( relaxed );
+			
 			if ( relaxed )
 			{
 				openNodes.insert(neighborNode);
@@ -78,5 +95,12 @@ std::shared_ptr < CPathModel > CDijkstraAlgorithm::FindShortestPath( const IGrap
 	auto executionTime = std::chrono::duration_cast<std::chrono::microseconds>(endTime - startTime);
 	t_executionTime = executionTime.count();
 
-	return ( m_relaxationProvider.BuildPath(graphModel, nodeFrom, nodeTo) );
+	std::shared_ptr < CPathModel > shortestPath = m_relaxationProvider.BuildPath(graphModel, nodeFrom, nodeTo);
+	
+	t_minotaurStackMemoryAllocated = g_stackMemoryAllocated - stackMemoryAllocatedBefore;
+	t_minotaurStackMemoryFreed = g_stackMemoryFreed - stackMemoryFreedBefore;
+
+	t_ComputeHeapMemoryUsage();
+
+	return ( shortestPath );
 }

@@ -25,6 +25,9 @@ namespace Minotaur
 	
 class CBoruvkaAlgorithm : public ITreeFinder
 {
+	protected:
+		virtual void t_ComputeHeapMemoryUsage( void );
+
 	public:
 		CBoruvkaAlgorithm( void );
 		virtual ~CBoruvkaAlgorithm( void );
@@ -54,6 +57,8 @@ class CBoruvkaAlgorithm : public ITreeFinder
 				void ExpandMSTBoruvka( void );
 				bool CanExpandMSTBoruvka( void );
 				std::shared_ptr < CTreeModel > BuildMSTBoruvka( void );
+				
+				unsigned long long heapMemoryUsed;
 		};
 	
 };

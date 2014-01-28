@@ -16,7 +16,8 @@
 
 using namespace Minotaur;
 
-AbstractDijkstraRelaxation::AbstractDijkstraRelaxation( void )
+AbstractDijkstraRelaxation::AbstractDijkstraRelaxation( void ) : 
+	heapMemoryUsed ( 0 )
 {
 	
 }
@@ -28,8 +29,7 @@ AbstractDijkstraRelaxation::~AbstractDijkstraRelaxation( void )
 
 std::shared_ptr < CPathModel > AbstractDijkstraRelaxation::BuildPath( const IGraphModel& graphModel, const CNodeModel& nodeFrom, const CNodeModel& nodeTo ) const
 {
-	std::vector < CNodeModel > pathNodes;
-	
+	std::vector < CNodeModel > pathNodes;	
 	CNodeModel currentNode = nodeTo;
 	while ( !( currentNode.operator ==(nodeFrom) ) )
 	{
@@ -47,5 +47,6 @@ std::shared_ptr < CPathModel > AbstractDijkstraRelaxation::BuildPath( const IGra
 	std::reverse( pathNodes.begin(), pathNodes.end() );
 
 	std::shared_ptr < CPathModel > shortestPath( new CPathModel( graphModel, pathNodes ) );
+	
 	return shortestPath;
 }

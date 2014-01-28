@@ -77,13 +77,21 @@ bool CAdjacencyList::m_CompareAdjacencyMaps( AdjacencyMap& toCompareAdjacencyMap
 		{
 			for ( unsigned int edgesVectorIndex = 0; edgesVectorIndex < adjacencyMapIterator->second.size(); ++edgesVectorIndex )
 			{
-				equalInside = equalInside && ( ( adjacencyMapIteratorToCompare->second.at(edgesVectorIndex).first ) == 
-					( adjacencyMapIterator->second.at(edgesVectorIndex).first ) );
-				equalInside = equalInside && ( ( adjacencyMapIteratorToCompare->second.at(edgesVectorIndex).second ) == 
-					( adjacencyMapIterator->second.at(edgesVectorIndex).second ) );
-				if ( !equalInside )
+				try
 				{
-					adjacencyMapsEqual = false;
+					equalInside = equalInside && ( ( adjacencyMapIteratorToCompare->second.at(edgesVectorIndex).first ) == 
+						( adjacencyMapIterator->second.at(edgesVectorIndex).first ) );
+					equalInside = equalInside && ( ( adjacencyMapIteratorToCompare->second.at(edgesVectorIndex).second ) == 
+						( adjacencyMapIterator->second.at(edgesVectorIndex).second ) );
+					if ( !equalInside )
+					{
+						adjacencyMapsEqual = false;
+					}
+				}
+				catch( ... )
+				{
+					//NOPE
+					return adjacencyMapsEqual;
 				}
 			}
 		}
@@ -126,11 +134,19 @@ std::vector < CNodeModel > CAdjacencyList::GetNeighbors ( const CNodeModel& node
 	std::vector< CNodeModel > graphModelNodeNeighbors;
 	unsigned int nodeFromId = nodeFrom.GetNodeId();
 	
-	for ( auto edgesVectorIndex : m_adjacencyMap.at(nodeFromId) )
+	try
 	{
-		CNodeModel neighborNode = GetGraphModelNode( edgesVectorIndex.second );
-		graphModelNodeNeighbors.push_back(neighborNode);
+		for ( auto edgesVectorIndex : m_adjacencyMap.at(nodeFromId) )
+		{
+			CNodeModel neighborNode = GetGraphModelNode( edgesVectorIndex.second );
+			graphModelNodeNeighbors.push_back(neighborNode);
+		}
 	}
+	catch( ... )
+	{
+		// nothing special
+		// returning empty vector
+	} 
 	
 	return graphModelNodeNeighbors;
 }
@@ -144,10 +160,18 @@ bool CAdjacencyList::ContainsEdge( const unsigned int& nodeFromId, const unsigne
 	{
 		for ( unsigned int vectorIndex = 0; vectorIndex < adjMapIterator->second.size(); ++vectorIndex )
 		{
-			if ( nodeToId == adjMapIterator->second.at(vectorIndex).second )
+			try
 			{
-				containsEdge = true;
-				break;
+				if ( nodeToId == adjMapIterator->second.at(vectorIndex).second )
+				{
+					containsEdge = true;
+					break;
+				}
+			}
+			catch( ... )
+			{
+				//NOPE
+				return containsEdge;
 			}
 		}
 	}	
@@ -161,9 +185,16 @@ CEdgeModel CAdjacencyList::GetGraphModelEdge( const unsigned int& nodeFromId, co
 	{
 		for ( unsigned int vectorIndex = 0; vectorIndex < adjMapIterator->second.size(); ++vectorIndex )
 		{
-			if ( nodeToId == adjMapIterator->second.at(vectorIndex).second )
+			try
 			{
-				return ( adjMapIterator->second.at(vectorIndex).first );
+				if ( nodeToId == adjMapIterator->second.at(vectorIndex).second )
+				{
+					return ( adjMapIterator->second.at(vectorIndex).first );
+				}
+			}
+			catch( ... )
+			{
+				break;
 			}
 		}
 	}	

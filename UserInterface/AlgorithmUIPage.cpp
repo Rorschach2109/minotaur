@@ -216,12 +216,11 @@ void CAlgorithmUIPage::m_WriteMSTMemoryUsageToFile( const std::string& algorithm
 		std::string streamPath = "./../MemoryUsage/MST/" + algorithmName;
 		streamOutputStream.open( streamPath.c_str(), std::ios::app );
 
-		auto minotaurMemoryUsage = m_treeFinder->GetMemoryUsage();
-		double residentSetSizeMemory = minotaurMemoryUsage.GetResidentSetSizeMemory();
-		double sharedMemorySize = minotaurMemoryUsage.GetSharedMemorySize();
-		double privateMemorySize = minotaurMemoryUsage.GetPrivateMemorySize();
-
-		streamOutputStream << m_subGraphName << "\t" << residentSetSizeMemory << "\t" << sharedMemorySize << "\t" << privateMemorySize << "\n";
+		unsigned long long minotaurStackMemoryUsage = m_treeFinder->GetStackMemoryAllocated();
+		unsigned long long minotaurStackMemoryFreed = m_treeFinder->GetStackMemoryFreed();
+		unsigned long long minotaurHeapMemoryUsage = m_treeFinder->GetHeapMemoryUsage();
+		
+		streamOutputStream << m_subGraphName << "\t" << minotaurStackMemoryUsage << "\t" << minotaurStackMemoryFreed << "\t" << minotaurHeapMemoryUsage << "\n";
 		
 		streamOutputStream.close();
 	}
@@ -235,12 +234,11 @@ void CAlgorithmUIPage::m_WritePathMemoryUsageToFile( const std::string& algorith
 		std::string streamPath = "./../MemoryUsage/Path/" + algorithmName;
 		streamOutputStream.open( streamPath.c_str(), std::ios::app );
 
-		auto minotaurMemoryUsage = m_pathFinder->GetMemoryUsage();
-		double residentSetSizeMemory = minotaurMemoryUsage.GetResidentSetSizeMemory();
-		double sharedMemorySize = minotaurMemoryUsage.GetSharedMemorySize();
-		double privateMemorySize = minotaurMemoryUsage.GetPrivateMemorySize();
-
-		streamOutputStream << m_subGraphName << "\t" << residentSetSizeMemory << "\t" << sharedMemorySize << "\t" << privateMemorySize << "\n";
+		unsigned long long minotaurStackMemoryUsage = m_pathFinder->GetStackMemoryAllocated();
+		unsigned long long minotaurStackMemoryFreed = m_pathFinder->GetStackMemoryFreed();
+		unsigned long long minotaurHeapMemoryUsage = m_pathFinder->GetHeapMemoryUsage();
+		
+		streamOutputStream << m_subGraphName << "\t" << minotaurStackMemoryUsage << "\t" << minotaurStackMemoryFreed << "\t" << minotaurHeapMemoryUsage << "\n";
 		
 		streamOutputStream.close();
 	}	

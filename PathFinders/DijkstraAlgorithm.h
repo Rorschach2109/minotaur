@@ -27,6 +27,9 @@ class CDijkstraAlgorithm : public IPathFinder
 		
 		CNodeModel m_GetCheapestNode( const std::set < CNodeModel, CNodeModel::SNodeModelLess >& openNodes );
 	
+	protected:
+		virtual void t_ComputeHeapMemoryUsage( void );
+
 	public:
 		CDijkstraAlgorithm( void ) = delete;
 		explicit CDijkstraAlgorithm( const AbstractDijkstraRelaxation& relaxationProvider );

@@ -27,6 +27,9 @@ class CTreeModel;
 	
 class CPrimAlgorithm : public ITreeFinder
 {
+	protected:
+		virtual void t_ComputeHeapMemoryUsage( void );
+
 	public:
 		CPrimAlgorithm( void );
 		virtual ~CPrimAlgorithm( void );
@@ -63,6 +66,8 @@ class CPrimAlgorithm : public ITreeFinder
 			bool CanExpandMST( void );
 
 			std::shared_ptr < CTreeModel > BuildMST( void );
+
+			unsigned long long heapMemoryUsed;
 	};
 };
 	

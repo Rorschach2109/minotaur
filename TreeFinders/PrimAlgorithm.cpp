@@ -18,8 +18,12 @@
 
 using namespace Minotaur;
 
+extern unsigned long long g_stackMemoryAllocated;
+extern unsigned long long g_stackMemoryFreed;
+
 CPrimAlgorithm::CCut::CCut( const IGraphModel& graphModel, const CNodeModel& nodeRoot ) : 
-	m_graphModel( graphModel )
+	m_graphModel( graphModel ),
+	heapMemoryUsed( 0 )
 {
 	m_mstNodes.push_back(nodeRoot);
 	m_AddValidEdgesToMST(nodeRoot);
@@ -35,7 +39,7 @@ CEdgeModel CPrimAlgorithm::CCut::m_FindCheapestEdge( void )
 {
 	CEdgeModel cheapestEdge = CEdgeModel();
 	double cheapestWeight = std::numeric_limits< double >::infinity();
-	
+
 	for ( auto edge : m_cutEdges )
 	{
 		double currentEdgeWeight = edge.GetEdgeWeight();
@@ -45,12 +49,14 @@ CEdgeModel CPrimAlgorithm::CCut::m_FindCheapestEdge( void )
 			cheapestWeight = currentEdgeWeight;
 		}
 	}
+
 	return cheapestEdge;
 }
 
 void CPrimAlgorithm::CCut::m_AddValidEdgesToMST( const CNodeModel& node )
 {
 	std::vector < CNodeModel > nodeNeighbors = m_graphModel.GetNeighbors( node );
+	
 	for ( auto neighborNode : nodeNeighbors )
 	{
 		CEdgeModel edgeToAdd = m_graphModel.GetGraphModelEdge( node.GetNodeId(), neighborNode.GetNodeId() );
@@ -69,6 +75,7 @@ void CPrimAlgorithm::CCut::m_AddValidEdgesToMST( const CNodeModel& node )
 void CPrimAlgorithm::CCut::m_RemoveInvalidEdges( void )
 {
 	std::vector < CEdgeModel > invalidEdges;
+
 	for ( auto edge : m_cutEdges )
 	{
 		unsigned int nodeFromId = edge.GetNodeFromId();
@@ -102,7 +109,7 @@ bool CPrimAlgorithm::CCut::m_VectorContainsNode( const unsigned int& nodeIdToChe
 			break;
 		}
 	}
-
+	
 	return vectorContainsNode;
 }
 
@@ -147,7 +154,7 @@ CNodeModel CPrimAlgorithm::CCut::m_AddNodeToMST( const CEdgeModel& cheapestMSTEd
 	CNodeModel nodeToAdd = ( m_VectorContainsNode(nodeFromId, m_mstNodes) )? nodeTo : nodeFrom;
 	
 	m_mstNodes.push_back(nodeToAdd);
-	
+
 	return nodeToAdd;
 }
 
@@ -171,12 +178,14 @@ bool CPrimAlgorithm::CCut::CanExpandMST( void )
 bool CPrimAlgorithm::CCut::GraphModelContained( void )
 {
 	bool graphModelContained = ( ( m_mstNodes.size() ) == ( m_graphModel.GetNodesNumber() ) );
+	
 	return graphModelContained;
 }
 
 std::shared_ptr < CTreeModel > CPrimAlgorithm::CCut::BuildMST( void )
 {
 	std::vector < std::pair < unsigned int, unsigned int > > mstEdgeDefinition;
+
 	for ( auto mstEdge : m_mstEdges )
 	{
 		unsigned int nodeFromId = mstEdge.GetNodeFromId();
@@ -185,6 +194,7 @@ std::shared_ptr < CTreeModel > CPrimAlgorithm::CCut::BuildMST( void )
 	}
 	
 	std::shared_ptr < CTreeModel > mstPrim( new CTreeModel(m_graphModel, mstEdgeDefinition) );
+	
 	return mstPrim;
 }
 
@@ -199,9 +209,20 @@ CPrimAlgorithm::~CPrimAlgorithm( void )
 	
 }
 
+void CPrimAlgorithm::t_ComputeHeapMemoryUsage( void )
+{
+        t_minotaurHeapMemoryUsage = sizeof(CCut) + 2 * sizeof(std::shared_ptr < CTreeModel > ) + 8 * sizeof(CEdgeModel) + 
+					2 * sizeof(double) + sizeof( std::vector < CNodeModel > ) + 7 * sizeof(CNodeModel) + 
+					5 * sizeof(bool) + sizeof( std::vector < CEdgeModel > ) + 6 * sizeof( unsigned int) + 
+					2 * sizeof( std::shared_ptr < CTreeModel > ) + sizeof( std::vector < std::pair < unsigned int, unsigned int > > ) + 
+					sizeof(CPrimAlgorithm);
+}
+
+
 std::shared_ptr < CTreeModel > CPrimAlgorithm::FindMST( const IGraphModel& graphModel, const CNodeModel& nodeRoot )
 {
-	auto startTime = std::chrono::high_resolution_clock::now();
+	unsigned long long stackMemoryAllocatedBefore = g_stackMemoryAllocated;
+	unsigned long long stackMemoryFreedBefore = g_stackMemoryFreed;	auto startTime = std::chrono::high_resolution_clock::now();
 
 	CCut cut = CCut(graphModel, nodeRoot);
 	
@@ -210,9 +231,17 @@ std::shared_ptr < CTreeModel > CPrimAlgorithm::FindMST( const IGraphModel& graph
 		cut.ExpandMST();
 	}
 
+	std::shared_ptr < CTreeModel > mstPrim = cut.BuildMST();
+
 	auto endTime = std::chrono::high_resolution_clock::now();
 	auto executionTime = std::chrono::duration_cast<std::chrono::microseconds>(endTime - startTime);
+	
 	t_executionTime = executionTime.count();
-		
-	return ( cut.BuildMST() );
+	
+	t_minotaurStackMemoryAllocated = g_stackMemoryAllocated - stackMemoryAllocatedBefore;
+	t_minotaurStackMemoryFreed = g_stackMemoryFreed - stackMemoryFreedBefore;
+
+	t_ComputeHeapMemoryUsage();
+
+	return ( mstPrim );
 }

@@ -37,6 +37,10 @@ class AbstractDijkstraRelaxation
 		virtual bool IsCheaper( const CNodeModel& lNode, const CNodeModel& rNode ) const = 0;
 		
 		std::shared_ptr < CPathModel > BuildPath( const IGraphModel& graphModel, const CNodeModel& nodeFrom, const CNodeModel& nodeTo ) const;
+		
+		virtual void ComputeHeapMemoryUsage( void ) = 0;
+		
+		mutable unsigned long long heapMemoryUsed;
 };
 	
 } // namespace Minotaur

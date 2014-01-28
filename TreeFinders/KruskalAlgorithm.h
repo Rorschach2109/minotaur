@@ -27,6 +27,9 @@ class CTreeModel;
 
 class CKruskalAlgorithm : public ITreeFinder
 {
+	protected:
+		virtual void t_ComputeHeapMemoryUsage( void );
+
 	public:
 		CKruskalAlgorithm( void );
 		virtual ~CKruskalAlgorithm( void );
@@ -54,6 +57,8 @@ class CKruskalAlgorithm : public ITreeFinder
 				void ExpandMST( void );
 				bool CanExpandMST( void );
 				std::shared_ptr < CTreeModel > BuildMST( const CNodeModel& nodeRoot );
+				
+				unsigned long long heapMemoryUsed;
 		};
 };
 	
